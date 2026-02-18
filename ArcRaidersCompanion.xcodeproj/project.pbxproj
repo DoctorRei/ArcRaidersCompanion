@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		63CE3A942F460085001FDB65 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 63CE3A932F460085001FDB65 /* Moya */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		63ECED452F45056A000318EE /* ArcRaidersCompanion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArcRaidersCompanion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63CE3A942F460085001FDB65 /* Moya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = ArcRaidersCompanion;
 			packageProductDependencies = (
+				63CE3A932F460085001FDB65 /* Moya */,
 			);
 			productName = ArcRaidersCompanion;
 			productReference = 63ECED452F45056A000318EE /* ArcRaidersCompanion.app */;
@@ -107,6 +113,9 @@
 			);
 			mainGroup = 63ECED3C2F45056A000318EE;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				63CE3A922F460085001FDB65 /* XCRemoteSwiftPackageReference "Moya" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 63ECED462F45056A000318EE /* Products */;
 			projectDirPath = "";
@@ -355,6 +364,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		63CE3A922F460085001FDB65 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		63CE3A932F460085001FDB65 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 63CE3A922F460085001FDB65 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 63ECED3D2F45056A000318EE /* Project object */;
 }

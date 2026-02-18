@@ -1,0 +1,19 @@
+# Xcode user data
+xcuserdata/
+*.xcuserstate
+*.xcuserdatad/
+
+# macOS system files
+.DS_Store
+
+# Swift Package Manager
+/.build
+/Packages
+.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
+.swiftpm/configuration/registries.json
+
+# Xcode derived data
+DerivedData/
+
+# Network credentials
+.netrc
