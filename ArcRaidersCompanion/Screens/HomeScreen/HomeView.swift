@@ -11,18 +11,39 @@ struct HomeView: View {
     @ObservedObject var viewModel: HomeView.ViewModel
     
     var body: some View {
-        contentV2()
-            .task {
-                await viewModel.getEvents()
+            pickerView()
+            content()
+                .task {
+                    await viewModel.getEvents()
+                }
+    }
+    
+    func pickerView() -> some View {
+        Picker("", selection: $viewModel.selectedPickerTab) {
+            ForEach(PickerStyles.allCases) { style in
+                Text(style.rawValue).tag(style)
             }
+        }
+        .pickerStyle(.segmented)
     }
     
     @ViewBuilder
-    func contentV2() -> some View {
+    func content() -> some View {
         ScrollView {
             LazyVStack {
-                ForEach(viewModel.events, id: \.id) { event in
-                    Views.EventCardView(event: event)
+                switch viewModel.selectedPickerTab {
+                case .actual:
+                    ForEach(viewModel.activeEvents, id: \.id) { event in
+                        Views.EventCardView(event: event)
+                    }
+                case .upcoming:
+                    ForEach(viewModel.upcomingEvents, id: \.id) { event in
+                        Views.EventCardView(event: event)
+                    }
+                case .finished:
+                    ForEach(viewModel.finishedEvents, id: \.id) { event in
+                        Views.EventCardView(event: event)
+                    }
                 }
             }
         }

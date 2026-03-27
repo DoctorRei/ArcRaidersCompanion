@@ -13,14 +13,22 @@ extension Views {
         let event: Event
         
         var body: some View {
-            Views.ContainerView {
-                cardBody(event: event)
-            }
+            content()
         }
     }
 }
 
-extension Views.EventCardView {
+private extension Views.EventCardView {
+    func content() -> some View {
+        Views.ContainerView {
+            cardBody(event: event)
+                .overlay(alignment: .topTrailing) {
+                    Views.ActivityIndicator(isActive: event.isActive)
+                        .padding()
+                }
+        }
+    }
+    
     func cardBody(event: Event) -> some View {
         VStack {
             HStack {

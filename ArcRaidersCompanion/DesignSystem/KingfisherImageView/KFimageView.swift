@@ -9,11 +9,11 @@ import SwiftUI
 import Kingfisher
 
 struct KFImageView: View {
-    let url: URL?
-    var placeholder: AnyView?
-    var errorView: AnyView?
-    var configuration: KingfisherOptionsInfo?
-    var cornerRadius: CGFloat = 0
+    private let url: URL?
+    private var placeholder: AnyView?
+    private var errorView: AnyView?
+    private var configuration: KingfisherOptionsInfo?
+    private var cornerRadius: CGFloat = 0
     
     init(url: URL?,
          placeholder: AnyView? = nil,
