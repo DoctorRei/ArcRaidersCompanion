@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct EventScheduleResponse: Codable {
+struct EventScheduleResponse: Decodable {
     let data: [Event]
     let cachedAt: Int64
     
@@ -63,7 +63,7 @@ struct Event: Decodable, Identifiable {
     // Форматированная дата и время
     var formattedDateTime: String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy HH:mm"
+        formatter.dateFormat = "dd.MM.yyyy"
         formatter.timeZone = TimeZone.current
         return formatter.string(from: startDate)
     }
