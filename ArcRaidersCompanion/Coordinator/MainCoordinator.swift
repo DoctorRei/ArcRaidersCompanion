@@ -16,59 +16,51 @@ enum TabBarTag: Int {
     case favorites
 }
 
-class MainCoordinator: BaseCoordinator<UINavigationController> {
+class MainCoordinator: BaseCoordinator<UITabBarController> {
     weak var delegate: MainCoordinatorDelegate?
     
     override func start() {
-        showTabBarView()
+        configureTabs()
     }
-}
-
-private extension MainCoordinator {
-    func showTabBarView() {
-        let homeScreen = configureHomeScreen()
-        let favoritesScreen = configureFavoritesScreen()
+    
+    private func configureTabs() {
+        let homeViewController = configureHomeScreen()
+        let favoritesViewController = configureFavoritesScreen()
         
-        let controllers = [
-            homeScreen,
-            favoritesScreen
-        ]
-        
-        let tabBarController = UITabBarController()
-        tabBarController.setViewControllers(controllers, animated: false)
-        
-        presenter.setViewControllers([tabBarController], animated: true)
+        presenter.viewControllers = [homeViewController, favoritesViewController]
     }
 }
 
 private extension MainCoordinator {
     func configureHomeScreen() -> UINavigationController {
-        let flowPresenter = UINavigationController()
-        let coordinator = HomeCoordinator(presenter: flowPresenter)
-        flowPresenter.tabBarItem = UITabBarItem(
+        let navigationController = UINavigationController()
+        
+        let coordinator = HomeCoordinator(presenter: navigationController)
+        navigationController.tabBarItem = UITabBarItem(
             title: "Home",
             image: .init(systemName: "heart"),
             tag: TabBarTag.home.rawValue
         )
-
+        
         coordinator.start()
         store(coordinator: coordinator)
         
-        return coordinator.presenter
+        return navigationController
     }
     
     func configureFavoritesScreen() -> UINavigationController {
-        let flowPresenter = UINavigationController()
-        let coordinator = FavoritesCoordinator(presenter: flowPresenter)
-        flowPresenter.tabBarItem = UITabBarItem(
+        let navigationController = UINavigationController()
+        
+        let coordinator = FavoritesCoordinator(presenter: navigationController)
+        navigationController.tabBarItem = UITabBarItem(
             title: "Favorites",
             image: .init(systemName: "heart.fill"),
             tag: TabBarTag.favorites.rawValue
         )
-
+        
         coordinator.start()
         store(coordinator: coordinator)
         
-        return coordinator.presenter
+        return navigationController
     }
 }

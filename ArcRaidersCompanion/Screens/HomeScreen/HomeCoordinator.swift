@@ -19,7 +19,6 @@ private extension HomeCoordinator {
         let view = HomeView(viewModel: vm)
         
         let hostingController = HomeHostingController(rootView: view, viewModel: vm)
-        
         presenter.setViewControllers([hostingController], animated: true)
     }
 }
