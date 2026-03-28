@@ -11,11 +11,12 @@ struct HomeView: View {
     @ObservedObject var viewModel: HomeView.ViewModel
     
     var body: some View {
-            pickerView()
-            content()
-                .task {
-                    await viewModel.getEvents()
-                }
+        pickerView()
+        content()
+            .task {
+                await viewModel.getEvents()
+            }
+            .toolbar(.hidden, for: .navigationBar)
     }
     
     func pickerView() -> some View {

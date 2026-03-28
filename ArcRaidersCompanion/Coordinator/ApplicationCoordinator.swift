@@ -7,13 +7,13 @@
 
 import UIKit
 
-class ApplicationCoordinator: BaseCoordinator<UINavigationController> {
+class ApplicationCoordinator: BaseCoordinator<UITabBarController> {
     let window: UIWindow
     
     init(window: UIWindow) {
         self.window = window
         
-        let presenter = UINavigationController()
+        let presenter = UITabBarController()
         super.init(presenter: presenter)
         
         self.window.rootViewController = presenter

@@ -13,9 +13,3 @@ final class HomeHostingController: HostingController<HomeView, HomeView.ViewMode
         view.backgroundColor = .systemPink.withAlphaComponent(0.2)
     }
 }
-
-private extension HomeHostingController {
-    func setupUI() {
-        title = "Home"
-    }
-}

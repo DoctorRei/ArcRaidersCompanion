@@ -20,9 +20,9 @@ class BaseCoordinator<ControllerType> where ControllerType: UIViewController {
     func start() {}
 }
 
-extension BaseCoordinator{
+extension BaseCoordinator {
     func store<U: UIViewController>(coordinator: BaseCoordinator<U>) {
-        let coordinatorExists = childCoordinators.contains(where: {(key, value) -> Bool in
+        let coordinatorExists = childCoordinators.contains(where: { (key, _) -> Bool in
             return key == coordinator.id
         })
         
@@ -32,13 +32,7 @@ extension BaseCoordinator{
     }
     
     func free<U: UIViewController>(coordinator: BaseCoordinator<U>) {
-        let coordinatorExists = childCoordinators.contains(where: {(key, value) -> Bool in
-            return key == coordinator.id
-        })
-        
-        if coordinatorExists {
-            childCoordinators[coordinator.id] = nil
-        }
+        childCoordinators[coordinator.id] = nil
     }
     
     func freeAllCoordinators() {
