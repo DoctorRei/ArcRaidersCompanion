@@ -11,7 +11,18 @@ struct DataBaseView: View {
     @ObservedObject var viewModel: ViewModel
 
     var body: some View {
-        Views.DataBaseCollection()
+        Views.DataBaseCollection { item in
+            switch item {
+            case .arcs:
+                viewModel.showArcsScene()
+            case .quests:
+                print("1")
+            case .items:
+                print("2")
+            case .traders:
+                print("3")
+            }
+        }
             .task {
                 Task {
                     await viewModel.getArcs()

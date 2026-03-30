@@ -42,7 +42,8 @@ extension Views {
             }
         }
 
-        let itemsTypes: [ItemType] = [.arcs, .items, .quests, .traders]
+        private let itemsTypes: [ItemType] = [.arcs, .items, .quests, .traders]
+        let typeSelected: (ItemType) -> Void
         
         var body: some View {
             content()
@@ -51,10 +52,19 @@ extension Views {
         func content() -> some View {
             ScrollView {
                 ForEach(itemsTypes, id: \.self) { item in
-                    DataBaseCell(image: item.image, text: item.text)
+                    cell(item: item)
                 }
                 .padding(.horizontal, 16)
             }
+        }
+        
+        func cell(item: ItemType) -> some View {
+            Button {
+                typeSelected(item)
+            } label: {
+                DataBaseCell(image: item.image, text: item.text)
+            }
+            .buttonStyle(.plain)
         }
     }
 }

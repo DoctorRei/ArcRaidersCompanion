@@ -8,9 +8,6 @@
 import SwiftUI
 import Combine
 
-protocol DataBaseCoordinatorProtocol: AnyObject {
-}
-
 extension DataBaseView {
     protocol ViewModelProtocol {
         associatedtype Arcs
@@ -40,5 +37,11 @@ extension DataBaseView.ViewModel: DataBaseView.ViewModelProtocol {
             }
         }
     }
-    
+}
+
+extension DataBaseView.ViewModel {
+    func showArcsScene() {
+        print("TESTTEST DataBase ViewModel ShowArcsScene")
+        coordinator?.showArcsScene()
+    }
 }

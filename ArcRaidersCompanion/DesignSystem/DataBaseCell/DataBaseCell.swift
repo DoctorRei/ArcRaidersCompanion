@@ -26,19 +26,14 @@ extension Views {
 
 extension Views.DataBaseCell {
     private func content() -> some View {
-        Button {
-            print("Press Me")
-        } label: {
-            Views.ContainerView {
-                HStack {
-                    imageWithBorder()
-                        .padding()
-                    Text(text)
-                        .frame(maxWidth: .infinity)
-                }
+        Views.ContainerView {
+            HStack {
+                imageWithBorder()
+                    .padding()
+                Text(text)
+                    .frame(maxWidth: .infinity)
             }
         }
-        .buttonStyle(.plain)
     }
     
     func imageWithBorder() -> some View {
