@@ -27,13 +27,13 @@ final class NetworkManager {
         return decoder
     }()
     
-    func fetchEvents() async throws -> [Event] {
+    func fetchEvents() async throws -> [Model.Event] {
         return try await withCheckedThrowingContinuation { continuation in
             provider.request(.events) { result in
                 switch result {
                 case .success(let data):
                     do {
-                        let scheduleResponse = try self.decoder.decode(EventScheduleResponse.self, from: data.data)
+                        let scheduleResponse = try self.decoder.decode(Model.EventScheduleResponse.self, from: data.data)
                         continuation.resume(returning: scheduleResponse.data)
                     } catch {
                         continuation.resume(throwing: NetworkError.decodingError(error))
@@ -43,5 +43,9 @@ final class NetworkManager {
                 }
             }
         }
+    }
+    
+    func fetchEvents() async throws {
+        
     }
 }

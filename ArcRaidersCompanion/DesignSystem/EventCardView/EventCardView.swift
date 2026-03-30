@@ -10,7 +10,19 @@ import Kingfisher
 
 extension Views {
     struct EventCardView: View {
-        let event: Event
+        struct Model {
+            var isActive: Bool
+            var name: String
+            var map: String
+            var icon: String
+            
+            var formattedStartTime: String
+            var formattedEndTime: String
+            var formattedDateTime: String
+            var id: String
+        }
+        
+        let event: Model
         
         var body: some View {
             content()
@@ -29,7 +41,7 @@ private extension Views.EventCardView {
         }
     }
     
-    func cardBody(event: Event) -> some View {
+    func cardBody(event: Model) -> some View {
         VStack {
             HStack {
                 loadedImageView(with: URL(string: event.icon))

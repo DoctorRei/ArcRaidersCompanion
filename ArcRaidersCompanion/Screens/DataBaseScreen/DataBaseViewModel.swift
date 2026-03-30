@@ -14,5 +14,8 @@ protocol DataBaseCoordinatorProtocol: AnyObject {
 extension DataBaseView {
     final class ViewModel: ObservableObject {
         weak var coordinator: DataBaseCoordinatorProtocol?
+        private var networkManager = NetworkManager.shared
+        
+        
     }
 }
