@@ -20,13 +20,13 @@ protocol HomeCoordinatorProtocol: AnyObject {
     func showFavorites()
 }
 
-protocol ViewModelProtocol {
-    associatedtype Event
-    var events: [Event] { get set }
-    func getEvents() async
-}
-
 extension HomeView {
+    protocol ViewModelProtocol {
+        associatedtype Event
+        var events: [Event] { get set }
+        func getEvents() async
+    }
+    
     final class ViewModel: ObservableObject {
         typealias Event = NetworkManager.Model.Event
         typealias CardModel = Views.EventCardView.Model
@@ -43,7 +43,7 @@ extension HomeView {
     }
 }
 
-extension HomeView.ViewModel: ViewModelProtocol {
+extension HomeView.ViewModel: HomeView.ViewModelProtocol {
     func getEvents() async {
         Task {
             do {

@@ -20,7 +20,7 @@ final class NetworkManager {
     
     private init() {}
     
-    private let provider = MoyaProvider<MetaForgeService>()
+    private let provider = MoyaProvider<MetaForgeService>(plugins: [NetworkLoggerPlugin()])
     private let decoder: JSONDecoder = {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -45,7 +45,21 @@ final class NetworkManager {
         }
     }
     
-    func fetchEvents() async throws {
-        
+    func fetchArcs() async throws -> [Model.ARCEnemy] {
+        return try await withCheckedThrowingContinuation { continuation in
+            provider.request(.arcs) { result in
+                switch result {
+                case .success(let data):
+                    do {
+                        let scheduleResponse = try self.decoder.decode(Model.ArcsRespone.self, from: data.data)
+                        continuation.resume(returning: scheduleResponse.data)
+                    } catch {
+                        continuation.resume(throwing: NetworkError.decodingError(error))
+                    }
+                case .failure(let error):
+                    continuation.resume(throwing: NetworkError.moyaError(error))
+                }
+            }
+        }
     }
 }
