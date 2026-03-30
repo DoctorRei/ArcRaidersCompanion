@@ -12,6 +12,7 @@ struct HomeView: View {
     
     var body: some View {
         pickerView()
+            .padding(.horizontal)
         content()
             .task {
                 await viewModel.getEvents()
@@ -20,7 +21,7 @@ struct HomeView: View {
     }
     
     func pickerView() -> some View {
-        Picker("", selection: $viewModel.selectedPickerTab) {
+        Picker(String(), selection: $viewModel.selectedPickerTab) {
             ForEach(PickerStyles.allCases) { style in
                 Text(style.rawValue).tag(style)
             }

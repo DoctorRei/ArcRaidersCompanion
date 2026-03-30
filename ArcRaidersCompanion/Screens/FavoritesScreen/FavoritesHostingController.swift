@@ -13,9 +13,3 @@ final class FavoritesHostingController: HostingController<FavoritesView, Favorit
         view.backgroundColor = .red
     }
 }
-
-private extension HomeHostingController {
-    func setupUI() {
-        title = "Favorites"
-    }
-}

@@ -171,35 +171,3 @@ extension Array where Element == Event {
         return Dictionary(grouping: self) { $0.map }
     }
 }
-
-// MARK: - Пример использования
-extension Event {
-    static var preview: Event {
-        Event(
-            name: "Matriarch",
-            map: "Blue Gate",
-            icon: "https://cdn.metaforge.app/arc-raiders/custom/matriarch.webp",
-            startTime: 1771423200000,
-            endTime: 1771426800000
-        )
-    }
-    
-    static var previews: [Event] {
-        return [
-            Event(
-                name: "Matriarch",
-                map: "Blue Gate",
-                icon: "https://cdn.metaforge.app/arc-raiders/custom/matriarch.webp",
-                startTime: 1771423200000,
-                endTime: 1771426800000
-            ),
-            Event(
-                name: "Night Raid",
-                map: "Stella Montis",
-                icon: "https://cdn.metaforge.app/arc-raiders/custom/night.webp",
-                startTime: 1771423200000,
-                endTime: 1771426800000
-            )
-        ]
-    }
-}
