@@ -12,5 +12,10 @@ struct DataBaseView: View {
 
     var body: some View {
         Views.DataBaseCollection()
+            .task {
+                Task {
+                    await viewModel.getArcs()
+                }
+            }
     }
 }

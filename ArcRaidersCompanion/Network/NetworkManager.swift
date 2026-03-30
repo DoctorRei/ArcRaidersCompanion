@@ -20,20 +20,38 @@ final class NetworkManager {
     
     private init() {}
     
-    private let provider = MoyaProvider<MetaForgeService>()
+    private let provider = MoyaProvider<MetaForgeService>(plugins: [NetworkLoggerPlugin()])
     private let decoder: JSONDecoder = {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
     }()
     
-    func fetchEvents() async throws -> [Event] {
+    func fetchEvents() async throws -> [Model.Event] {
         return try await withCheckedThrowingContinuation { continuation in
             provider.request(.events) { result in
                 switch result {
                 case .success(let data):
                     do {
-                        let scheduleResponse = try self.decoder.decode(EventScheduleResponse.self, from: data.data)
+                        let scheduleResponse = try self.decoder.decode(Model.EventScheduleResponse.self, from: data.data)
+                        continuation.resume(returning: scheduleResponse.data)
+                    } catch {
+                        continuation.resume(throwing: NetworkError.decodingError(error))
+                    }
+                case .failure(let error):
+                    continuation.resume(throwing: NetworkError.moyaError(error))
+                }
+            }
+        }
+    }
+    
+    func fetchArcs() async throws -> [Model.ARCEnemy] {
+        return try await withCheckedThrowingContinuation { continuation in
+            provider.request(.arcs) { result in
+                switch result {
+                case .success(let data):
+                    do {
+                        let scheduleResponse = try self.decoder.decode(Model.ArcsRespone.self, from: data.data)
                         continuation.resume(returning: scheduleResponse.data)
                     } catch {
                         continuation.resume(throwing: NetworkError.decodingError(error))
