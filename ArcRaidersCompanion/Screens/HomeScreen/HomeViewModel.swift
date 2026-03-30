@@ -43,6 +43,7 @@ extension HomeView {
 extension HomeView.ViewModel: ViewModelProtocol {
     func getEvents() async {
         Task {
+            print("TESTTEST We take another Events")
             do {
                 try await events = networkManager.fetchEvents()
                 filterEvents(with: events)

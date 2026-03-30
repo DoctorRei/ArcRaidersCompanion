@@ -14,6 +14,5 @@ protocol FavoritesCoordinatorProtocol: AnyObject {
 extension FavoritesView {
     final class ViewModel: ObservableObject {
         weak var coordinator: FavoritesCoordinatorProtocol?
-        
     }
 }
