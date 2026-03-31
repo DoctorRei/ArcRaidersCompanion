@@ -23,10 +23,5 @@ struct DataBaseView: View {
                 print("3")
             }
         }
-            .task {
-                Task {
-                    await viewModel.getArcs()
-                }
-            }
     }
 }

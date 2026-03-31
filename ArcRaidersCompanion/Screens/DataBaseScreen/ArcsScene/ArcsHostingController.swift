@@ -10,8 +10,7 @@ import SwiftUI
 final class ArcsHostingController: HostingController<ArcsView, ArcsView.ViewModel> {
     override func viewDidLoad() {
         super.viewDidLoad()
-//        view.backgroundColor = .systemPink.withAlphaComponent(0.2)
-        view.backgroundColor = .red
+        view.backgroundColor = .systemPink.withAlphaComponent(0.2)
     }
 }
 

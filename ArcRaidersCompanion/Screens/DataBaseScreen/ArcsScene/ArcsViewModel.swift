@@ -12,33 +12,52 @@ protocol ArcsCoordinatorProtocol: AnyObject {
 }
 
 extension ArcsView {
-//    protocol ViewModelProtocol {
-//        associatedtype Arcs
-//        func getArcs() async
-//    }
+    protocol ViewModelProtocol {
+        associatedtype Arcs
+        func getArcs() async
+    }
     
     final class ViewModel: ObservableObject {
+        typealias ArcEnemy = NetworkManager.Model.ARCEnemy
         weak var coordinator: ArcsCoordinatorProtocol?
         private var networkManager = NetworkManager.shared
         private var isErrorLoading = false
-        private var arcModels: [NetworkManager.Model.ARCEnemy] = []
-        
+
+        var arcTypes: [ArcEnemy.EnemyType] = [.boss, .ground, .flying, .turret]
+        @Published var bossArcs: [ArcEnemy] = []
+        @Published var groundArcs: [ArcEnemy] = []
+        @Published var flyingArcs: [ArcEnemy] = []
+        @Published var turretArcs: [ArcEnemy] = []
     }
 }
 
-//extension ArcsView.ViewModel: DataBaseView.ViewModelProtocol {
-//    typealias Arcs = NetworkManager.Model.ARCEnemy
-//    
-//    func getArcs() async {
-//        Task {
-//            do {
-//                try await arcModels = networkManager.fetchArcs()
-//                print(arcModels)
-//            } catch {
-//                isErrorLoading = true
-//                print(isErrorLoading)
-//            }
-//        }
-//    }
-//}
+extension ArcsView.ViewModel: ArcsView.ViewModelProtocol {
+    typealias Arcs = NetworkManager.Model.ARCEnemy
+    
+    func getArcs() async {
+        Task {
+            do {
+                let model = try await networkManager.fetchArcs()
+                sortArcsByType(model: model)
+            } catch {
+                isErrorLoading = true
+            }
+        }
+    }
+    
+    func sortArcsByType(model: [ArcEnemy]) {
+        model.forEach { arc in
+            switch arc.type {
+            case .ground:
+                groundArcs.append(arc)
+            case .flying:
+                flyingArcs.append(arc)
+            case .turret:
+                turretArcs.append(arc)
+            case .boss:
+                bossArcs.append(arc)
+            }
+        }
+    }
+}
 
