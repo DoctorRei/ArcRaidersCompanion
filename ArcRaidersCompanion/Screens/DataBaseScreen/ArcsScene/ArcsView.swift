@@ -9,42 +9,75 @@ import SwiftUI
 
 struct ArcsView: View {
     @ObservedObject var viewModel: ViewModel
+    @State private var isCellBossExpanded = false
+    @State private var isCellFlyingExpanded = false
+    @State private var isCellGroundExpanded = false
+    @State private var isCellTurretExpanded = false
     
     init(viewModel: ViewModel) {
         self.viewModel = viewModel
         getArcsData()
-        print("TESTTEST Init")
     }
-
+    
     var body: some View {
-        arcsTypes()
-            .onAppear {
-                print("TESTTEST onApper")
-            }
+        ScrollView {
+            content()
+        }
     }
 }
 
 extension ArcsView {
+    func content() -> some View {
+        arcsTypes()
+            .padding(.horizontal)
+    }
+    
     func arcsTypes() -> some View {
-        ScrollView {
-            ForEach(viewModel.arcTypes, id: \.hashValue) { type in
-                switch type {
-                case .boss:
-                    ForEach($viewModel.bossArcs, id: \.id) { model in
-                        arcDescriptionCell(for: model.wrappedValue)
+        ForEach(viewModel.arcTypes, id: \.hashValue) { type in
+            switch type {
+            case .boss:
+                Views.ArcExpandedCell(isExpanded: $isCellBossExpanded) {
+                    arcPreviewCell(type: type)
+                } content: {
+                    VStack(spacing: 2) {
+                        ForEach($viewModel.bossArcs, id: \.id) { model in
+                            arcDescriptionCell(for: model.wrappedValue)
+                        }
                     }
-                case .flying:
-                    ForEach($viewModel.flyingArcs, id: \.id) { model in
-                        arcDescriptionCell(for: model.wrappedValue)
+                    .padding(.horizontal)
+                }
+            case .flying:
+                Views.ArcExpandedCell(isExpanded: $isCellFlyingExpanded) {
+                    arcPreviewCell(type: type)
+                } content: {
+                    VStack(spacing: 2) {
+                        ForEach($viewModel.flyingArcs, id: \.id) { model in
+                            arcDescriptionCell(for: model.wrappedValue)
+                        }
                     }
-                case .ground:
-                    ForEach($viewModel.groundArcs, id: \.id) { model in
-                        arcDescriptionCell(for: model.wrappedValue)
+                    .padding(.horizontal)
+                }
+            case .ground:
+                Views.ArcExpandedCell(isExpanded: $isCellGroundExpanded) {
+                    arcPreviewCell(type: type)
+                } content: {
+                    VStack(spacing: 2) {
+                        ForEach($viewModel.groundArcs, id: \.id) { model in
+                            arcDescriptionCell(for: model.wrappedValue)
+                        }
                     }
-                case .turret:
-                    ForEach($viewModel.turretArcs, id: \.id) { model in
-                        arcDescriptionCell(for: model.wrappedValue)
+                    .padding(.horizontal)
+                }
+            case .turret:
+                Views.ArcExpandedCell(isExpanded: $isCellTurretExpanded) {
+                    arcPreviewCell(type: type)
+                } content: {
+                    VStack(spacing: 2) {
+                        ForEach($viewModel.turretArcs, id: \.id) { model in
+                            arcDescriptionCell(for: model.wrappedValue)
+                        }
                     }
+                    .padding(.horizontal)
                 }
             }
         }
@@ -52,6 +85,14 @@ extension ArcsView {
     
     func arcDescriptionCell(for model: NetworkManager.Model.ARCEnemy) -> some View {
         Views.ArcDescriptionCell(arcModel: model)
+    }
+    
+    func arcPreviewCell(type: ArcsView.ViewModel.ArcEnemy.EnemyType) -> some View {
+        Views.ArcPreviewCell(
+            text: type.rawValue,
+            frameWidth: 124,
+            frameHeight: 124
+        )
     }
 }
 

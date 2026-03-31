@@ -39,6 +39,7 @@ private extension Views.EventCardView {
                         .padding()
                 }
         }
+        .padding()
     }
     
     func cardBody(event: Model) -> some View {
