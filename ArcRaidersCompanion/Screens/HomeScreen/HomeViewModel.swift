@@ -34,6 +34,7 @@ extension HomeView {
         private var networkManager = NetworkManager.shared
         
         var events: [Event] = []
+        
         @Published private var isErrorLoading: Bool = false
         @Published var selectedPickerTab: PickerStyles = .actual
 

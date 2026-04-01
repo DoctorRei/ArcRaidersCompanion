@@ -1,41 +1,13 @@
 //
-//  ArcsModel.swift
+//  ArcModel+Helpers.swift
 //  ArcRaidersCompanion
 //
-//  Created by Akira Rei on 30.03.2026.
+//  Created by Akira Rei on 01.04.2026.
 //
 
 import Foundation
 
-// MARK: - Enhanced ARC Enemy Model with Classification
-extension NetworkManager.Model {
-    struct ARCEnemy: Identifiable, Decodable {
-        let id: String
-        let name: String
-        let description: String
-        let icon: String
-        let image: String
-        let createdAt: String
-        let updatedAt: String
-    }
-    
-    struct PaginationInfo: Decodable {
-        let page: Int
-        let limit: Int
-        let total: Int
-        let totalPages: Int
-        let hasNextPage: Bool
-        let hasPrevPage: Bool
-    }
-    
-    // MARK: - Enemy Collection
-    struct ArcsRespone: Decodable {
-        let data: [ARCEnemy]
-        let pagination: PaginationInfo
-    }
-}
-
-extension NetworkManager.Model.ARCEnemy {
+extension NetworkManager.Model.DataModels.ArcsData.ARCEnemy {
     enum EnemyType: String, CaseIterable {
         case ground = "Ground"
         case flying = "Flying"
@@ -63,7 +35,7 @@ extension NetworkManager.Model.ARCEnemy {
         switch id {
         case "queen", "matriarch":
             return .boss
-        case "hornet", "wasp", "snitch", "spotter", "rocketeer", "firefly":
+        case "hornet", "wasp", "snitch", "spotter", "rocketeer", "firefly", "vaporizer":
             return .flying
         case "turret", "sentinel":
             return .turret
@@ -113,9 +85,3 @@ extension NetworkManager.Model.ARCEnemy {
     }
 }
 
-//// MARK: - JSON Parsing Extension
-//extension ARCEnemiesResponse {
-//    func toEnemyCollection() -> EnemyCollection {
-//        EnemyCollection(enemies: data, pagination: pagination)
-//    }
-//}

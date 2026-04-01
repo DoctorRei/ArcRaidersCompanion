@@ -54,9 +54,16 @@ extension MetaForgeService: TargetType {
     var method: Moya.Method {
         return .get
     }
-    
     var task: Task {
-        return .requestPlain
+        switch self {
+        case .items, .quests, .gameAppData, .events, .traders:
+                .requestPlain
+        case .arcs:
+                .requestParameters(
+                    parameters: ["includeLoot": "true"],
+                    encoding: URLEncoding.default
+                )
+        }
     }
 
     var headers: [String: String]? {

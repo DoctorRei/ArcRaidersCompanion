@@ -9,6 +9,13 @@ import SwiftUI
 
 extension Views {
     struct DataBaseCollection: View {
+        private enum Const {
+            static let arcsTitle: String = "Arcs"
+            static let questsTitle: String = "Quests"
+            static let itemsTitle: String = "Items"
+            static let tradersTitle: String = "Traders"
+        }
+        
         enum ItemType: Hashable {
             case arcs
             case quests
@@ -31,18 +38,19 @@ extension Views {
             var text: String {
                 switch self {
                 case .arcs:
-                    "Arcs"
+                    Const.arcsTitle
                 case .quests:
-                    "Quests"
+                    Const.questsTitle
                 case .items:
-                    "Items"
+                    Const.itemsTitle
                 case .traders:
-                    "Traders"
+                    Const.tradersTitle
                 }
             }
         }
-
-        let itemsTypes: [ItemType] = [.arcs, .items, .quests, .traders]
+        
+        private let itemsTypes: [ItemType] = [.arcs, .items, .quests, .traders]
+        let typeSelected: (ItemType) -> Void
         
         var body: some View {
             content()
@@ -51,10 +59,19 @@ extension Views {
         func content() -> some View {
             ScrollView {
                 ForEach(itemsTypes, id: \.self) { item in
-                    DataBaseCell(image: item.image, text: item.text)
+                    cell(item: item)
                 }
-                .padding(.horizontal, 16)
+                .padding(.horizontal)
             }
+        }
+        
+        func cell(item: ItemType) -> some View {
+            Button {
+                typeSelected(item)
+            } label: {
+                DataBaseCell(image: item.image, text: item.text)
+            }
+            .buttonStyle(.plain)
         }
     }
 }

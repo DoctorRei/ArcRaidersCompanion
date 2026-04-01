@@ -20,7 +20,6 @@ extension Views {
                 .frame(maxWidth: .infinity)
                 .background(Color.gray.opacity(0.4))
                 .cornerRadius(16)
-                .padding(16)
                 .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
         }
     }
