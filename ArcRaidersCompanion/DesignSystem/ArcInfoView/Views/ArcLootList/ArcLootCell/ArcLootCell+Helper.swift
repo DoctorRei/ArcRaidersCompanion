@@ -8,14 +8,18 @@
 import SwiftUI
 
 extension Views.ArcInfoView.Models.ArcModel.ArcLoot.LootItem {
-    var rarityColor: Color {
+    var color: Color {
         switch rarity {
-        case "Rare":
-                .blue.opacity(0.4)
-        case "Uncommon":
-                .green.opacity(0.4)
-        default:
+        case .common:
                 .white
+        case .uncommon:
+                .green.opacity(0.4)
+        case .rare:
+                .blue.opacity(0.4)
+        case .epic:
+                .purple.opacity(0.4)
+        case .legendary:
+                .yellow.opacity(0.5)
         }
     }
 }

@@ -32,7 +32,9 @@ struct ArcsView: View {
 
 extension ArcsView {
     func content() -> some View {
-        arcsTypes()
+        LazyVStack {
+            arcsTypes()
+        }
             .padding(.horizontal)
     }
     
@@ -57,9 +59,11 @@ extension ArcsView {
         return Views.ArcInfoView.ArcExpandedCell(isExpanded: model.0, spacing: .small) {
             arcPreviewCell(type: type)
         } content: {
+            LazyVStack {
                 ForEach(model.1, id: \.id) { model in
                     arcDescriptionCell(for: model.wrappedValue)
                 }
+            }
             .padding(.horizontal)
         }
     }

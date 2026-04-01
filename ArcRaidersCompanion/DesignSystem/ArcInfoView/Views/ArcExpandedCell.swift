@@ -55,6 +55,11 @@ extension Views.ArcInfoView {
                     isExpanded.wrappedValue.toggle()
                 } label: {
                     header
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(.white, lineWidth: isExpanded.wrappedValue ? 3 : 0)
+                        )
+                    
                 }
                 .buttonStyle(.plain)
                 

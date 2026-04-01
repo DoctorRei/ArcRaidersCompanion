@@ -11,17 +11,15 @@ extension Views.ArcInfoView {
     struct ArcLootList: View {
         var lootList: [Models.ArcModel.ArcLoot]
         
+        init(lootList: [Models.ArcModel.ArcLoot]) {
+            self.lootList = lootList.sorted { $0.item.rarity.priority > $1.item.rarity.priority }
+        }
+        
         var body: some View {
-            List(lootList, id: \.id) { loot in
-                ArcLootCell(
-                    lootModel: .init(
-                        id: loot.item.id,
-                        icon: loot.item.icon,
-                        name: loot.item.name,
-                        rarity: loot.item.rarity,
-                        itemType: loot.item.itemType
-                    )
-                )
+            LazyVStack(spacing: 2) {
+                ForEach(lootList, id: \.id) { item in
+                    ArcLootCell(lootModel: item.item)
+                }
             }
         }
     }

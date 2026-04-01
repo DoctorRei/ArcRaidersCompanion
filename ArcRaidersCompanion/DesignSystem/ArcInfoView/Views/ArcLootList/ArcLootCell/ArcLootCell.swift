@@ -13,7 +13,7 @@ extension Views.ArcInfoView.ArcLootList {
 
         var body: some View {
             content()
-                .background(lootModel.rarityColor)
+                .background(lootModel.color)
         }
     }
 }
@@ -26,5 +26,6 @@ extension Views.ArcInfoView.ArcLootList.ArcLootCell {
             Text(lootModel.name)
                 .frame(maxWidth: .infinity)
         }
+        .padding()
     }
 }

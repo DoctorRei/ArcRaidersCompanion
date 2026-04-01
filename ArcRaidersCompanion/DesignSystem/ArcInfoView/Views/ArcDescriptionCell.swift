@@ -12,9 +12,12 @@ extension Views.ArcInfoView {
         private enum Const {
             static let arcFullInfoPadding: CGFloat = 26
             static let imageFrame: CGFloat = 64
-            static let fullImageHeightFrame: CGFloat = 200
-            static let fullImageWidthFrame: CGFloat = 250
+            static let fullImageHeightFrame: CGFloat = 180
+            static let fullImageWidthFrame: CGFloat = 20
             static let imageViewCornerRadius: CGFloat = 16
+            static let overlayCornerRadius: CGFloat = 12
+            static let borderWidth: CGFloat = 3
+            static let borderWidthDefault: CGFloat = 0
         }
         
         @State private var isExpanded = false
@@ -29,6 +32,13 @@ extension Views.ArcInfoView {
                 arcPreviewInfo()
             } content: {
                 arcFullInfo()
+                    .overlay(
+                        RoundedRectangle(cornerRadius: Const.overlayCornerRadius)
+                            .stroke( .white, lineWidth: $isExpanded.wrappedValue
+                                    ? Const.borderWidth
+                                    : Const.borderWidthDefault
+                            )
+                        )
                     .padding(.bottom, Const.arcFullInfoPadding)
             }
         }

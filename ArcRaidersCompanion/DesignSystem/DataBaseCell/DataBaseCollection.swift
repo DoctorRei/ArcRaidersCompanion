@@ -48,7 +48,7 @@ extension Views {
                 }
             }
         }
-
+        
         private let itemsTypes: [ItemType] = [.arcs, .items, .quests, .traders]
         let typeSelected: (ItemType) -> Void
         

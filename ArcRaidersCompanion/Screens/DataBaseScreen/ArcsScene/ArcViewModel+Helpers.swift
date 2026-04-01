@@ -34,7 +34,7 @@ extension Views.ArcInfoView.Models.ArcModel.ArcLoot.LootItem {
         self.id = networkLootItemModel.id
         self.itemType = networkLootItemModel.itemType
         self.name = networkLootItemModel.name
-        self.rarity = networkLootItemModel.rarity
+        self.rarity = Rarity(rawValue: networkLootItemModel.rarity) ?? .common
     }
 }
 extension ArcsView.ViewModel.ArcModel {

@@ -19,7 +19,7 @@ extension Views.ArcInfoView {
 }
 
 extension Views.ArcInfoView.Models.ArcModel {
-    struct ArcLoot: Decodable {
+    struct ArcLoot {
         let id: String
         let item: LootItem
         let itemId: String
@@ -27,11 +27,31 @@ extension Views.ArcInfoView.Models.ArcModel {
 }
 
 extension Views.ArcInfoView.Models.ArcModel.ArcLoot {
-    struct LootItem: Decodable {
+    struct LootItem {
         let id: String
         let icon: String
         let name: String
-        let rarity: String
+        let rarity: Rarity
         let itemType: String
+    }
+}
+
+extension Views.ArcInfoView.Models.ArcModel.ArcLoot.LootItem {
+    enum Rarity: String, CaseIterable {
+        case common = "Common"
+        case uncommon = "Uncommon"
+        case rare = "Rare"
+        case epic = "Epic"
+        case legendary = "Legendary"
+        
+        var priority: Int {
+            switch self {
+            case .common: return 0
+            case .uncommon: return 1
+            case .rare: return 2
+            case .epic: return 3
+            case .legendary: return 4
+            }
+        }
     }
 }

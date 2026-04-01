@@ -60,7 +60,7 @@ extension MetaForgeService: TargetType {
                 .requestPlain
         case .arcs:
                 .requestParameters(
-                    parameters: ["includeLoot": true],
+                    parameters: ["includeLoot": "true"],
                     encoding: URLEncoding.default
                 )
         }
