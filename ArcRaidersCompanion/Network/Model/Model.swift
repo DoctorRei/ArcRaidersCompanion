@@ -8,3 +8,12 @@
 extension NetworkManager {
     enum Model {}
 }
+
+extension NetworkManager.Model {
+    enum Response {}
+    enum DataModels {}
+}
+
+extension NetworkManager.Model.DataModels {
+    enum ArcsData {}
+}

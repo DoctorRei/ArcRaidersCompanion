@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension Views {
+extension Views.ArcInfoView {
     struct ArcDescriptionCell: View {
         private enum Const {
             static let arcFullInfoPadding: CGFloat = 26
@@ -18,7 +18,7 @@ extension Views {
         }
         
         @State private var isExpanded = false
-        var arcModel: NetworkManager.Model.ARCEnemy
+        var arcModel: Models.ArcModel
         
         var body: some View {
             content()
@@ -34,7 +34,7 @@ extension Views {
         }
         
         func arcPreviewInfo() -> some View {
-            Views.ArcPreviewCell(
+            ArcPreviewCell(
                 icon: arcModel.icon,
                 text: arcModel.name,
                 frameWidth: Const.imageFrame,
@@ -43,7 +43,7 @@ extension Views {
         }
         
         func arcFullInfo() -> some View {
-            ContainerView {
+            Views.ContainerView {
                 VStack {
                     KFImageView(url: URL(string: arcModel.image), cornerRadius: Const.imageViewCornerRadius)
                         .frame(height: Const.fullImageHeightFrame)
@@ -51,6 +51,8 @@ extension Views {
                         .padding()
                     Text(arcModel.description)
                         .padding()
+                    Text("Loot:")
+                    Views.ArcInfoView.ArcLootList(lootList: arcModel.loot)
                 }
             }
         }

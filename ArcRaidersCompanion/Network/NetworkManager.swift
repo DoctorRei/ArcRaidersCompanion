@@ -45,13 +45,13 @@ final class NetworkManager {
         }
     }
     
-    func fetchArcs() async throws -> [Model.ARCEnemy] {
+    func fetchArcs() async throws -> [Model.DataModels.ArcsData.ARCEnemy] {
         return try await withCheckedThrowingContinuation { continuation in
             provider.request(.arcs) { result in
                 switch result {
                 case .success(let data):
                     do {
-                        let scheduleResponse = try self.decoder.decode(Model.ArcsRespone.self, from: data.data)
+                        let scheduleResponse = try self.decoder.decode(Model.Response.ArcsRespone.self, from: data.data)
                         continuation.resume(returning: scheduleResponse.data)
                     } catch {
                         continuation.resume(throwing: NetworkError.decodingError(error))

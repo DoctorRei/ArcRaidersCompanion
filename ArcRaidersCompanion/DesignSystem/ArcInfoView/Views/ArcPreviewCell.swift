@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension Views {
+extension Views.ArcInfoView {
     struct ArcPreviewCell: View {
         var icon: String?
         var text: String
@@ -19,7 +19,7 @@ extension Views {
         }
         
         func content() -> some View {
-            ContainerView {
+            Views.ContainerView {
                 HStack {
                     image()
                         .frame(width: frameWidth, height: frameHeight)

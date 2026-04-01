@@ -42,7 +42,7 @@ extension ArcsView {
         }
     }
     
-    func makeArcListBy(type: ViewModel.ArcEnemy.EnemyType) -> some View {
+    func makeArcListBy(type: ViewModel.ArcModel.EnemyType) -> some View {
         let model = switch type {
         case .boss:
             ($isCellBossExpanded, $viewModel.bossArcs)
@@ -54,7 +54,7 @@ extension ArcsView {
             ($isCellTurretExpanded, $viewModel.turretArcs)
         }
         
-        return Views.ArcExpandedCell(isExpanded: model.0, spacing: .small) {
+        return Views.ArcInfoView.ArcExpandedCell(isExpanded: model.0, spacing: .small) {
             arcPreviewCell(type: type)
         } content: {
                 ForEach(model.1, id: \.id) { model in
@@ -64,12 +64,21 @@ extension ArcsView {
         }
     }
     
-    func arcDescriptionCell(for model: NetworkManager.Model.ARCEnemy) -> some View {
-        Views.ArcDescriptionCell(arcModel: model)
+    func arcDescriptionCell(for model: ViewModel.ArcModel) -> some View {
+        Views.ArcInfoView.ArcDescriptionCell(
+            arcModel: .init(
+                id: model.id,
+                name: model.name,
+                description: model.description,
+                icon: model.icon,
+                image: model.image,
+                loot: model.loot
+            )
+        )
     }
     
-    func arcPreviewCell(type: ViewModel.ArcEnemy.EnemyType) -> some View {
-        Views.ArcPreviewCell(
+    func arcPreviewCell(type: ViewModel.ArcModel.EnemyType) -> some View {
+        Views.ArcInfoView.ArcPreviewCell(
             text: type.rawValue,
             frameWidth: Const.imageFrame,
             frameHeight: Const.imageFrame

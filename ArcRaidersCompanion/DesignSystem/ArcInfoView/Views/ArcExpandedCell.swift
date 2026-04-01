@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension Views {
+extension Views.ArcInfoView {
     // MARK: - Основной компонент
     struct ArcExpandedCell<Header: View, Content: View>: View {
         enum Spacing {

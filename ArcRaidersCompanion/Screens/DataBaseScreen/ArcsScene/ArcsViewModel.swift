@@ -13,27 +13,26 @@ protocol ArcsCoordinatorProtocol: AnyObject {
 
 extension ArcsView {
     protocol ViewModelProtocol {
-        associatedtype Arcs
         func getArcs() async
     }
     
     final class ViewModel: ObservableObject {
-        typealias ArcEnemy = NetworkManager.Model.ARCEnemy
+        typealias ArcEnemy = NetworkManager.Model.DataModels.ArcsData.ARCEnemy
+        typealias ArcModel = Views.ArcInfoView.Models.ArcModel
+
         weak var coordinator: ArcsCoordinatorProtocol?
         private var networkManager = NetworkManager.shared
         private var isErrorLoading = false
 
-        var arcTypes: [ArcEnemy.EnemyType] = [.boss, .ground, .flying, .turret]
-        @Published var bossArcs: [ArcEnemy] = []
-        @Published var groundArcs: [ArcEnemy] = []
-        @Published var flyingArcs: [ArcEnemy] = []
-        @Published var turretArcs: [ArcEnemy] = []
+        var arcTypes: [ArcModel.EnemyType] = [.boss, .ground, .flying, .turret]
+        @Published var bossArcs: [ArcModel] = []
+        @Published var groundArcs: [ArcModel] = []
+        @Published var flyingArcs: [ArcModel] = []
+        @Published var turretArcs: [ArcModel] = []
     }
 }
 
 extension ArcsView.ViewModel: ArcsView.ViewModelProtocol {
-    typealias Arcs = NetworkManager.Model.ARCEnemy
-    
     func getArcs() async {
         Task {
             do {
@@ -47,17 +46,17 @@ extension ArcsView.ViewModel: ArcsView.ViewModelProtocol {
     
     func sortArcsByType(model: [ArcEnemy]) {
         model.forEach { arc in
+            let model = ArcModel(networkArcModel: arc)
             switch arc.type {
             case .ground:
-                groundArcs.append(arc)
+                groundArcs.append(model)
             case .flying:
-                flyingArcs.append(arc)
+                flyingArcs.append(model)
             case .turret:
-                turretArcs.append(arc)
+                turretArcs.append(model)
             case .boss:
-                bossArcs.append(arc)
+                bossArcs.append(model)
             }
         }
     }
 }
-
