@@ -9,6 +9,13 @@ import SwiftUI
 
 extension Views {
     struct DataBaseCollection: View {
+        private enum Const {
+            static let arcsTitle: String = "Arcs"
+            static let questsTitle: String = "Quests"
+            static let itemsTitle: String = "Items"
+            static let tradersTitle: String = "Traders"
+        }
+        
         enum ItemType: Hashable {
             case arcs
             case quests
@@ -31,13 +38,13 @@ extension Views {
             var text: String {
                 switch self {
                 case .arcs:
-                    "Arcs"
+                    Const.arcsTitle
                 case .quests:
-                    "Quests"
+                    Const.questsTitle
                 case .items:
-                    "Items"
+                    Const.itemsTitle
                 case .traders:
-                    "Traders"
+                    Const.tradersTitle
                 }
             }
         }
@@ -54,7 +61,7 @@ extension Views {
                 ForEach(itemsTypes, id: \.self) { item in
                     cell(item: item)
                 }
-                .padding(.horizontal, 16)
+                .padding(.horizontal)
             }
         }
         

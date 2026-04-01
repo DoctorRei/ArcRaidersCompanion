@@ -9,6 +9,12 @@ import SwiftUI
 
 extension Views {
     struct DataBaseCell: View {
+        private enum Const {
+            static let navigationTitle: String = "Data Base"
+            static let imageFrame: CGFloat = 124
+            static let circleBorder: CGFloat = 3
+        }
+        
         private let image: UIImage
         private let text: String
         
@@ -19,7 +25,7 @@ extension Views {
         
         var body: some View {
             content()
-                .navigationTitle("Data Base")
+                .navigationTitle(Const.navigationTitle)
         }
     }
 }
@@ -38,11 +44,11 @@ extension Views.DataBaseCell {
     
     func imageWithBorder() -> some View {
         Image(uiImage: image)
-            .frame(width: 124, height: 124)
+            .frame(width: Const.imageFrame, height: Const.imageFrame)
             .clipShape(.circle)
             .overlay(
                 Circle()
-                    .stroke(Color.white, lineWidth: 3)
+                    .stroke(Color.white, lineWidth: Const.circleBorder)
             )
     }
 }

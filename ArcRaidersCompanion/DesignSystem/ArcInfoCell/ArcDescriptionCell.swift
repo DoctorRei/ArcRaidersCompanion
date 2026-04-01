@@ -9,6 +9,14 @@ import SwiftUI
 
 extension Views {
     struct ArcDescriptionCell: View {
+        private enum Const {
+            static let arcFullInfoPadding: CGFloat = 26
+            static let imageFrame: CGFloat = 64
+            static let fullImageHeightFrame: CGFloat = 200
+            static let fullImageWidthFrame: CGFloat = 250
+            static let imageViewCornerRadius: CGFloat = 16
+        }
+        
         @State private var isExpanded = false
         var arcModel: NetworkManager.Model.ARCEnemy
         
@@ -17,10 +25,11 @@ extension Views {
         }
         
         func content() -> some View {
-            ArcExpandedCell(isExpanded: $isExpanded) {
+            ArcExpandedCell(isExpanded: $isExpanded, spacing: .none) {
                 arcPreviewInfo()
             } content: {
                 arcFullInfo()
+                    .padding(.bottom, Const.arcFullInfoPadding)
             }
         }
         
@@ -28,17 +37,17 @@ extension Views {
             Views.ArcPreviewCell(
                 icon: arcModel.icon,
                 text: arcModel.name,
-                frameWidth: 64,
-                frameHeight: 64
+                frameWidth: Const.imageFrame,
+                frameHeight: Const.imageFrame
             )
         }
         
         func arcFullInfo() -> some View {
             ContainerView {
                 VStack {
-                    KFImageView(url: URL(string: arcModel.image), cornerRadius: 16)
-                        .frame(height: 200)
-                        .frame(maxWidth: 250)
+                    KFImageView(url: URL(string: arcModel.image), cornerRadius: Const.imageViewCornerRadius)
+                        .frame(height: Const.fullImageHeightFrame)
+                        .frame(maxWidth: Const.fullImageWidthFrame)
                         .padding()
                     Text(arcModel.description)
                         .padding()

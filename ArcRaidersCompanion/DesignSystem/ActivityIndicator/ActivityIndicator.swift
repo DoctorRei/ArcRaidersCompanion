@@ -9,11 +9,15 @@ import SwiftUI
 
 extension Views {
     struct ActivityIndicator: View {
+        private enum Const {
+            static let frame: CGFloat = 14
+        }
+        
         var isActive: Bool
 
         var body: some View {
             Circle()
-                .frame(width: 14, height: 14)
+                .frame(width: Const.frame, height: Const.frame)
                 .foregroundStyle(isActive ? .yellow : .red)
         }
     }

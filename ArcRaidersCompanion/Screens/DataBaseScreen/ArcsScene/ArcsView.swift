@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct ArcsView: View {
+    private enum Const {
+        static let imageFrame: CGFloat = 124
+    }
+    
     @ObservedObject var viewModel: ViewModel
     @State private var isCellBossExpanded = false
     @State private var isCellFlyingExpanded = false
@@ -34,52 +38,29 @@ extension ArcsView {
     
     func arcsTypes() -> some View {
         ForEach(viewModel.arcTypes, id: \.hashValue) { type in
-            switch type {
-            case .boss:
-                Views.ArcExpandedCell(isExpanded: $isCellBossExpanded) {
-                    arcPreviewCell(type: type)
-                } content: {
-                    VStack(spacing: 2) {
-                        ForEach($viewModel.bossArcs, id: \.id) { model in
-                            arcDescriptionCell(for: model.wrappedValue)
-                        }
-                    }
-                    .padding(.horizontal)
+            makeArcListBy(type: type)
+        }
+    }
+    
+    func makeArcListBy(type: ViewModel.ArcEnemy.EnemyType) -> some View {
+        let model = switch type {
+        case .boss:
+            ($isCellBossExpanded, $viewModel.bossArcs)
+        case .ground:
+            ($isCellGroundExpanded, $viewModel.groundArcs)
+        case .flying:
+            ($isCellFlyingExpanded, $viewModel.flyingArcs)
+        case .turret:
+            ($isCellTurretExpanded, $viewModel.turretArcs)
+        }
+        
+        return Views.ArcExpandedCell(isExpanded: model.0, spacing: .small) {
+            arcPreviewCell(type: type)
+        } content: {
+                ForEach(model.1, id: \.id) { model in
+                    arcDescriptionCell(for: model.wrappedValue)
                 }
-            case .flying:
-                Views.ArcExpandedCell(isExpanded: $isCellFlyingExpanded) {
-                    arcPreviewCell(type: type)
-                } content: {
-                    VStack(spacing: 2) {
-                        ForEach($viewModel.flyingArcs, id: \.id) { model in
-                            arcDescriptionCell(for: model.wrappedValue)
-                        }
-                    }
-                    .padding(.horizontal)
-                }
-            case .ground:
-                Views.ArcExpandedCell(isExpanded: $isCellGroundExpanded) {
-                    arcPreviewCell(type: type)
-                } content: {
-                    VStack(spacing: 2) {
-                        ForEach($viewModel.groundArcs, id: \.id) { model in
-                            arcDescriptionCell(for: model.wrappedValue)
-                        }
-                    }
-                    .padding(.horizontal)
-                }
-            case .turret:
-                Views.ArcExpandedCell(isExpanded: $isCellTurretExpanded) {
-                    arcPreviewCell(type: type)
-                } content: {
-                    VStack(spacing: 2) {
-                        ForEach($viewModel.turretArcs, id: \.id) { model in
-                            arcDescriptionCell(for: model.wrappedValue)
-                        }
-                    }
-                    .padding(.horizontal)
-                }
-            }
+            .padding(.horizontal)
         }
     }
     
@@ -87,11 +68,11 @@ extension ArcsView {
         Views.ArcDescriptionCell(arcModel: model)
     }
     
-    func arcPreviewCell(type: ArcsView.ViewModel.ArcEnemy.EnemyType) -> some View {
+    func arcPreviewCell(type: ViewModel.ArcEnemy.EnemyType) -> some View {
         Views.ArcPreviewCell(
             text: type.rawValue,
-            frameWidth: 124,
-            frameHeight: 124
+            frameWidth: Const.imageFrame,
+            frameHeight: Const.imageFrame
         )
     }
 }

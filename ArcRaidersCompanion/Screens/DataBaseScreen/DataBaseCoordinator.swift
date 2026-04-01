@@ -31,7 +31,6 @@ extension DataBaseCoordinator: DataBaseCoordinatorProtocol {
     func showArcsScene() {
         let vm = ArcsView.ViewModel()
         let view = ArcsView(viewModel: vm)
-        print("TESTTEST DataBase Coordinator")
         
         let hostingController = ArcsHostingController(rootView: view, viewModel: vm)
         
