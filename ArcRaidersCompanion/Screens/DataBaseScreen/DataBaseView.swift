@@ -18,7 +18,7 @@ struct DataBaseView: View {
             case .quests:
                 print("1")
             case .items:
-                print("2")
+                viewModel.showSearchItemScene()
             case .traders:
                 print("3")
             }
