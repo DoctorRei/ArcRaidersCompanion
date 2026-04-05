@@ -9,6 +9,7 @@ import UIKit
 
 protocol DataBaseCoordinatorProtocol: AnyObject {
     func showArcsScene()
+    func showSearchItemScene()
 }
 
 class DataBaseCoordinator: BaseCoordinator<UINavigationController> {
@@ -18,11 +19,18 @@ class DataBaseCoordinator: BaseCoordinator<UINavigationController> {
 }
 
 extension DataBaseCoordinator: DataBaseCoordinatorProtocol {
+    func showSearchItemScene() {
+        let coordinator = SearchItemCoordinator(presenter: presenter)
+        coordinator.start()
+        
+        store(coordinator: coordinator)
+    }
+    
     func showDataBaseScreen() {
         let vm = DataBaseView.ViewModel()
         vm.coordinator = self
         let view = DataBaseView(viewModel: vm)
-        
+
         let hostingController = DataBaseHostingController(rootView: view, viewModel: vm)
         
         presenter.setViewControllers([hostingController], animated: true)

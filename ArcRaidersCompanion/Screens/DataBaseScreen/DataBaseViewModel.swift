@@ -18,4 +18,8 @@ extension DataBaseView.ViewModel {
     func showArcsScene() {
         coordinator?.showArcsScene()
     }
+    
+    func showSearchItemScene() {
+        coordinator?.showSearchItemScene()
+    }
 }
