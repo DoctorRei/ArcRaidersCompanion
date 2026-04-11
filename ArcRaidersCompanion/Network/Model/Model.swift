@@ -16,4 +16,5 @@ extension NetworkManager.Model {
 
 extension NetworkManager.Model.DataModels {
     enum ArcsData {}
+    enum ItemsData {}
 }

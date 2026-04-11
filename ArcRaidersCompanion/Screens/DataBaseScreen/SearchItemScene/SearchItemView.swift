@@ -21,8 +21,8 @@ struct SearchItemView: View {
     var body: some View {
         ScrollView {
             content()
-                .onAppear {
-                    viewModel.coordinator?.showItemDetails()
+                .task {
+                    await viewModel.getItems()
                 }
         }
     }
