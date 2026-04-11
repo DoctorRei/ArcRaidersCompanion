@@ -29,7 +29,7 @@ extension SearchItemCoordinator: SearchItemNavigateProtocol {
     func navigateBack() {
         presenter.popViewController(animated: true)
     }
-    
+
     func showItemDetails() {
         print("TESTTEST")
     }
