@@ -11,7 +11,6 @@ struct SearchItemView: View {
     private enum Const {
         static let imageFrame: CGFloat = 124
     }
-    
     @ObservedObject var viewModel: ViewModel
     
     init(viewModel: ViewModel) {
@@ -20,16 +19,38 @@ struct SearchItemView: View {
     
     var body: some View {
         ScrollView {
-            content()
-                .task {
-                    await viewModel.getItems()
-                }
+            Text("Hello")
         }
+        .onTapGesture {
+            hideKeyboard()
+            viewModel.isSearchFocused = false
+        }
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Views.SearchTextView(
+                    searchText: $viewModel.text,
+                    scrollOffset: $viewModel.scrollOffset,
+                    isFocus: $viewModel.isSearchFocused,
+                    onTextChange: { text in
+                        Task {
+                            await viewModel.getItems(with: text)
+                        }
+                    }
+                )
+                    .frame(minWidth: 200, idealWidth: 500, maxWidth: .infinity)
+            }
+        }
+        .toolbarRole(.editor)
+        .navigationBarBackButtonHidden(viewModel.isSearchFocused)
     }
 }
 
 extension SearchItemView {
     func content() -> some View {
-        Text("Text")
+        Text("")
+    }
+    
+    func listOfItems() {
+        
     }
 }
