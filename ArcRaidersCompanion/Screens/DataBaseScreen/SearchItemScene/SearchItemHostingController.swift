@@ -11,7 +11,7 @@ final class SearchItemHostingController: HostingController<SearchItemView, Searc
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemPink.withAlphaComponent(0.2)
-        navigationController?.title = "Search Item"
+        navigationController?.navigationBar.isHidden = true
     }
 }
 

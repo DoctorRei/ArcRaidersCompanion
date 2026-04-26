@@ -28,6 +28,7 @@ extension Views {
         
         var body: some View {
             content()
+                .fixedSize(horizontal: false, vertical: true)
                 .onChange(of: searchText) { newValue in
                     if !newValue.isEmpty {
                         logicWhenUserWriteSome(with: newValue)
@@ -94,14 +95,13 @@ struct CustomTextField: UIViewRepresentable {
         let textField = UITextField()
         textField.placeholder = placeholder
         textField.delegate = context.coordinator
-        textField.returnKeyType = .done // Для возможности скрыть клавиатуру кнопкой
+        textField.returnKeyType = .done
         return textField
     }
     
     func updateUIView(_ uiView: UITextField, context: Context) {
         uiView.text = text
         
-        // ✅ Исправленная логика: гарантируем выполнение в правильный момент
         DispatchQueue.main.async {
             if isFocused {
                 if !uiView.isFirstResponder {
@@ -132,7 +132,6 @@ struct CustomTextField: UIViewRepresentable {
             text = textField.text ?? ""
         }
         
-        // ✅ Более надёжный метод для отслеживания изменений текста
         func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
             if let currentText = textField.text,
                let textRange = Range(range, in: currentText) {
@@ -156,7 +155,6 @@ struct CustomTextField: UIViewRepresentable {
             }
         }
         
-        // ✅ Скрытие клавиатуры по нажатию Return
         func textFieldShouldReturn(_ textField: UITextField) -> Bool {
             textField.resignFirstResponder()
             return true

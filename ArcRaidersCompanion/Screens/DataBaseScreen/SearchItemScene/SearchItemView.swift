@@ -9,7 +9,13 @@ import SwiftUI
 
 struct SearchItemView: View {
     private enum Const {
-        static let imageFrame: CGFloat = 124
+        static let textFieldPadding: CGFloat = 16
+        static let textFieldPaddingBase: CGFloat = 0
+        static let animationDuration: CGFloat = 0.15
+        static let chevronLeftFrame: CGFloat = 44
+        static let chevronBackGroundFrame: CGFloat = 36
+
+        static let chevronImage: String = "chevron.left"
     }
     @ObservedObject var viewModel: ViewModel
     
@@ -18,39 +24,74 @@ struct SearchItemView: View {
     }
     
     var body: some View {
-        ScrollView {
-            Text("Hello")
-        }
+        content()
         .onTapGesture {
             hideKeyboard()
             viewModel.isSearchFocused = false
         }
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                Views.SearchTextView(
-                    searchText: $viewModel.text,
-                    scrollOffset: $viewModel.scrollOffset,
-                    isFocus: $viewModel.isSearchFocused,
-                    onTextChange: { text in
-                        Task {
-                            await viewModel.getItems(with: text)
-                        }
-                    }
-                )
-                    .frame(minWidth: 200, idealWidth: 500, maxWidth: .infinity)
-            }
-        }
-        .toolbarRole(.editor)
-        .navigationBarBackButtonHidden(viewModel.isSearchFocused)
     }
 }
 
 extension SearchItemView {
     func content() -> some View {
-        Text("")
+        VStack(spacing: 6) {
+            customNavigationBar()
+            listOfItems()
+        }
     }
     
-    func listOfItems() {
-        
+    func customNavigationBar() -> some View {
+        HStack {
+            if !viewModel.isSearchFocused {
+                backButton()
+                    .padding(.leading)
+                    .transition(.move(edge: .leading).combined(with: .opacity))
+            }
+            Views.SearchTextView(
+                searchText: $viewModel.text,
+                scrollOffset: $viewModel.scrollOffset,
+                isFocus: $viewModel.isSearchFocused,
+                onTextChange: { text in
+                    Task {
+                        await viewModel.getItems(with: text)
+                    }
+                }
+            )
+            .padding(.trailing)
+            .padding(.leading, viewModel.isSearchFocused ? Const.textFieldPadding : Const.textFieldPaddingBase)
+        }
+        .animation(.easeInOut(duration: Const.animationDuration), value: viewModel.isSearchFocused)
+    }
+    
+    func backButton() -> some View {
+        Button {
+            navigateBack()
+        } label: {
+            Image(systemName: Const.chevronImage)
+                .foregroundColor(.black)
+                .frame(width: Const.chevronLeftFrame, height: Const.chevronLeftFrame)
+                .background(
+                    Circle()
+                        .foregroundStyle(.white)
+                        .frame(width: Const.chevronBackGroundFrame, height: Const.chevronBackGroundFrame)
+                )
+                .contentShape(Rectangle())
+        }
+    }
+    
+    func listOfItems() -> some View {
+        ScrollView {
+            Views.ArcInfoView.ArcLootList(lootList: viewModel.foundedItems)
+        }
+    }
+    
+    func arcDescriptionCell(for model: [Views.ArcInfoView.Models.ArcModel.ArcLoot]) -> some View {
+        Views.ArcInfoView.ArcLootList(lootList: model)
+    }
+}
+
+extension SearchItemView {
+    func navigateBack() {
+        viewModel.navigateBack()
     }
 }
