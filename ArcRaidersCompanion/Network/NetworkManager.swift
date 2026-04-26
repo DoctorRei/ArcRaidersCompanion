@@ -86,7 +86,7 @@ final class NetworkManager {
     
     func fetchItems(
         page: Int = 1,
-        limit: Int = 50,
+        limit: Int = 200,
         search: String? = nil,
         itemType: ItemType? = nil,
         rarity: Rarity? = nil,
