@@ -50,9 +50,7 @@ extension SearchItemView {
         case (true, false):
             Text("Sorry, but we not found your item")
         case (false, false):
-            ScrollView {
-                listOfItems()
-            }
+            listOfItems()
         case (true, true):
             Text("Sorry, but we not found your item")
         }
@@ -102,7 +100,12 @@ extension SearchItemView {
     }
     
     func listOfItems() -> some View {
-        Views.ArcInfoView.ArcLootList(lootList: viewModel.foundedItems)
+        ScrollView {
+            Views.ArcInfoView.ArcLootList(lootList: viewModel.foundedItems)
+                .onTapGesture {
+                    navigateToSelectedItem()
+                }
+        }
     }
     
     func arcDescriptionCell(for model: [Views.ArcInfoView.Models.ArcModel.ArcLoot]) -> some View {
@@ -113,5 +116,9 @@ extension SearchItemView {
 extension SearchItemView {
     func navigateBack() {
         viewModel.navigateBack()
+    }
+    
+    func navigateToSelectedItem() {
+        viewModel.navigateToSelectedItem()
     }
 }

@@ -31,6 +31,9 @@ extension SearchItemCoordinator: SearchItemNavigateProtocol {
     }
 
     func showItemDetails() {
-        print("TESTTEST")
+        let coordinator = SelectedItemCoordinator(presenter: presenter)
+        coordinator.start()
+        
+        store(coordinator: coordinator)
     }
 }
