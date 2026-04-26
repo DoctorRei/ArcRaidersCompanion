@@ -6,15 +6,17 @@
 //
 
 extension Views.ArcInfoView {
-    enum Models {
-        struct ArcModel {
-            let id: String
-            let name: String
-            let description: String
-            let icon: String
-            let image: String
-            let loot: [ArcLoot]
-        }
+    enum Models {}
+}
+
+extension Views.ArcInfoView.Models {
+    struct ArcModel {
+        let id: String
+        let name: String
+        let description: String
+        let icon: String
+        let image: String
+        let loot: [ArcLoot]
     }
 }
 

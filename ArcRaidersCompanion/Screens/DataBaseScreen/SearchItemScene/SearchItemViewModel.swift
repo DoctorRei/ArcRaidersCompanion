@@ -15,22 +15,56 @@ protocol SearchItemNavigateProtocol: AnyObject {
 
 extension SearchItemView {
     protocol ViewModelProtocol {
-        func getItems() async
+        func getItems(with searchID: String) async
     }
     
     final class ViewModel: ObservableObject {
         weak var coordinator: SearchItemNavigateProtocol?
         private var networkManager = NetworkManager.shared
-        private var isErrorLoading = false
+        
+        @Published var foundedItems: [Views.ArcInfoView.Models.ArcModel.ArcLoot] = []
+        @Published var isSearchFocused = false
+        @Published var isLoading = false
+        @Published var isErrorLoading = false
+        @Published var text = ""
+        @Published var scrollOffset: CGFloat = 0
+    }
+}
+
+extension SearchItemView.ViewModel {
+    func navigateBack() {
+        coordinator?.navigateBack()
     }
 }
 
 extension SearchItemView.ViewModel: SearchItemView.ViewModelProtocol {
-    func getItems() async {
+    func getItems(with searchID: String) async {
+        defer { isLoading = false }
+        isErrorLoading = false
+        isLoading = true
         do {
-            let item = try await networkManager.fetchItem(id: "acoustic-guitar")
+            let itemsNetwork = try await networkManager.fetchItems(search: searchID)
+            let items = itemsNetwork.data.map {
+                Views.ArcInfoView.Models.ArcModel.ArcLoot(
+                    id: $0.id,
+                    item: .init(id: $0.id, icon: $0.icon, name: $0.name, rarity: .legendary, itemType: $0.itemType),
+                    itemId: $0.id
+                )
+            }
+            foundedItems = items
+            if foundedItems.isEmpty {
+                isErrorLoading = true
+            }
         } catch {
-            print(error.localizedDescription)
+            isErrorLoading = true
         }
+    }
+}
+
+extension SearchItemView.ViewModel {
+    struct ItemModel {
+        let id: String
+        let image: String
+        
     }
 }

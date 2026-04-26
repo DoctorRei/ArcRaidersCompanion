@@ -28,9 +28,14 @@ extension NetworkManager.Model.DataModels.ItemsData {
         let lootArea: String?
         let sources: String?
         let ammoType: String?
-        let locations: [String]
+        let locations: [Location]
         let guideLinks: [GuideLink]
         let gameAssetId: Int
+    }
+    
+    struct Location: Decodable {
+        let id: String
+        let map: String
     }
     
     // MARK: - StatBlock
