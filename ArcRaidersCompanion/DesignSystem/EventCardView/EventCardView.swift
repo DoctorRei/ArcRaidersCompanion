@@ -47,7 +47,7 @@ private extension Views.EventCardView {
         Views.ContainerView {
             cardBody(event: event)
                 .overlay(alignment: .topTrailing) {
-                    Views.ActivityIndicator(isActive: event.isActive)
+                    Views.EventIsActiveIndicator(isActive: event.isActive)
                         .padding()
                 }
         }

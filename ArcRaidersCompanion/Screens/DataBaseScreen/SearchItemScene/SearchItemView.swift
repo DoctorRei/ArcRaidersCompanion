@@ -33,10 +33,28 @@ struct SearchItemView: View {
 }
 
 extension SearchItemView {
+    @ViewBuilder
     func content() -> some View {
         VStack(spacing: 6) {
             customNavigationBar()
-            listOfItems()
+            searchItemsView()
+                .frame(maxHeight: .infinity)
+        }
+    }
+    
+    @ViewBuilder
+    func searchItemsView() -> some View {
+        switch (viewModel.isErrorLoading, viewModel.isLoading) {
+        case (false, true):
+            loader()
+        case (true, false):
+            Text("Sorry, but we not found your item")
+        case (false, false):
+            ScrollView {
+                listOfItems()
+            }
+        case (true, true):
+            Text("Sorry, but we not found your item")
         }
     }
     
@@ -79,10 +97,12 @@ extension SearchItemView {
         }
     }
     
+    func loader() -> some View {
+        Views.ActivityIndicator()
+    }
+    
     func listOfItems() -> some View {
-        ScrollView {
-            Views.ArcInfoView.ArcLootList(lootList: viewModel.foundedItems)
-        }
+        Views.ArcInfoView.ArcLootList(lootList: viewModel.foundedItems)
     }
     
     func arcDescriptionCell(for model: [Views.ArcInfoView.Models.ArcModel.ArcLoot]) -> some View {
