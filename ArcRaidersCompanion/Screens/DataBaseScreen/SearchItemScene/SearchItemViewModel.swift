@@ -10,7 +10,7 @@ import Foundation
 
 protocol SearchItemNavigateProtocol: AnyObject {
     func navigateBack()
-    func showItemDetails()
+    func showItemDetails(with item: SearchItemView.ViewModel.FoundedItem.Item?)
 }
 
 extension SearchItemView {
@@ -22,12 +22,14 @@ extension SearchItemView {
         weak var coordinator: SearchItemNavigateProtocol?
         private var networkManager = NetworkManager.shared
         
-        @Published var foundedItems: [Views.ArcInfoView.Models.ArcModel.ArcLoot] = []
+        @Published var foundedMiniItems: [Views.ArcInfoView.Models.ArcModel.ArcLoot] = []
+        @Published var scrollOffset: CGFloat = 0
         @Published var isSearchFocused = false
         @Published var isLoading = false
         @Published var isErrorLoading = false
         @Published var text = ""
-        @Published var scrollOffset: CGFloat = 0
+        
+        private var foundedFullItems: [String: FoundedItem.Item] = [:]
     }
 }
 
@@ -36,8 +38,8 @@ extension SearchItemView.ViewModel {
         coordinator?.navigateBack()
     }
     
-    func navigateToSelectedItem() {
-        coordinator?.showItemDetails()
+    func navigateToSelectedItem(with id: String) {
+        coordinator?.showItemDetails(with: foundedFullItems[id])
     }
 }
 
@@ -63,9 +65,13 @@ extension SearchItemView.ViewModel: SearchItemView.ViewModelProtocol {
                     itemId: $0.id
                 )
             }
-            foundedItems = items
 
-            if foundedItems.isEmpty {
+            foundedMiniItems = items
+            itemsNetwork.data.forEach { item in
+                foundedFullItems[item.id] = .init(data: item)
+            }
+
+            if foundedMiniItems.isEmpty {
                 isErrorLoading = true
             }
 

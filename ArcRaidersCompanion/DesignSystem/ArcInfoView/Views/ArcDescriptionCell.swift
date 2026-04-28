@@ -18,6 +18,7 @@ extension Views.ArcInfoView {
             static let overlayCornerRadius: CGFloat = 12
             static let borderWidth: CGFloat = 3
             static let borderWidthDefault: CGFloat = 0
+            static let lootString: String = "Loot:"
         }
         
         @State private var isExpanded = false
@@ -61,8 +62,10 @@ extension Views.ArcInfoView {
                         .padding()
                     Text(arcModel.description)
                         .padding()
-                    Text("Loot:")
-                    Views.ArcInfoView.ArcLootList(lootList: arcModel.loot)
+                    Text(Const.lootString)
+                    Views.ArcInfoView.ArcLootList(lootList: arcModel.loot) { item in
+                        // TODO: - Navigation to another scene
+                    }
                 }
             }
         }
