@@ -18,5 +18,8 @@ struct SelectedItemView: View {
     
     var body: some View {
         Text("")
+            .onAppear {
+                viewModel.printTest()
+            }
     }
 }

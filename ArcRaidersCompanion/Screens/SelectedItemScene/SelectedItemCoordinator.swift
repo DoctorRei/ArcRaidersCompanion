@@ -8,14 +8,22 @@
 import UIKit
 
 class SelectedItemCoordinator: BaseCoordinator<UINavigationController> {
+    typealias Item = SearchItemView.ViewModel.FoundedItem.Item
+    private let selectedItem: Item
+    
     override func start() {
         showSelectedItemScene()
+    }
+    
+    init(presenter: UINavigationController, selectedItem: Item) {
+        self.selectedItem = selectedItem
+        super.init(presenter: presenter)
     }
 }
 
 private extension SelectedItemCoordinator {
     func showSelectedItemScene() {
-        let vm = SelectedItemView.ViewModel()
+        let vm = SelectedItemView.ViewModel(item: selectedItem)
         let view = SelectedItemView(viewModel: vm)
         
         let hostingController = SelectedItemHostingController(rootView: view, viewModel: vm)

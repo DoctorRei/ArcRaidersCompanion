@@ -26,14 +26,15 @@ private extension SearchItemCoordinator {
 }
 
 extension SearchItemCoordinator: SearchItemNavigateProtocol {
-    func navigateBack() {
-        presenter.popViewController(animated: true)
-    }
-
-    func showItemDetails() {
-        let coordinator = SelectedItemCoordinator(presenter: presenter)
+    func showItemDetails(with item: SearchItemView.ViewModel.FoundedItem.Item?) {
+        guard let item else { return }
+        let coordinator = SelectedItemCoordinator(presenter: presenter, selectedItem: item)
         coordinator.start()
         
         store(coordinator: coordinator)
+    }
+    
+    func navigateBack() {
+        presenter.popViewController(animated: true)
     }
 }

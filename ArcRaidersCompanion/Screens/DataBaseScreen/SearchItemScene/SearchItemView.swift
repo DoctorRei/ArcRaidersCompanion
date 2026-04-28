@@ -101,15 +101,13 @@ extension SearchItemView {
     
     func listOfItems() -> some View {
         ScrollView {
-            Views.ArcInfoView.ArcLootList(lootList: viewModel.foundedItems)
-                .onTapGesture {
-                    navigateToSelectedItem()
-                }
+            Views.ArcInfoView.ArcLootList(lootList: viewModel.foundedMiniItems) { item in
+                navigateToSelectedItem(with: item.id)
+            }
+//                .onTapGesture {
+//                    navigateToSelectedItem()
+//                }
         }
-    }
-    
-    func arcDescriptionCell(for model: [Views.ArcInfoView.Models.ArcModel.ArcLoot]) -> some View {
-        Views.ArcInfoView.ArcLootList(lootList: model)
     }
 }
 
@@ -118,7 +116,7 @@ extension SearchItemView {
         viewModel.navigateBack()
     }
     
-    func navigateToSelectedItem() {
-        viewModel.navigateToSelectedItem()
+    func navigateToSelectedItem(with id: String) {
+        viewModel.navigateToSelectedItem(with: id)
     }
 }
