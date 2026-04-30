@@ -36,7 +36,21 @@ extension SearchItemView {
     @ViewBuilder
     func content() -> some View {
         VStack(spacing: 6) {
-            customNavigationBar()
+            Views.CustomNavigationBar(
+                navigationBarStyle: .search(
+                    .init(
+                        searchText: $viewModel.text,
+                        scrollOffset: $viewModel.scrollOffset,
+                        isSearchFocused: $viewModel.isSearchFocused) { text in
+                            Task {
+                                await viewModel.getItems(with: text)
+                            }
+                        } backAction: {
+                            navigateBack()
+                        }
+                    )
+                )
+
             searchItemsView()
                 .frame(maxHeight: .infinity)
         }
@@ -54,29 +68,6 @@ extension SearchItemView {
         case (true, true):
             Text("Sorry, but we not found your item")
         }
-    }
-    
-    func customNavigationBar() -> some View {
-        HStack {
-            if !viewModel.isSearchFocused {
-                backButton()
-                    .padding(.leading)
-                    .transition(.move(edge: .leading).combined(with: .opacity))
-            }
-            Views.SearchTextView(
-                searchText: $viewModel.text,
-                scrollOffset: $viewModel.scrollOffset,
-                isFocus: $viewModel.isSearchFocused,
-                onTextChange: { text in
-                    Task {
-                        await viewModel.getItems(with: text)
-                    }
-                }
-            )
-            .padding(.trailing)
-            .padding(.leading, viewModel.isSearchFocused ? Const.textFieldPadding : Const.textFieldPaddingBase)
-        }
-        .animation(.easeInOut(duration: Const.animationDuration), value: viewModel.isSearchFocused)
     }
     
     func backButton() -> some View {
@@ -104,9 +95,6 @@ extension SearchItemView {
             Views.ArcInfoView.ArcLootList(lootList: viewModel.foundedMiniItems) { item in
                 navigateToSelectedItem(with: item.id)
             }
-//                .onTapGesture {
-//                    navigateToSelectedItem()
-//                }
         }
     }
 }

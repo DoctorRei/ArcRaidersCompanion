@@ -16,13 +16,13 @@ extension SelectedItemView {
     protocol ViewModelProtocol {}
     
     final class ViewModel: ObservableObject {
-        weak var coordinator: SearchItemNavigateProtocol?
+        weak var coordinator: SelectedItemNavigateProtocol?
         private var networkManager = NetworkManager.shared
         
-        private let item: SearchItemView.ViewModel.FoundedItem.Item
+        @Published var item: SearchItemView.ViewModel.FoundedItem.Item
         
         init(
-            coordinator: SearchItemNavigateProtocol? = nil,
+            coordinator: SelectedItemNavigateProtocol? = nil,
             networkManager: NetworkManager = NetworkManager.shared,
             item: SearchItemView.ViewModel.FoundedItem.Item
         ) {
