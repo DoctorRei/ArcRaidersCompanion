@@ -24,6 +24,7 @@ class SelectedItemCoordinator: BaseCoordinator<UINavigationController> {
 private extension SelectedItemCoordinator {
     func showSelectedItemScene() {
         let vm = SelectedItemView.ViewModel(item: selectedItem)
+        vm.coordinator = self
         let view = SelectedItemView(viewModel: vm)
         
         let hostingController = SelectedItemHostingController(rootView: view, viewModel: vm)

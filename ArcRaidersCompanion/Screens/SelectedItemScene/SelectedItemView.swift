@@ -29,8 +29,5 @@ struct SelectedItemView: View {
         ScrollView {
             Text("HELLO")
         }
-            .onAppear {
-                viewModel.printTest()
-            }
     }
 }
