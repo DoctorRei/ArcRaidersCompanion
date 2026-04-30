@@ -19,7 +19,7 @@ extension SelectedItemView {
         weak var coordinator: SearchItemNavigateProtocol?
         private var networkManager = NetworkManager.shared
         
-        private let item: SearchItemView.ViewModel.FoundedItem.Item
+        @Published var item: SearchItemView.ViewModel.FoundedItem.Item
         
         init(
             coordinator: SearchItemNavigateProtocol? = nil,

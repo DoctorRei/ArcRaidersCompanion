@@ -17,7 +17,18 @@ struct SelectedItemView: View {
     }
     
     var body: some View {
-        Text("")
+        Views.CustomNavigationBar(
+            navigationBarStyle: .title(
+                .init(
+                    title: viewModel.item.name,
+                    backAction: {
+                        viewModel.navigateBack()
+                    })
+            )
+        )
+        ScrollView {
+            Text("HELLO")
+        }
             .onAppear {
                 viewModel.printTest()
             }
