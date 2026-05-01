@@ -20,8 +20,6 @@ extension SelectedItemView {
         private var networkManager = NetworkManager.shared
         
         @Published var item: SearchItemView.ViewModel.FoundedItem.Item
-        @Published var isExpandedBasicInfo: Bool = false
-        @Published var isExpandedItemCharacteristics: Bool = false
         
         init(
             coordinator: SelectedItemNavigateProtocol? = nil,
@@ -33,8 +31,37 @@ extension SelectedItemView {
             self.item = item
         }
         
-        func printTest() {
-            print("TESTTEST \(item)")
+        var hasBasicInfo: Bool {
+            item.workbench != nil ||
+            item.ammoType != nil ||
+            item.shieldType != nil ||
+            item.subcategory != nil ||
+            !item.loadoutSlots.isEmpty
+        }
+
+        var hasStats: Bool {
+            let mirror = Mirror(reflecting: item.statBlock)
+            for child in mirror.children {
+                switch child.value {
+                case let val as Int: if val != 0 { return true }
+                case let val as Double: if val != 0.0 { return true }
+                case let val as String: if !val.isEmpty { return true }
+                default: break
+                }
+            }
+            return false
+        }
+
+        var hasLocations: Bool {
+            !item.locations.isEmpty
+        }
+
+        var hasGuides: Bool {
+            !item.guideLinks.isEmpty
+        }
+
+        var hasLocationsOrGuides: Bool {
+            hasLocations || hasGuides
         }
     }
 }

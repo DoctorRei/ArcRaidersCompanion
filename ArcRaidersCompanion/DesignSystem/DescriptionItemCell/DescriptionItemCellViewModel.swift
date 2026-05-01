@@ -31,6 +31,8 @@ extension Views.DescriptionItemCell {
     enum CellType {
         case baseInfo
         case fullInfo
+        case locations
+        case guides
     }
     
     struct StatGroup: Identifiable {

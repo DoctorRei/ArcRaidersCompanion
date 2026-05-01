@@ -87,6 +87,10 @@ extension Views.DescriptionItemCell {
             baseInfoCell()
         case .fullInfo:
             fullInfoCell()
+        case .locations:
+            locationsCell()
+        case .guides:
+            guidesCell()
         }
     }
 }
@@ -124,28 +128,27 @@ extension Views.DescriptionItemCell {
 // MARK: - Full Info Cell
 extension Views.DescriptionItemCell {
     func fullInfoCell() -> some View {
-        VStack(alignment: .leading, spacing: Const.Spacing.content) {
+        VStack(alignment: .leading) {
             if groupedStats.isEmpty {
                 emptyStatsView()
             } else {
                 statsGroupsView()
             }
         }
-        .padding(.vertical)
     }
-    
+
     func emptyStatsView() -> some View {
         Text(Const.Text.emptyStats)
             .foregroundColor(.secondary)
             .padding(Const.Spacing.emptyStats)
     }
-    
+
     func statsGroupsView() -> some View {
         ForEach(groupedStats) { group in
             statGroupView(group: group)
         }
     }
-    
+
     func statGroupView(group: StatGroup) -> some View {
         VStack(alignment: .leading, spacing: Const.Spacing.group) {
             statGroupHeader(group: group)
@@ -153,22 +156,21 @@ extension Views.DescriptionItemCell {
         }
         .baseCellStyle()
     }
-    
+
     func statGroupHeader(group: StatGroup) -> some View {
         HStack(spacing: Const.Spacing.icon) {
             Text(group.category.icon)
                 .font(Const.Fonts.icon)
-            
+
             Text(group.category.rawValue)
                 .font(Const.Fonts.header)
                 .foregroundColor(.primary)
-            
+
             Spacer()
         }
-        .padding(.horizontal)
         .padding(.top, Const.Spacing.groupTop)
     }
-    
+
     func statGroupContent(stats: [(title: String, value: String)]) -> some View {
         VStack(spacing: Const.Spacing.zero) {
             ForEach(stats, id: \.title) { stat in
@@ -177,9 +179,101 @@ extension Views.DescriptionItemCell {
                     value: stat.value,
                     isDeviderNeeded: stat.title != stats.last?.title
                 )
-                .padding(.horizontal)
                 .padding(.vertical, Const.Spacing.statRowVertical)
             }
+        }
+    }
+}
+
+// MARK: - Locations Cell
+extension Views.DescriptionItemCell {
+    @ViewBuilder
+    func locationsCell() -> some View {
+        if itemModel.locations.isEmpty {
+            emptyLocationsView()
+        } else {
+            locationsListView()
+        }
+    }
+
+    func emptyLocationsView() -> some View {
+        Text("No locations available")
+            .foregroundColor(.secondary)
+            .padding(Const.Spacing.emptyStats)
+    }
+
+    func locationsListView() -> some View {
+        VStack(alignment: .leading, spacing: Const.Spacing.group) {
+            ForEach(itemModel.locations, id: \.id) { location in
+                locationRow(location: location)
+                if location.id != itemModel.locations.last?.id {
+                    Divider()
+                        .padding(.horizontal, Const.Sizes.dividerPadding)
+                }
+            }
+        }
+        .baseCellStyle()
+        .padding(.vertical, Const.Spacing.cellVertical)
+    }
+
+    func locationRow(location: SearchItemView.ViewModel.FoundedItem.Location) -> some View {
+        HStack {
+            Image(systemName: "map")
+                .foregroundColor(.blue)
+                .frame(width: 30)
+            Text(location.map)
+                .font(Const.Fonts.value)
+                .fontWeight(.medium)
+            Spacer()
+        }
+        .padding(.horizontal)
+    }
+}
+
+// MARK: - Guides Cell
+extension Views.DescriptionItemCell {
+    @ViewBuilder
+    func guidesCell() -> some View {
+        if itemModel.guideLinks.isEmpty {
+            emptyGuidesView()
+        } else {
+            guidesListView()
+        }
+    }
+
+    func emptyGuidesView() -> some View {
+        Text("No guides available")
+            .foregroundColor(.secondary)
+            .padding(Const.Spacing.emptyStats)
+    }
+
+    func guidesListView() -> some View {
+        VStack(alignment: .leading, spacing: Const.Spacing.group) {
+            ForEach(itemModel.guideLinks, id: \.url) { guide in
+                guideRow(guide: guide)
+                if guide.url != itemModel.guideLinks.last?.url {
+                    Divider()
+                        .padding(.horizontal, Const.Sizes.dividerPadding)
+                }
+            }
+        }
+        .baseCellStyle()
+        .padding(.vertical, Const.Spacing.cellVertical)
+    }
+
+    func guideRow(guide: SearchItemView.ViewModel.FoundedItem.GuideLink) -> some View {
+        Link(destination: URL(string: guide.url) ?? URL(string: "https://google.com")!) {
+            HStack {
+                Image(systemName: "link")
+                    .foregroundColor(.blue)
+                    .frame(width: 30)
+                Text(guide.label)
+                    .font(Const.Fonts.value)
+                    .fontWeight(.medium)
+                    .foregroundColor(.blue)
+                Spacer()
+            }
+            .padding(.horizontal)
         }
     }
 }
@@ -195,13 +289,12 @@ extension Views.DescriptionItemCell {
         if !value.isEmpty {
             VStack(spacing: Const.Spacing.zero) {
                 statRowContent(title: title, value: value)
-                dividerView(isNeeded: isDeviderNeeded)
             }
         }
     }
     
     func statRowContent(title: String, value: String) -> some View {
-        HStack(spacing: Const.Spacing.statRow) {
+        HStack {
             statTitleText(title)
             statValueText(value)
         }
@@ -220,30 +313,6 @@ extension Views.DescriptionItemCell {
             .fontWeight(.medium)
             .foregroundColor(.primary)
             .frame(maxWidth: .infinity, alignment: .leading)
-    }
-    
-    func increasingIndicator() -> some View {
-        Image(systemName: Const.Images.increasing)
-            .foregroundColor(.green)
-            .font(Const.Fonts.indicator)
-    }
-    
-    func decreasingIndicator() -> some View {
-        Image(systemName: Const.Images.decreasing)
-            .foregroundColor(.red)
-            .font(Const.Fonts.indicator)
-    }
-    
-    @ViewBuilder
-    func dividerView(isNeeded: Bool) -> some View {
-        if isNeeded {
-            Divider()
-                .padding(.horizontal, Const.Sizes.dividerPadding)
-        }
-    }
-    
-    private func isNumeric(_ string: String) -> Bool {
-        Double(string.replacingOccurrences(of: "%", with: "")) != nil
     }
 }
 
