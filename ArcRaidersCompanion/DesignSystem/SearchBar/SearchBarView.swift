@@ -10,6 +10,7 @@ import SwiftUI
 extension Views {
     struct SearchTextView: View {
         @Binding private var searchText: String
+        /// Пока не используется
         @Binding private var scrollOffset: CGFloat
         @Binding var isFocused: Bool
         @State private var debounceTask: Task<Void, Never>?
@@ -96,6 +97,8 @@ struct CustomTextField: UIViewRepresentable {
         textField.placeholder = placeholder
         textField.delegate = context.coordinator
         textField.returnKeyType = .done
+        textField.autocorrectionType = .no
+        textField.spellCheckingType = .no
         return textField
     }
     
