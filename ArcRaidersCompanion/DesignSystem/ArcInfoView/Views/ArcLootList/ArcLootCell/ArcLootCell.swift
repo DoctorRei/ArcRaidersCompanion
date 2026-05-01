@@ -9,10 +9,15 @@ import SwiftUI
 
 extension Views.ArcInfoView.ArcLootList {
     struct ArcLootCell: View {
-        let lootModel: Views.ArcInfoView.Models.ArcModel.ArcLoot.LootItem
+        typealias Item = Views.ArcInfoView.Models.ArcModel.ArcLoot.LootItem
+        let lootModel: Item
+        var completion: (Item) -> Void
 
         var body: some View {
             content()
+                .onTapGesture {
+                    completion(lootModel)
+                }
                 .background(lootModel.color)
         }
     }

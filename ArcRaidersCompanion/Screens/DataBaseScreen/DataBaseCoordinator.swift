@@ -10,6 +10,7 @@ import UIKit
 protocol DataBaseCoordinatorProtocol: AnyObject {
     func showArcsScene()
     func showSearchItemScene()
+    func showSelectedItemView(item: SelectedItemCoordinator.Item)
 }
 
 class DataBaseCoordinator: BaseCoordinator<UINavigationController> {
@@ -19,6 +20,13 @@ class DataBaseCoordinator: BaseCoordinator<UINavigationController> {
 }
 
 extension DataBaseCoordinator: DataBaseCoordinatorProtocol {
+    func showSelectedItemView(item: SelectedItemCoordinator.Item) {
+        let coordinator = SelectedItemCoordinator(presenter: presenter, selectedItem: item)
+        coordinator.start()
+        
+        store(coordinator: coordinator)
+    }
+    
     func showSearchItemScene() {
         let coordinator = SearchItemCoordinator(presenter: presenter)
         coordinator.start()
