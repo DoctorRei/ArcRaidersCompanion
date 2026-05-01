@@ -8,8 +8,6 @@ import SwiftUI
 
 extension Views {
     struct DescriptionItemCell: View {
-        
-        // MARK: - Constants
         private enum Const {
             enum Titles {
                 static let price: String = "Price"
@@ -22,28 +20,23 @@ extension Views {
             
             enum Sizes {
                 static let titleWidth: CGFloat = 150
-                static let cellCornerRadius: CGFloat = 12
-                static let cellShadowRadius: CGFloat = 5
-                static let cellShadowY: CGFloat = 2
-                static let cellShadowOpacity: CGFloat = 0.05
                 static let dividerPadding: CGFloat = 16
             }
             
             enum Spacing {
                 static let zero: CGFloat = 0
-                static let content: CGFloat = 16
                 static let group: CGFloat = 8
-                static let statRow: CGFloat = 12
                 static let statRowVertical: CGFloat = 6
                 static let cellVertical: CGFloat = 8
                 static let groupTop: CGFloat = 8
                 static let icon: CGFloat = 8
-                static let cellHorizontal: CGFloat = 16
                 static let emptyStats: CGFloat = 16
             }
             
             enum Text {
                 static let emptyStats: String = "No characteristics available"
+                static let emptyLocations: String = "No locations available"
+                static let emptyGuides: String = "No guides available"
             }
             
             enum Fonts {
@@ -51,7 +44,6 @@ extension Views {
                 static let value: Font = .subheadline
                 static let header: Font = .headline
                 static let icon: Font = .title3
-                static let indicator: Font = .caption
             }
             
             enum Format {
@@ -60,18 +52,75 @@ extension Views {
                 static let underscoreReplacement: String = " "
                 static let wordSeparator: String = " "
             }
-            
+
             enum Images {
-                static let increasing: String = "arrow.up"
-                static let decreasing: String = "arrow.down"
+                static let map: String = "map"
+                static let link: String = "link"
+            }
+
+            enum URLs {
+                static let fallbackURL: String = "https://google.com"
+            }
+
+            enum IconSizes {
+                static let standard: CGFloat = 30
+            }
+
+            enum StatSearchKeywords {
+                enum Combat: String, CaseIterable {
+                    case damage = "damage"
+                    case fireRate = "fire rate"
+                    case range = "range"
+                    case magazine = "magazine"
+                    case projectile = "projectile"
+                    case firing = "firing"
+                    case ammo = "ammo"
+                    case bullet = "bullet"
+                    case stun = "stun"
+                }
+
+                enum Mobility: String, CaseIterable {
+                    case agility = "agility"
+                    case weight = "weight"
+                    case movement = "movement"
+                    case stamina = "stamina"
+                    case ads = "ads"
+                    case speed = "speed"
+                }
+
+                enum Defense: String, CaseIterable {
+                    case health = "health"
+                    case shield = "shield"
+                    case mitigation = "mitigation"
+                    case defense = "defense"
+                }
+
+                enum Utility: String, CaseIterable {
+                    case healing = "healing"
+                    case duration = "duration"
+                    case useTime = "use time"
+                    case slots = "slots"
+                    case stack = "stack"
+                    case augment = "augment"
+                    case backpack = "backpack"
+                    case safePocket = "safe pocket"
+                    case quickUse = "quick use"
+                }
+
+                enum Weapon: String, CaseIterable {
+                    case recoil = "recoil"
+                    case dispersion = "dispersion"
+                    case reload = "reload"
+                    case equip = "equip"
+                    case durability = "durability"
+                    case illumination = "illumination"
+                }
             }
         }
-        
-        // MARK: - Properties
+
         let itemModel: SearchItemView.ViewModel.FoundedItem.Item
         let selectedType: CellType
-        
-        // MARK: - Body
+
         var body: some View {
             content()
         }
@@ -174,12 +223,8 @@ extension Views.DescriptionItemCell {
     func statGroupContent(stats: [(title: String, value: String)]) -> some View {
         VStack(spacing: Const.Spacing.zero) {
             ForEach(stats, id: \.title) { stat in
-                statRow(
-                    title: stat.title,
-                    value: stat.value,
-                    isDeviderNeeded: stat.title != stats.last?.title
-                )
-                .padding(.vertical, Const.Spacing.statRowVertical)
+                statRow(title: stat.title, value: stat.value)
+                    .padding(.vertical, Const.Spacing.statRowVertical)
             }
         }
     }
@@ -197,7 +242,7 @@ extension Views.DescriptionItemCell {
     }
 
     func emptyLocationsView() -> some View {
-        Text("No locations available")
+        Text(Const.Text.emptyLocations)
             .foregroundColor(.secondary)
             .padding(Const.Spacing.emptyStats)
     }
@@ -218,9 +263,9 @@ extension Views.DescriptionItemCell {
 
     func locationRow(location: SearchItemView.ViewModel.FoundedItem.Location) -> some View {
         HStack {
-            Image(systemName: "map")
+            Image(systemName: Const.Images.map)
                 .foregroundColor(.blue)
-                .frame(width: 30)
+                .frame(width: Const.IconSizes.standard)
             Text(location.map)
                 .font(Const.Fonts.value)
                 .fontWeight(.medium)
@@ -242,7 +287,7 @@ extension Views.DescriptionItemCell {
     }
 
     func emptyGuidesView() -> some View {
-        Text("No guides available")
+        Text(Const.Text.emptyGuides)
             .foregroundColor(.secondary)
             .padding(Const.Spacing.emptyStats)
     }
@@ -262,11 +307,11 @@ extension Views.DescriptionItemCell {
     }
 
     func guideRow(guide: SearchItemView.ViewModel.FoundedItem.GuideLink) -> some View {
-        Link(destination: URL(string: guide.url) ?? URL(string: "https://google.com")!) {
+        Link(destination: URL(string: guide.url) ?? URL(string: Const.URLs.fallbackURL)!) {
             HStack {
-                Image(systemName: "link")
+                Image(systemName: Const.Images.link)
                     .foregroundColor(.blue)
-                    .frame(width: 30)
+                    .frame(width: Const.IconSizes.standard)
                 Text(guide.label)
                     .font(Const.Fonts.value)
                     .fontWeight(.medium)
@@ -283,13 +328,10 @@ extension Views.DescriptionItemCell {
     @ViewBuilder
     func statRow(
         title: String,
-        value: String,
-        isDeviderNeeded: Bool = false
+        value: String
     ) -> some View {
         if !value.isEmpty {
-            VStack(spacing: Const.Spacing.zero) {
-                statRowContent(title: title, value: value)
-            }
+            statRowContent(title: title, value: value)
         }
     }
     
@@ -401,56 +443,27 @@ extension Views.DescriptionItemCell {
     
     private func categorizeStat(_ title: String) -> StatCategory {
         let lowercased = title.lowercased()
-        
-        if lowercased.contains("damage") ||
-            lowercased.contains("fire rate") ||
-            lowercased.contains("range") ||
-            lowercased.contains("magazine") ||
-            lowercased.contains("projectile") ||
-            lowercased.contains("firing") ||
-            lowercased.contains("ammo") ||
-            lowercased.contains("bullet") ||
-            lowercased.contains("stun") {
+
+        if Const.StatSearchKeywords.Combat.allCases.contains(where: { lowercased.contains($0.rawValue) }) {
             return .combat
         }
-        
-        if lowercased.contains("agility") ||
-            lowercased.contains("weight") ||
-            lowercased.contains("movement") ||
-            lowercased.contains("stamina") ||
-            lowercased.contains("ads") ||
-            lowercased.contains("speed") {
+
+        if Const.StatSearchKeywords.Mobility.allCases.contains(where: { lowercased.contains($0.rawValue) }) {
             return .mobility
         }
-        
-        if lowercased.contains("health") ||
-            lowercased.contains("shield") ||
-            lowercased.contains("mitigation") ||
-            lowercased.contains("defense") {
+
+        if Const.StatSearchKeywords.Defense.allCases.contains(where: { lowercased.contains($0.rawValue) }) {
             return .defense
         }
-        
-        if lowercased.contains("healing") ||
-            lowercased.contains("duration") ||
-            lowercased.contains("use time") ||
-            lowercased.contains("slots") ||
-            lowercased.contains("stack") ||
-            lowercased.contains("augment") ||
-            lowercased.contains("backpack") ||
-            lowercased.contains("safe pocket") ||
-            lowercased.contains("quick use") {
+
+        if Const.StatSearchKeywords.Utility.allCases.contains(where: { lowercased.contains($0.rawValue) }) {
             return .utility
         }
-        
-        if lowercased.contains("recoil") ||
-            lowercased.contains("dispersion") ||
-            lowercased.contains("reload") ||
-            lowercased.contains("equip") ||
-            lowercased.contains("durability") ||
-            lowercased.contains("illumination") {
+
+        if Const.StatSearchKeywords.Weapon.allCases.contains(where: { lowercased.contains($0.rawValue) }) {
             return .weapon
         }
-        
+
         return .other
     }
 }
