@@ -29,7 +29,7 @@ extension Views.ArcInfoView {
         }
         
         func content() -> some View {
-            ArcExpandedCell(isExpanded: $isExpanded, spacing: .none) {
+            Views.ExpandedCell(isExpanded: $isExpanded, spacing: .none) {
                 arcPreviewInfo()
             } content: {
                 arcFullInfo()

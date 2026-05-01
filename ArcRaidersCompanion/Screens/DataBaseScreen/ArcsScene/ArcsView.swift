@@ -56,7 +56,7 @@ extension ArcsView {
             ($isCellTurretExpanded, $viewModel.turretArcs)
         }
         
-        return Views.ArcInfoView.ArcExpandedCell(isExpanded: model.0, spacing: .small) {
+        return Views.ExpandedCell(isExpanded: model.0, spacing: .small) {
             arcPreviewCell(type: type)
         } content: {
             LazyVStack {

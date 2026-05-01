@@ -97,6 +97,8 @@ struct CustomTextField: UIViewRepresentable {
         textField.placeholder = placeholder
         textField.delegate = context.coordinator
         textField.returnKeyType = .done
+        textField.autocorrectionType = .no
+        textField.spellCheckingType = .no
         return textField
     }
     

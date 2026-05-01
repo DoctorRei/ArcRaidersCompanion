@@ -20,6 +20,8 @@ extension SelectedItemView {
         private var networkManager = NetworkManager.shared
         
         @Published var item: SearchItemView.ViewModel.FoundedItem.Item
+        @Published var isExpandedBasicInfo: Bool = false
+        @Published var isExpandedItemCharacteristics: Bool = false
         
         init(
             coordinator: SelectedItemNavigateProtocol? = nil,

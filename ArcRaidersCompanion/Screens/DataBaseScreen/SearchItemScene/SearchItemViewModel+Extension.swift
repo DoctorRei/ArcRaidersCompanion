@@ -9,7 +9,7 @@ import Foundation
 
 extension SearchItemView.ViewModel {
     enum FoundedItem {
-        struct Item {
+        struct Item: Hashable {
             let id: String
             let name: String
             let description: String
@@ -57,7 +57,7 @@ extension SearchItemView.ViewModel {
             }
         }
         
-        struct Location {
+        struct Location: Hashable {
             let id: String
             let map: String
             
@@ -68,7 +68,7 @@ extension SearchItemView.ViewModel {
         }
         
         // MARK: - StatBlock
-        struct StatBlock {
+        struct StatBlock: Hashable {
             let range: Double?
             let value: Int?
             let damage: Double?
@@ -188,7 +188,7 @@ extension SearchItemView.ViewModel {
             }
         }
         
-        struct GuideLink {
+        struct GuideLink: Hashable {
             let url: String
             let label: String
             
@@ -198,7 +198,7 @@ extension SearchItemView.ViewModel {
             }
         }
         
-        struct Pagination {
+        struct Pagination: Hashable {
             let page: Int
             let limit: Int
             let total: Int
