@@ -175,6 +175,24 @@ final class NetworkManager {
         return item
     }
     
+    func fetchTraders() async throws -> [Model.DataModels.TradersData.Trader] {
+        return try await withCheckedThrowingContinuation { continuation in
+            provider.request(.traders) { result in
+                switch result {
+                case .success(let data):
+                    do {
+                        let response = try self.decoder.decode(Model.Response.TradersResponse.self, from: data.data)
+                        continuation.resume(returning: response.data)
+                    } catch {
+                        continuation.resume(throwing: NetworkError.decodingError(error))
+                    }
+                case .failure(let error):
+                    continuation.resume(throwing: NetworkError.moyaError(error))
+                }
+            }
+        }
+    }
+
     func fetchAllItems(
         search: String? = nil,
         itemType: ItemType? = nil,
