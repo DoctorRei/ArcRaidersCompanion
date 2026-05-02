@@ -13,7 +13,7 @@ extension Views {
             static let textFieldPadding: CGFloat = 16
             static let textFieldPaddingBase: CGFloat = 0
             static let animationDuration: CGFloat = 0.15
-            static let chevronLeftFrame: CGFloat = 44
+            static let chevronLeftFrame: CGFloat = 56
             static let chevronBackGroundFrame: CGFloat = 36
 
             static let chevronImage: String = "chevron.left"
@@ -40,7 +40,7 @@ extension Views {
             HStack(spacing: 0) {
                 if !config.isSearchFocused.wrappedValue && showBackButton {
                     backButton(action: config.backAction)
-                        .padding(.leading)
+                        .padding(.leading, 8)
                         .transition(.move(edge: .leading).combined(with: .opacity))
                 }
                 SearchTextView(
@@ -59,13 +59,15 @@ extension Views {
         }
         
         private func navigationBarTitle(with config: TitleConfiguration) -> some View {
-            HStack(alignment: .center, spacing: 0) {
+            HStack(spacing: 0) {
                 if showBackButton {
                     backButton(action: config.backAction)
                         .padding(.leading)
                         .transition(.move(edge: .leading).combined(with: .opacity))
                 }
-                
+                Spacer()
+            }
+            .overlay(alignment: .center) {
                 Text(config.title)
                     .font(.custom("SF Pro Display", size: 18, relativeTo: .title2))
                     .foregroundColor(.primary)

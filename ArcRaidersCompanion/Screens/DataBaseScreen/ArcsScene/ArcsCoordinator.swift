@@ -16,11 +16,18 @@ class ArcsCoordinator: BaseCoordinator<UINavigationController> {
 private extension ArcsCoordinator {
     func showArcsScene() {
         let vm = ArcsView.ViewModel()
+        vm.coordinator = self
         let view = ArcsView(viewModel: vm)
         
         let hostingController = ArcsHostingController(rootView: view, viewModel: vm)
         
         presenter.setViewControllers([hostingController], animated: true)
+    }
+}
+
+extension ArcsCoordinator: ArcsCoordinatorProtocol {
+    func navigateBack() {
+        presenter.popViewController(animated: true)
     }
 }
 

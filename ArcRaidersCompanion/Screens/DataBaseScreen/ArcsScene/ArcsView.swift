@@ -10,6 +10,7 @@ import SwiftUI
 struct ArcsView: View {
     private enum Const {
         static let imageFrame: CGFloat = 124
+        static let arcTitle: String = "Arcs"
     }
     
     @ObservedObject var viewModel: ViewModel
@@ -25,6 +26,16 @@ struct ArcsView: View {
     
     var body: some View {
         ScrollView {
+            Views.CustomNavigationBar(
+                navigationBarStyle: .title(
+                    .init(
+                        title: Const.arcTitle,
+                        backAction: {
+                            viewModel.navigateBack()
+                        }
+                    )
+                )
+            )
             content()
         }
     }
