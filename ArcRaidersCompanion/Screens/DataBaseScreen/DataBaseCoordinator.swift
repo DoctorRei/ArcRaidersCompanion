@@ -19,6 +19,12 @@ class DataBaseCoordinator: BaseCoordinator<UINavigationController> {
     }
 }
 
+extension DataBaseCoordinator: ArcsCoordinatorProtocol {
+    func navigateBack() {
+        presenter.popViewController(animated: true)
+    }
+}
+
 extension DataBaseCoordinator: DataBaseCoordinatorProtocol {
     func showSelectedItemView(item: SelectedItemCoordinator.Item) {
         let coordinator = SelectedItemCoordinator(presenter: presenter, selectedItem: item)
@@ -46,10 +52,9 @@ extension DataBaseCoordinator: DataBaseCoordinatorProtocol {
     
     func showArcsScene() {
         let vm = ArcsView.ViewModel()
+        vm.coordinator = self
         let view = ArcsView(viewModel: vm)
-        
         let hostingController = ArcsHostingController(rootView: view, viewModel: vm)
-        
         presenter.pushViewController(hostingController, animated: true)
     }
 }

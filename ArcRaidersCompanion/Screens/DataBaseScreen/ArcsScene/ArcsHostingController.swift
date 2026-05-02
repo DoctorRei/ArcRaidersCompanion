@@ -11,6 +11,7 @@ final class ArcsHostingController: HostingController<ArcsView, ArcsView.ViewMode
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemPink.withAlphaComponent(0.2)
+        navigationController?.navigationBar.isHidden = true
     }
 }
 

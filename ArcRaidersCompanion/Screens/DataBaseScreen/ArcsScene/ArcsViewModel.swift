@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 
 protocol ArcsCoordinatorProtocol: AnyObject {
+    func navigateBack()
 }
 
 extension ArcsView {
@@ -58,5 +59,11 @@ extension ArcsView.ViewModel: ArcsView.ViewModelProtocol {
                 bossArcs.append(model)
             }
         }
+    }
+}
+
+extension ArcsView.ViewModel {
+    func navigateBack() {
+        coordinator?.navigateBack()
     }
 }
