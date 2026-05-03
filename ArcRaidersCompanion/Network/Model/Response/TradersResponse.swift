@@ -9,6 +9,7 @@ import Foundation
 
 extension NetworkManager.Model.Response {
     struct TradersResponse: Decodable {
-        let data: [NetworkManager.Model.DataModels.TradersData.Trader]
+        let success: Bool
+        let data: [String: [NetworkManager.Model.DataModels.TradersData.TraderItem]]
     }
 }

@@ -9,12 +9,12 @@ import SwiftUI
 
 struct TradersView: View {
     private enum Const {
-        static let imageFrame: CGFloat = 124
         static let traderTitle: String = "Traders"
+        static let imageFrame: CGFloat = 64
     }
 
     @ObservedObject var viewModel: ViewModel
-    @State private var isCellExpanded = false
+    @State private var expandedTraderId: String?
 
     init(viewModel: ViewModel) {
         self.viewModel = viewModel
@@ -41,29 +41,60 @@ struct TradersView: View {
 extension TradersView {
     func content() -> some View {
         LazyVStack {
-            tradersList()
+            ForEach(viewModel.traders) { trader in
+                traderCell(for: trader)
+            }
         }
         .padding(.horizontal)
     }
 
-    func tradersList() -> some View {
-        ForEach(viewModel.traders, id: \.id) { trader in
-            traderDescriptionCell(for: trader)
+    func traderCell(for trader: ViewModel.TraderModel) -> some View {
+        Views.ContainerView {
+            VStack(alignment: .leading, spacing: 8) {
+                Button(action: {
+                    withAnimation {
+                        if expandedTraderId == trader.id {
+                            expandedTraderId = nil
+                        } else {
+                            expandedTraderId = trader.id
+                        }
+                    }
+                }) {
+                    traderPreviewCell(trader: trader)
+                }
+                .buttonStyle(PlainButtonStyle())
+
+                if expandedTraderId == trader.id {
+                    traderItemsList(items: trader.items)
+                        .transition(.opacity)
+                }
+            }
         }
     }
 
-    func traderDescriptionCell(for trader: ViewModel.TraderModel) -> some View {
-        Views.TraderInfoView.TraderDescriptionCell(
-            traderModel: trader
-        )
+    func traderPreviewCell(trader: ViewModel.TraderModel) -> some View {
+        HStack {
+            Views.TraderInfoView.TraderPreviewCell(
+                text: trader.name,
+                frameWidth: Const.imageFrame,
+                frameHeight: Const.imageFrame
+            )
+            Spacer()
+            Image(systemName: expandedTraderId == trader.id ? "chevron.up" : "chevron.down")
+                .foregroundColor(.secondary)
+        }
     }
 
-    func traderPreviewCell() -> some View {
-        Views.TraderInfoView.TraderPreviewCell(
-            text: "Eto zabi;",
-            frameWidth: Const.imageFrame,
-            frameHeight: Const.imageFrame
-        )
+    func traderItemsList(items: [TradersView.TraderItemModel]) -> some View {
+        VStack {
+            ForEach(items) { item in
+                Views.TraderInfoView.TraderItemCell(itemModel: item)
+                if item.id != items.last?.id {
+                    Divider()
+                }
+            }
+        }
+        .padding(.horizontal)
     }
 }
 

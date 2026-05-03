@@ -6,6 +6,7 @@
 //
 
 import Combine
+import Foundation
 
 protocol TradersCoordinatorProtocol: AnyObject {
     func navigateBack()
@@ -17,7 +18,7 @@ extension TradersView {
     }
 
     final class ViewModel: ObservableObject {
-        typealias TraderModel = Views.TraderInfoView.Models.TraderModel
+        typealias TraderModel = TradersView.TraderModel
 
         weak var coordinator: TradersCoordinatorProtocol?
         private var networkManager = NetworkManager.shared
@@ -32,9 +33,11 @@ extension TradersView.ViewModel: TradersView.ViewModelProtocol {
         Task {
             do {
                 let networkTraders = try await networkManager.fetchTraders()
+                print("TESTTEST \(networkTraders)")
                 sortTraders(networkTraders)
             } catch {
                 isErrorLoading = true
+                print("TESTTEST \(error.localizedDescription)")
             }
         }
     }

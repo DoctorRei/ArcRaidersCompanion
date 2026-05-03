@@ -182,7 +182,14 @@ final class NetworkManager {
                 case .success(let data):
                     do {
                         let response = try self.decoder.decode(Model.Response.TradersResponse.self, from: data.data)
-                        continuation.resume(returning: response.data)
+                        let traders = response.data.map { key, value in
+                            Model.DataModels.TradersData.Trader(
+                                id: key,
+                                name: key,
+                                items: value
+                            )
+                        }
+                        continuation.resume(returning: traders)
                     } catch {
                         continuation.resume(throwing: NetworkError.decodingError(error))
                     }
