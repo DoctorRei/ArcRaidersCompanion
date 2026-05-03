@@ -48,21 +48,16 @@ extension TradersView {
         .padding(.horizontal)
     }
 
+    @ViewBuilder
     func traderCell(for trader: ViewModel.TraderModel) -> some View {
         Views.ContainerView {
             VStack(alignment: .leading, spacing: 8) {
-                Button(action: {
-                    withAnimation {
-                        if expandedTraderId == trader.id {
-                            expandedTraderId = nil
-                        } else {
-                            expandedTraderId = trader.id
-                        }
-                    }
-                }) {
+                Button {
+                    openCellFor(id: trader.id)
+                } label: {
                     traderPreviewCell(trader: trader)
                 }
-                .buttonStyle(PlainButtonStyle())
+                .buttonStyle(.plain)
 
                 if expandedTraderId == trader.id {
                     traderItemsList(items: trader.items)
@@ -70,23 +65,30 @@ extension TradersView {
                 }
             }
         }
+        .overlay {
+            overlayForCell(trader: trader.id)
+        }
+    }
+    
+    @ViewBuilder
+    func overlayForCell(trader id: String) -> some View {
+        if expandedTraderId == id {
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(Color.white, lineWidth: 3)
+        }
     }
 
     func traderPreviewCell(trader: ViewModel.TraderModel) -> some View {
-        HStack {
             Views.TraderInfoView.TraderPreviewCell(
                 text: trader.name,
                 frameWidth: Const.imageFrame,
                 frameHeight: Const.imageFrame
             )
-            Spacer()
-            Image(systemName: expandedTraderId == trader.id ? "chevron.up" : "chevron.down")
-                .foregroundColor(.secondary)
-        }
+            .frame(maxWidth: .infinity)
     }
 
     func traderItemsList(items: [TradersView.TraderItemModel]) -> some View {
-        VStack {
+        LazyVStack {
             ForEach(items) { item in
                 Views.TraderInfoView.TraderItemCell(itemModel: item)
                 if item.id != items.last?.id {
@@ -98,10 +100,20 @@ extension TradersView {
     }
 }
 
-extension TradersView {
+private extension TradersView {
     func getTradersData() {
         Task {
             await viewModel.getTraders()
+        }
+    }
+    
+    func openCellFor(id: String) {
+        withAnimation {
+            if expandedTraderId == id {
+                expandedTraderId = nil
+            } else {
+                expandedTraderId = id
+            }
         }
     }
 }

@@ -33,11 +33,9 @@ extension TradersView.ViewModel: TradersView.ViewModelProtocol {
         Task {
             do {
                 let networkTraders = try await networkManager.fetchTraders()
-                print("TESTTEST \(networkTraders)")
                 sortTraders(networkTraders)
             } catch {
                 isErrorLoading = true
-                print("TESTTEST \(error.localizedDescription)")
             }
         }
     }
