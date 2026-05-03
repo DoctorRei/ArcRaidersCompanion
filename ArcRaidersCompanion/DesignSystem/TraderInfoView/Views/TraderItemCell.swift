@@ -15,10 +15,12 @@ extension Views.TraderInfoView {
             static let pricePrefix: String = "Trader price: "
         }
 
-        var itemModel: TradersView.TraderItemModel
+        var itemModel: TradersView.ViewModel.TraderItemModel
 
         var body: some View {
             content()
+                .background(itemModel.rarity.color)
+                .cornerRadius(8)
         }
 
         func content() -> some View {

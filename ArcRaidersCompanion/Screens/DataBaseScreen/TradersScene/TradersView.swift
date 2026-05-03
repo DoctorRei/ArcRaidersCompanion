@@ -38,7 +38,7 @@ struct TradersView: View {
     }
 }
 
-extension TradersView {
+private extension TradersView {
     func content() -> some View {
         LazyVStack {
             ForEach(viewModel.traders) { trader in
@@ -87,7 +87,7 @@ extension TradersView {
             .frame(maxWidth: .infinity)
     }
 
-    func traderItemsList(items: [TradersView.TraderItemModel]) -> some View {
+    func traderItemsList(items: [ViewModel.TraderItemModel]) -> some View {
         LazyVStack {
             ForEach(items) { item in
                 Views.TraderInfoView.TraderItemCell(itemModel: item)
