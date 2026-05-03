@@ -51,7 +51,7 @@ private extension TradersView {
     @ViewBuilder
     func traderCell(for trader: ViewModel.TraderModel) -> some View {
         Views.ContainerView {
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: 0) {
                 Button {
                     openCellFor(id: trader.id)
                 } label: {
@@ -88,15 +88,13 @@ private extension TradersView {
     }
 
     func traderItemsList(items: [ViewModel.TraderItemModel]) -> some View {
-        LazyVStack {
+        LazyVStack(spacing: 2) {
             ForEach(items) { item in
                 Views.TraderInfoView.TraderItemCell(itemModel: item)
-                if item.id != items.last?.id {
-                    Divider()
-                }
             }
         }
-        .padding(.horizontal)
+        .padding(.vertical, 2)
+        .padding(.horizontal, 6)
     }
 }
 

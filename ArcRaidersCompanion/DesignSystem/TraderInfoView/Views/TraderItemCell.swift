@@ -10,7 +10,7 @@ import SwiftUI
 extension Views.TraderInfoView {
     struct TraderItemCell: View {
         private enum Const {
-            static let iconFrame: CGFloat = 40
+            static let iconFrame: CGFloat = 56
             static let valuePrefix: String = "Value: "
             static let pricePrefix: String = "Trader price: "
         }
@@ -46,18 +46,16 @@ extension Views.TraderInfoView {
 
                         Text(Const.pricePrefix + "\(itemModel.traderPrice)")
                             .font(.caption)
-                            .foregroundColor(.blue)
+                            .foregroundColor(.secondary)
                     }
 
                     Text(itemModel.description)
                         .font(.caption)
                         .foregroundColor(.secondary)
-                        .lineLimit(2)
+                        .lineLimit(1)
                 }
-
                 Spacer()
             }
-            .padding(.vertical, 4)
         }
 
         @ViewBuilder
