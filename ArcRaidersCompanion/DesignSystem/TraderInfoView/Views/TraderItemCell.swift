@@ -48,14 +48,10 @@ extension Views.TraderInfoView {
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
-
-                    Text(itemModel.description)
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                        .lineLimit(1)
                 }
                 Spacer()
             }
+            .padding(2)
         }
 
         @ViewBuilder

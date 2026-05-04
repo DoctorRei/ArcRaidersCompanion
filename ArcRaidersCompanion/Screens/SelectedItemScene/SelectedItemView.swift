@@ -22,6 +22,7 @@ struct SelectedItemView: View {
             static let stats: String = "Stats"
             static let location: String = "Location"
             static let guides: String = "Guides"
+            static let loading: String = "Loading... "
         }
     }
 
@@ -35,18 +36,15 @@ struct SelectedItemView: View {
         Views.CustomNavigationBar(
             navigationBarStyle: .title(
                 .init(
-                    title: viewModel.item?.name ?? "Loading...",
+                    title: viewModel.item?.name ?? Const.Strings.loading,
                     backAction: {
                         viewModel.navigateBack()
                     })
             )
         )
         if viewModel.isLoading || viewModel.item == nil {
-            Spacer()
-            ProgressView()
-                .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                .scaleEffect(1.5)
-            Spacer()
+            Views.ActivityIndicator()
+                .frame(maxHeight: .infinity)
         } else {
             ScrollView {
                 content()

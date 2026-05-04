@@ -85,6 +85,9 @@ private extension TradersView {
                 frameHeight: Const.imageFrame
             )
             .frame(maxWidth: .infinity)
+            .overlay {
+                overlayForCell(trader: trader.id)
+            }
     }
 
     func traderItemsList(items: [ViewModel.TraderItemModel]) -> some View {
@@ -96,8 +99,7 @@ private extension TradersView {
                     }
             }
         }
-        .padding(.vertical, 2)
-        .padding(.horizontal, 6)
+        .padding(6)
     }
 }
 
