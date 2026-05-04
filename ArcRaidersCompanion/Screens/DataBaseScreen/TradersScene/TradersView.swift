@@ -91,6 +91,9 @@ private extension TradersView {
         LazyVStack(spacing: 2) {
             ForEach(items) { item in
                 Views.TraderInfoView.TraderItemCell(itemModel: item)
+                    .onTapGesture {
+                        viewModel.showItemDetails(id: item.id)
+                    }
             }
         }
         .padding(.vertical, 2)

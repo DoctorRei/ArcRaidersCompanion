@@ -39,13 +39,16 @@ extension Views.CustomNavigationBar {
     struct TitleConfiguration {
         let title: String
         let backAction: (() -> Void)?
-        
+        var isLoading: Bool = false
+
         init(
             title: String,
-            backAction: (() -> Void)? = nil
+            backAction: (() -> Void)? = nil,
+            isLoading: Bool = false
         ) {
             self.title = title
             self.backAction = backAction
+            self.isLoading = isLoading
         }
     }
 }

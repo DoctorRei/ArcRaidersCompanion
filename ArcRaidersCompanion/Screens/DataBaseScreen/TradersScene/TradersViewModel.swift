@@ -10,6 +10,7 @@ import Foundation
 
 protocol TradersCoordinatorProtocol: AnyObject {
     func navigateBack()
+    func showItemDetails(id: String)
 }
 
 extension TradersView {
@@ -44,6 +45,10 @@ extension TradersView.ViewModel: TradersView.ViewModelProtocol {
                 .sorted { $0.rarity.priority > $1.rarity.priority }
             return TraderModel(id: trader.id, name: trader.name, items: items)
         }
+    }
+
+    func showItemDetails(id: String) {
+        coordinator?.showItemDetails(id: id)
     }
 }
 

@@ -38,6 +38,18 @@ extension NetworkManager.Model.DataModels.ItemsData {
         let map: String
     }
     
+    struct ShieldCompatibility: Decodable {
+        let value: Int?
+        init(from decoder: Decoder) throws {
+            let container = try decoder.singleValueContainer()
+            if let intValue = try? container.decode(Int.self) {
+                value = intValue
+            } else {
+                value = nil
+            }
+        }
+    }
+
     // MARK: - StatBlock
     struct StatBlock: Decodable {
         let range: Double?
@@ -70,7 +82,7 @@ extension NetworkManager.Model.DataModels.ItemsData {
         let damagePerSecond: Int?
         let movementPenalty: Int?
         let safePocketSlots: Int?
-        let damageMitigation: Int?
+        let damageMitigation: Double?
         let healingPerSecond: Double?
         let reducedEquipTime: Int?
         let staminaPerSecond: Double?

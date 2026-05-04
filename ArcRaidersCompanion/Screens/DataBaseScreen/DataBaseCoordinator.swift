@@ -20,7 +20,7 @@ class DataBaseCoordinator: BaseCoordinator<UINavigationController> {
     }
 }
 
-extension DataBaseCoordinator: ArcsCoordinatorProtocol, TradersCoordinatorProtocol {
+extension DataBaseCoordinator: ArcsCoordinatorProtocol, TradersCoordinatorProtocol, SelectedItemNavigateProtocol {
     func navigateBack() {
         presenter.popViewController(animated: true)
     }
@@ -28,9 +28,15 @@ extension DataBaseCoordinator: ArcsCoordinatorProtocol, TradersCoordinatorProtoc
 
 extension DataBaseCoordinator: DataBaseCoordinatorProtocol {
     func showSelectedItemView(item: SelectedItemCoordinator.Item) {
-        let coordinator = SelectedItemCoordinator(presenter: presenter, selectedItem: item)
+        let coordinator = SelectedItemCoordinator(presenter: presenter, navigateWith: .itemData(item))
         coordinator.start()
 
+        store(coordinator: coordinator)
+    }
+
+    func showItemDetails(id: String) {
+        let coordinator = SelectedItemCoordinator(presenter: presenter, navigateWith: .id(id))
+        coordinator.start()
         store(coordinator: coordinator)
     }
 

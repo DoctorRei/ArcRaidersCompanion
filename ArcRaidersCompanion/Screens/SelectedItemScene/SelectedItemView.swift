@@ -35,15 +35,23 @@ struct SelectedItemView: View {
         Views.CustomNavigationBar(
             navigationBarStyle: .title(
                 .init(
-                    title: viewModel.item.name,
+                    title: viewModel.item?.name ?? "Loading...",
                     backAction: {
                         viewModel.navigateBack()
                     })
             )
         )
-        ScrollView {
-            content()
-                .padding(.horizontal)
+        if viewModel.isLoading || viewModel.item == nil {
+            Spacer()
+            ProgressView()
+                .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                .scaleEffect(1.5)
+            Spacer()
+        } else {
+            ScrollView {
+                content()
+                    .padding(.horizontal)
+            }
         }
     }
 }
@@ -51,26 +59,28 @@ struct SelectedItemView: View {
 extension SelectedItemView {
     func content() -> some View {
         VStack(alignment: .leading, spacing: Const.Spacing.section) {
-            itemImageView()
-            itemDescriptionView()
-            if viewModel.hasBasicInfo {
-                section(title: Const.Strings.basicInfo) {
-                    Views.DescriptionItemCell(itemModel: viewModel.item, selectedType: .baseInfo)
+            if let item = viewModel.item {
+                itemImageView(item: item)
+                itemDescriptionView(item: item)
+                if viewModel.hasBasicInfo {
+                    section(title: Const.Strings.basicInfo) {
+                        Views.DescriptionItemCell(itemModel: item, selectedType: .baseInfo)
+                    }
                 }
-            }
-            if viewModel.hasStats {
-                section(title: Const.Strings.stats) {
-                    Views.DescriptionItemCell(itemModel: viewModel.item, selectedType: .fullInfo)
+                if viewModel.hasStats {
+                    section(title: Const.Strings.stats) {
+                        Views.DescriptionItemCell(itemModel: item, selectedType: .fullInfo)
+                    }
                 }
-            }
-            if viewModel.hasLocations {
-                section(title: Const.Strings.location) {
-                    Views.DescriptionItemCell(itemModel: viewModel.item, selectedType: .locations)
+                if viewModel.hasLocations {
+                    section(title: Const.Strings.location) {
+                        Views.DescriptionItemCell(itemModel: item, selectedType: .locations)
+                    }
                 }
-            }
-            if viewModel.hasGuides {
-                section(title: Const.Strings.guides) {
-                    Views.DescriptionItemCell(itemModel: viewModel.item, selectedType: .guides)
+                if viewModel.hasGuides {
+                    section(title: Const.Strings.guides) {
+                        Views.DescriptionItemCell(itemModel: item, selectedType: .guides)
+                    }
                 }
             }
         }
@@ -86,15 +96,15 @@ extension SelectedItemView {
         }
     }
 
-    func itemImageView() -> some View {
-        KFImageView(url: URL(string: viewModel.item.icon))
+    func itemImageView(item: SearchItemView.ViewModel.FoundedItem.Item) -> some View {
+        KFImageView(url: URL(string: item.icon))
             .padding()
     }
 
-    func itemDescriptionView() -> some View {
+    func itemDescriptionView(item: SearchItemView.ViewModel.FoundedItem.Item) -> some View {
         Group {
-            if !viewModel.item.description.isEmpty {
-                Text(viewModel.item.description)
+            if !item.description.isEmpty {
+                Text(item.description)
                     .font(.body)
                     .foregroundColor(.secondary)
                     .lineSpacing(Const.Spacing.lineSpacing)
