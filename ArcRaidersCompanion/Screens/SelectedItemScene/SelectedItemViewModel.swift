@@ -13,26 +13,37 @@ protocol SelectedItemNavigateProtocol: AnyObject {
 }
 
 extension SelectedItemView {
-    protocol ViewModelProtocol {}
-    
+    protocol ViewModelProtocol {
+        func loadItem(id: String) async
+    }
+
     final class ViewModel: ObservableObject {
         weak var coordinator: SelectedItemNavigateProtocol?
         private var networkManager = NetworkManager.shared
-        
-        @Published var item: SearchItemView.ViewModel.FoundedItem.Item
-        
+
+        @Published var item: SearchItemView.ViewModel.FoundedItem.Item?
+        @Published var isLoading = false
+
         init(
             coordinator: SelectedItemNavigateProtocol? = nil,
             networkManager: NetworkManager = NetworkManager.shared,
-            item: SearchItemView.ViewModel.FoundedItem.Item
+            navigateWith: SelectedItemCoordinator.NavigateWith,
         ) {
             self.coordinator = coordinator
             self.networkManager = networkManager
-            self.item = item
+            switch navigateWith {
+            case .itemData(let item):
+                self.item = item
+            case .id(let id):
+                Task {
+                    await loadItem(id: id)
+                }
+            }
         }
-        
+
         var hasBasicInfo: Bool {
-            item.workbench != nil ||
+            guard let item = item else { return false }
+            return item.workbench != nil ||
             item.ammoType != nil ||
             item.shieldType != nil ||
             item.subcategory != nil ||
@@ -40,6 +51,7 @@ extension SelectedItemView {
         }
 
         var hasStats: Bool {
+            guard let item = item else { return false }
             let mirror = Mirror(reflecting: item.statBlock)
             for child in mirror.children {
                 switch child.value {
@@ -53,11 +65,13 @@ extension SelectedItemView {
         }
 
         var hasLocations: Bool {
-            !item.locations.isEmpty
+            guard let item = item else { return false }
+            return !item.locations.isEmpty
         }
 
         var hasGuides: Bool {
-            !item.guideLinks.isEmpty
+            guard let item = item else { return false }
+            return !item.guideLinks.isEmpty
         }
 
         var hasLocationsOrGuides: Bool {
@@ -67,6 +81,21 @@ extension SelectedItemView {
 }
 
 extension SelectedItemView.ViewModel {
+    func loadItem(id: String) async {
+        await MainActor.run { isLoading = true }
+        do {
+            let networkItem = try await networkManager.fetchItem(id: id)
+            let convertedItem = SearchItemView.ViewModel.FoundedItem.Item(data: networkItem)
+            await MainActor.run {
+                self.item = convertedItem
+                self.isLoading = false
+            }
+        } catch {
+            await MainActor.run { isLoading = false }
+            print("Error loading item: \(error)")
+        }
+    }
+    
     func navigateBack() {
         coordinator?.navigateBack()
     }

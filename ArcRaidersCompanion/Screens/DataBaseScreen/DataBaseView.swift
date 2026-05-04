@@ -20,7 +20,7 @@ struct DataBaseView: View {
             case .items:
                 viewModel.showSearchItemScene()
             case .traders:
-                print("3")
+                viewModel.showTradersScene()
             }
         }
     }

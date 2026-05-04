@@ -28,7 +28,7 @@ private extension SearchItemCoordinator {
 extension SearchItemCoordinator: SearchItemNavigateProtocol {
     func showItemDetails(with item: SearchItemView.ViewModel.FoundedItem.Item?) {
         guard let item else { return }
-        let coordinator = SelectedItemCoordinator(presenter: presenter, selectedItem: item)
+        let coordinator = SelectedItemCoordinator(presenter: presenter, navigateWith: .itemData(item))
         coordinator.start()
         
         store(coordinator: coordinator)

@@ -66,6 +66,11 @@ extension Views {
                         .transition(.move(edge: .leading).combined(with: .opacity))
                 }
                 Spacer()
+                if config.isLoading {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                        .padding(.trailing)
+                }
             }
             .overlay(alignment: .center) {
                 Text(config.title)

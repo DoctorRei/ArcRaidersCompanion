@@ -99,7 +99,7 @@ extension SearchItemView.ViewModel {
             let damagePerSecond: Int?
             let movementPenalty: Int?
             let safePocketSlots: Int?
-            let damageMitigation: Int?
+            let damageMitigation: Double?
             let healingPerSecond: Double?
             let reducedEquipTime: Int?
             let staminaPerSecond: Double?
@@ -168,7 +168,7 @@ extension SearchItemView.ViewModel {
                 self.illuminationRadius = data.illuminationRadius
                 self.increasedEquipTime = data.increasedEquipTime
                 self.reducedUnequipTime = data.reducedUnequipTime
-                self.shieldCompatibility = data.shieldCompatibility
+                self.shieldCompatibility = data.shieldCompatibility /*data.shieldCompatibility.flatMap { $0.value }*/
                 self.increasedUnequipTime = data.increasedUnequipTime
                 self.reducedVerticalRecoil = data.reducedVerticalRecoil
                 self.increasedBulletVelocity = data.increasedBulletVelocity
