@@ -20,6 +20,7 @@ extension SelectedItemView {
     final class ViewModel: ObservableObject {
         weak var coordinator: SelectedItemNavigateProtocol?
         private var networkManager = NetworkManager.shared
+        private var coreDataManager = CoreDataManager()
 
         @Published var item: SearchItemView.ViewModel.FoundedItem.Item?
         @Published var isLoading = false
@@ -98,5 +99,12 @@ extension SelectedItemView.ViewModel {
     
     func navigateBack() {
         coordinator?.navigateBack()
+    }
+}
+
+extension SelectedItemView.ViewModel {
+    func fetchItemFromCoreData() {
+        let items = coreDataManager.fetchAllItems()
+        print("TESTTEST items ids \(items)")
     }
 }
