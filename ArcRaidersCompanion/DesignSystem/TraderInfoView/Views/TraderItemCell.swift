@@ -15,6 +15,7 @@ extension Views.TraderInfoView {
             static let pricePrefix: String = "Trader price: "
         }
 
+        @State private var isFavoriteCell = false
         var itemModel: TradersView.ViewModel.TraderItemModel
 
         var body: some View {
@@ -29,9 +30,15 @@ extension Views.TraderInfoView {
                     .frame(width: Const.iconFrame, height: Const.iconFrame)
 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(itemModel.name)
-                        .font(.headline)
-                        .foregroundColor(.primary)
+                    HStack {
+                        Text(itemModel.name)
+                            .font(.headline)
+                            .foregroundColor(.primary)
+                        Spacer()
+                        Views.StarButton(isSelected: $isFavoriteCell) {
+                            print("Star Selected")
+                        }
+                    }
 
                     Text(itemModel.itemType)
                         .font(.caption)

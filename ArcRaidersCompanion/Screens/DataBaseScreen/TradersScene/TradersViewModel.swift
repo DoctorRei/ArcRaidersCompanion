@@ -21,6 +21,7 @@ extension TradersView {
     final class ViewModel: ObservableObject {
         weak var coordinator: TradersCoordinatorProtocol?
         private var networkManager = NetworkManager.shared
+        private var coreDataManager = CoreDataManager()
         private var isErrorLoading = false
 
         @Published var traders: [TraderModel] = []
@@ -55,5 +56,12 @@ extension TradersView.ViewModel: TradersView.ViewModelProtocol {
 extension TradersView.ViewModel {
     func navigateBack() {
         coordinator?.navigateBack()
+    }
+}
+
+extension TradersView.ViewModel {
+    func saveItemID(id: String) {
+        print("TESTTEST save id \(id)")
+        coreDataManager.createItem(id: id)
     }
 }
