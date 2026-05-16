@@ -17,6 +17,7 @@ extension Views.TraderInfoView {
 
         @State private var isFavoriteCell = false
         var itemModel: TradersView.ViewModel.TraderItemModel
+        var completion: (String) -> Void
 
         var body: some View {
             content()
@@ -37,6 +38,7 @@ extension Views.TraderInfoView {
                         Spacer()
                         Views.StarButton(isSelected: $isFavoriteCell) {
                             print("Star Selected")
+                            completion(itemModel.id)
                         }
                     }
 

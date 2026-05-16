@@ -45,7 +45,7 @@ extension TradersView.ViewModel {
 
         var color: Color {
             switch self {
-            case .common: return .white
+            case .common: return .gray.opacity(0.4)
             case .uncommon: return .green.opacity(0.4)
             case .rare: return .blue.opacity(0.4)
             case .epic: return .purple.opacity(0.4)

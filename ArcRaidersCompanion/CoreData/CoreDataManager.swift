@@ -17,6 +17,7 @@ final class CoreDataManager {
     // CREATE - создание нового Item
     func createItem(id: String) {
         let item = Item(context: stack.viewContext, id: id)
+        item.id = id
         stack.save()
     }
     

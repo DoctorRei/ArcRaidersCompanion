@@ -11,7 +11,7 @@ extension Views.ArcInfoView.Models.ArcModel.ArcLoot.LootItem {
     var color: Color {
         switch rarity {
         case .common:
-                .white
+                .gray.opacity(0.4)
         case .uncommon:
                 .green.opacity(0.4)
         case .rare:

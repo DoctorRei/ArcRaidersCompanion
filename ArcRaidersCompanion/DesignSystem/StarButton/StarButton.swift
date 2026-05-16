@@ -12,7 +12,7 @@ extension Views {
         private enum Const {
             static let starSize: CGFloat = 24
             static let brightYellow = Color.yellow
-            static let inactiveGray = Color.gray.opacity(0.5)
+            static let inactiveGray = Color.white
         }
 
         @Binding var isSelected: Bool

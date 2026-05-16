@@ -30,7 +30,7 @@ extension NetworkManager.Model.DataModels.ItemsData {
         let ammoType: String?
         let locations: [Location]
         let guideLinks: [GuideLink]
-        let gameAssetId: Int
+        let gameAssetId: Int?
     }
     
     struct Location: Decodable {
