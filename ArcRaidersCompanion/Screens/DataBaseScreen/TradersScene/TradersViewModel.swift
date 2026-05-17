@@ -64,14 +64,17 @@ extension TradersView.ViewModel {
         var id: String
         var name: String
         var icon: String
+        var isSelected: Bool
     }
     
-    func saveItem(item: ItemCoreData) {
-        coreDataManager.createItem(id: item.id, name: item.name, icon: item.icon)
-        print("save \(item)")
-        
-        let item2 = coreDataManager.fetchAllItems()
-        print("after save full array \(item2.first?.id), and name \(item2.first?.name), and icon \(item2.first?.icon)")
-        print("now check count \(item2.count)")
+    func favoriteButtonPressed(for item: ItemCoreData) {
+        switch item.isSelected {
+        case true:
+            coreDataManager.createItem(id: item.id, name: item.name, icon: item.icon)
+            print("save \(item)")
+        case false:
+            coreDataManager.deleteItem(with: item.id)
+            print("delete")
+        }
     }
 }

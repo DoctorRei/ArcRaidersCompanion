@@ -94,11 +94,12 @@ private extension TradersView {
         LazyVStack(spacing: 2) {
             ForEach(items) { item in
                 Views.TraderInfoView.TraderItemCell(itemModel: item) { itemModel in
-                    viewModel.saveItem(
-                        item: .init(
+                    viewModel.favoriteButtonPressed(
+                        for: .init(
                             id: itemModel.id,
                             name: itemModel.name,
-                            icon: itemModel.icon
+                            icon: itemModel.icon,
+                            isSelected: itemModel.isSelected
                         )
                     )
                 }

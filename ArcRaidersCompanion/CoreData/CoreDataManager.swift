@@ -23,6 +23,28 @@ final class CoreDataManager {
         stack.save()
     }
     
+    func deleteItem(with id: String) {
+        guard let item = fetchItem(for: id) else {
+            print("Delete Item with id \(id) failed")
+            return
+        }
+        
+        deleteItem(item)
+    }
+    
+    func fetchItem(for id: String) -> Item? {
+        let request = Item.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", id)
+        request.fetchLimit = 1
+        
+        do {
+            return try stack.viewContext.fetch(request).first
+        } catch {
+            print("Fetch error: \(error)")
+            return nil
+        }
+    }
+    
     // READ - получение всех Item
     func fetchAllItems() -> [Item] {
         let request = Item.fetchRequest()
@@ -44,7 +66,7 @@ final class CoreDataManager {
     }
     
     // DELETE - удаление Item
-    func deleteItem(_ item: Item) {
+    private func deleteItem(_ item: Item) {
         stack.viewContext.delete(item)
         stack.save()
     }

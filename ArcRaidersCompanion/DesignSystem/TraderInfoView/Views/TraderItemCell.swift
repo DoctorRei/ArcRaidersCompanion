@@ -19,6 +19,7 @@ extension Views.TraderInfoView {
             var id: String
             var name: String
             var icon: String
+            var isSelected: Bool
         }
 
         @State private var isFavoriteCell = false
@@ -42,7 +43,7 @@ extension Views.TraderInfoView {
                             .foregroundColor(.primary)
                         Spacer()
                         Views.StarButton(isSelected: $isFavoriteCell) {
-                            completion(.init(id: itemModel.id, name: itemModel.name, icon: itemModel.icon))
+                            completion(.init(id: itemModel.id, name: itemModel.name, icon: itemModel.icon, isSelected: isFavoriteCell))
                         }
                     }
 

@@ -8,7 +8,7 @@
 import CoreData
 
 enum CoreDataModel {
-    static var currentVersion: Int = 2  // Увеличивайте при каждом изменении модели
+    static var currentVersion: Int = 2
     
     static func create() -> NSManagedObjectModel {
         let model = NSManagedObjectModel()
