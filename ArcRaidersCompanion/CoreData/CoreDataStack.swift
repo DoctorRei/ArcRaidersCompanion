@@ -16,19 +16,28 @@ final class CoreDataStack {
     private init() {
         // Создаём модель ПРОГРАММНО (без xcdatamodeld файла!)
         let model = CoreDataModel.create()
+        let storeURL = Self.getStoreURL()
+
+        if FileManager.default.fileExists(atPath: storeURL.path) {
+            if !Self.isStoreCompatible(with: model, at: storeURL) {
+                print("⚠️ База несовместима, удаляем...")
+                try? FileManager.default.removeItem(at: storeURL)
+            }
+        }
         
         // Создаём контейнер с нашей моделью
         persistentContainer = NSPersistentContainer(
-            name: "AppModel",  // это имя не важно, т.к. мы передали модель
+            name: "AppModel",
             managedObjectModel: model
         )
         
         // Настраиваем хранилище (где будут сохраняться данные)
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
             ?? URL(fileURLWithPath: NSTemporaryDirectory())
-        let storeURL = documentsURL.appendingPathComponent("AppModel.sqlite")
 
         let storeDescription = NSPersistentStoreDescription(url: storeURL)
+        storeDescription.shouldMigrateStoreAutomatically = true
+        storeDescription.shouldInferMappingModelAutomatically = true
         persistentContainer.persistentStoreDescriptions = [storeDescription]
 
         // Загружаем хранилище
@@ -56,5 +65,23 @@ final class CoreDataStack {
     // Выполнение операций в фоновом контексте
     func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void) {
         persistentContainer.performBackgroundTask(block)
+    }
+    
+    private static func getStoreURL() -> URL {
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        return documentsURL.appendingPathComponent("AppModel.sqlite")
+    }
+    
+    private static func isStoreCompatible(with model: NSManagedObjectModel, at storeURL: URL) -> Bool {
+        do {
+            let metadata = try NSPersistentStoreCoordinator.metadataForPersistentStore(
+                ofType: NSSQLiteStoreType,
+                at: storeURL,
+                options: nil
+            )
+            return model.isConfiguration(withName: nil, compatibleWithStoreMetadata: metadata)
+        } catch {
+            return false
+        }
     }
 }

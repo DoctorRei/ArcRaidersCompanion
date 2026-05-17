@@ -15,9 +15,11 @@ final class CoreDataManager {
     }
     
     // CREATE - создание нового Item
-    func createItem(id: String) {
-        let item = Item(context: stack.viewContext, id: id)
+    func createItem(id: String, name: String, icon: String) {
+        let item = Item(context: stack.viewContext, id: id, name: name, icon: icon)
         item.id = id
+        item.name = name
+        item.icon = icon
         stack.save()
     }
     
@@ -26,7 +28,7 @@ final class CoreDataManager {
         let request = Item.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "id", ascending: true)
         request.sortDescriptors = [sortDescriptor]
-        
+
         do {
             return try stack.viewContext.fetch(request)
         } catch {

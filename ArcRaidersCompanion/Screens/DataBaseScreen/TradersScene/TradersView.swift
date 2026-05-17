@@ -93,13 +93,18 @@ private extension TradersView {
     func traderItemsList(items: [ViewModel.TraderItemModel]) -> some View {
         LazyVStack(spacing: 2) {
             ForEach(items) { item in
-                Views.TraderInfoView.TraderItemCell(itemModel: item) { id in
-                    print("completion tradersView \(id)")
-                    viewModel.saveItemID(id: id)
+                Views.TraderInfoView.TraderItemCell(itemModel: item) { itemModel in
+                    viewModel.saveItem(
+                        item: .init(
+                            id: itemModel.id,
+                            name: itemModel.name,
+                            icon: itemModel.icon
+                        )
+                    )
                 }
-                    .onTapGesture {
-                        viewModel.showItemDetails(id: item.id)
-                    }
+                .onTapGesture {
+                    viewModel.showItemDetails(id: item.id)
+                }
             }
         }
         .padding(6)

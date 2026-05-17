@@ -60,8 +60,18 @@ extension TradersView.ViewModel {
 }
 
 extension TradersView.ViewModel {
-    func saveItemID(id: String) {
-        print("TESTTEST save id \(id)")
-        coreDataManager.createItem(id: id)
+    struct ItemCoreData {
+        var id: String
+        var name: String
+        var icon: String
+    }
+    
+    func saveItem(item: ItemCoreData) {
+        coreDataManager.createItem(id: item.id, name: item.name, icon: item.icon)
+        print("save \(item)")
+        
+        let item2 = coreDataManager.fetchAllItems()
+        print("after save full array \(item2.first?.id), and name \(item2.first?.name), and icon \(item2.first?.icon)")
+        print("now check count \(item2.count)")
     }
 }
