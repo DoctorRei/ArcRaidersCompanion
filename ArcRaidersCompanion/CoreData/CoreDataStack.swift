@@ -14,25 +14,21 @@ final class CoreDataStack {
     let viewContext: NSManagedObjectContext
     
     private init() {
-        // Создаём модель ПРОГРАММНО (без xcdatamodeld файла!)
         let model = CoreDataModel.create()
         let storeURL = Self.getStoreURL()
 
         if FileManager.default.fileExists(atPath: storeURL.path) {
             if !Self.isStoreCompatible(with: model, at: storeURL) {
-                print("⚠️ База несовместима, удаляем...")
                 try? FileManager.default.removeItem(at: storeURL)
             }
         }
-        
-        // Создаём контейнер с нашей моделью
+
         persistentContainer = NSPersistentContainer(
             name: "AppModel",
             managedObjectModel: model
         )
         
-        // Настраиваем хранилище (где будут сохраняться данные)
-        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+        let _ = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
             ?? URL(fileURLWithPath: NSTemporaryDirectory())
 
         let storeDescription = NSPersistentStoreDescription(url: storeURL)

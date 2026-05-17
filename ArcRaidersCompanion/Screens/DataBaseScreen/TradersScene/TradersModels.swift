@@ -24,6 +24,8 @@ extension TradersView.ViewModel {
         let itemType: String
         let description: String
         let traderPrice: Int
+
+        var isFavorite: Bool = false
     }
 
     enum Rarity: String, CaseIterable {

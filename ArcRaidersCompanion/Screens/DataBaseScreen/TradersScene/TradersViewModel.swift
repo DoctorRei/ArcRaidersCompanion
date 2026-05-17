@@ -23,6 +23,7 @@ extension TradersView {
         private var networkManager = NetworkManager.shared
         private var coreDataManager = CoreDataManager()
         private var isErrorLoading = false
+        private var favoritesFromCoreData: [String: String] = [:]
 
         @Published var traders: [TraderModel] = []
     }
@@ -32,6 +33,7 @@ extension TradersView.ViewModel: TradersView.ViewModelProtocol {
     func getTraders() async {
         Task {
             do {
+                loadSavedFavorites()
                 let networkTraders = try await networkManager.fetchTraders()
                 sortTraders(networkTraders)
             } catch {
@@ -39,11 +41,23 @@ extension TradersView.ViewModel: TradersView.ViewModelProtocol {
             }
         }
     }
+    
+    private func loadSavedFavorites() {
+        coreDataManager.fetchAllItems().forEach { item in
+            favoritesFromCoreData[item.id] = item.id
+        }
+    }
 
     func sortTraders(_ model: [NetworkManager.Model.DataModels.TradersData.Trader]) {
         traders = model.map { trader in
-            let items = trader.items.map { TraderItemModel(networkItem: $0) }
+            let items = trader.items
+                .map { networkItem -> TraderItemModel in
+                    var item = TraderItemModel(networkItem: networkItem)
+                    item.isFavorite = favoritesFromCoreData[networkItem.id] != nil
+                    return item
+                }
                 .sorted { $0.rarity.priority > $1.rarity.priority }
+            
             return TraderModel(id: trader.id, name: trader.name, items: items)
         }
     }
@@ -71,10 +85,8 @@ extension TradersView.ViewModel {
         switch item.isSelected {
         case true:
             coreDataManager.createItem(id: item.id, name: item.name, icon: item.icon)
-            print("save \(item)")
         case false:
             coreDataManager.deleteItem(with: item.id)
-            print("delete")
         }
     }
 }

@@ -25,6 +25,15 @@ extension Views.TraderInfoView {
         @State private var isFavoriteCell = false
         var itemModel: TradersView.ViewModel.TraderItemModel
         var completion: (ItemCoreData) -> Void
+        
+        init(
+            itemModel: TradersView.ViewModel.TraderItemModel,
+            completion: @escaping (ItemCoreData) -> Void
+        ) {
+            self.itemModel = itemModel
+            self.isFavoriteCell = itemModel.isFavorite
+            self.completion = completion
+        }
 
         var body: some View {
             content()

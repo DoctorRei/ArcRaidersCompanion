@@ -101,10 +101,3 @@ extension SelectedItemView.ViewModel {
         coordinator?.navigateBack()
     }
 }
-
-extension SelectedItemView.ViewModel {
-    func fetchItemFromCoreData() {
-        let items = coreDataManager.fetchAllItems()
-        print("TESTTEST items ids \(items)")
-    }
-}
