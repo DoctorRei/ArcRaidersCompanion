@@ -25,17 +25,17 @@ struct ArcsView: View {
     }
     
     var body: some View {
-        ScrollView {
-            Views.CustomNavigationBar(
-                navigationBarStyle: .title(
-                    .init(
-                        title: Const.arcTitle,
-                        backAction: {
-                            viewModel.navigateBack()
-                        }
-                    )
+        Views.CustomNavigationBar(
+            navigationBarStyle: .title(
+                .init(
+                    title: Const.arcTitle,
+                    backAction: {
+                        viewModel.navigateBack()
+                    }
                 )
             )
+        )
+        ScrollView {
             content()
         }
     }

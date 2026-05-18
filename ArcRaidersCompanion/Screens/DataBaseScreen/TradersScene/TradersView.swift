@@ -35,13 +35,16 @@ struct TradersView: View {
         ScrollView {
             content()
         }
+        .onAppear() {
+            viewModel.updateFavoriteItems()
+        }
     }
 }
 
 private extension TradersView {
     func content() -> some View {
         LazyVStack {
-            ForEach(viewModel.traders) { trader in
+            ForEach(viewModel.traders, id: \.stableId) { trader in
                 traderCell(for: trader)
             }
         }

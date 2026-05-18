@@ -36,9 +36,6 @@ extension Views {
                 } else {
                     self._isFavorite = .constant(false)
                 }
-//                isFavorite = titleConfiguration.favoriteButton?.isFavorite ?? .constant(false)
-                print("IsFavorite in Custom NavBar \(titleConfiguration.favoriteButton?.isFavorite)")
-                print("and set newValue to state \(isFavorite)")
             }
         }
         
@@ -93,7 +90,8 @@ extension Views {
                         .padding(.trailing)
                 }
                 if let favoriteButton = config.favoriteButton {
-                    Views.StarButton(isSelected: $isFavorite, action: favoriteButton.action)
+                    Views.StarButton(configuration: .navBar, isSelected: $isFavorite, action: favoriteButton.action)
+                        .padding(.trailing)
                 }
             }
             .overlay(alignment: .center) {

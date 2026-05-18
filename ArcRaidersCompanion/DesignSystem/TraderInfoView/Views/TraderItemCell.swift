@@ -51,7 +51,7 @@ extension Views.TraderInfoView {
                             .font(.headline)
                             .foregroundColor(.primary)
                         Spacer()
-                        Views.StarButton(isSelected: $isFavoriteCell) {
+                        Views.StarButton(configuration: .cell, isSelected: $isFavoriteCell) {
                             completion(.init(id: itemModel.id, name: itemModel.name, icon: itemModel.icon, isSelected: isFavoriteCell))
                         }
                     }

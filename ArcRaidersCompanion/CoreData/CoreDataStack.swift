@@ -36,14 +36,12 @@ final class CoreDataStack {
         storeDescription.shouldInferMappingModelAutomatically = true
         persistentContainer.persistentStoreDescriptions = [storeDescription]
 
-        // Загружаем хранилище
         persistentContainer.loadPersistentStores { _, error in
             if let error = error {
                 fatalError("Failed to load Core Data stack: \(error)")
             }
         }
 
-        // Сохраняем viewContext для удобства
         viewContext = persistentContainer.viewContext
     }
     
@@ -58,7 +56,6 @@ final class CoreDataStack {
         }
     }
 
-    // Выполнение операций в фоновом контексте
     func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void) {
         persistentContainer.performBackgroundTask(block)
     }

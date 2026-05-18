@@ -47,6 +47,18 @@ extension TradersView.ViewModel: TradersView.ViewModelProtocol {
             favoritesFromCoreData[item.id] = item.id
         }
     }
+    
+    private func clearAndUpdateSavedFavorites() {
+        let items = coreDataManager.fetchAllItems()
+        var newDict: [String: String] = [:]
+        
+        items.forEach { item in
+            newDict[item.id] = item.id
+        }
+        
+        favoritesFromCoreData = [:]
+        favoritesFromCoreData = newDict
+    }
 
     func sortTraders(_ model: [NetworkManager.Model.DataModels.TradersData.Trader]) {
         traders = model.map { trader in
@@ -64,6 +76,20 @@ extension TradersView.ViewModel: TradersView.ViewModelProtocol {
 
     func showItemDetails(id: String) {
         coordinator?.showItemDetails(id: id)
+    }
+    
+    func updateFavoriteItems() {
+        guard !traders.isEmpty else { return }
+        clearAndUpdateSavedFavorites()
+        let updatedTraders = traders.map { trader in
+            let items = trader.items.map { traiderItem in
+                var item = traiderItem
+                item.isFavorite = favoritesFromCoreData[item.id] != nil
+                return item
+            }
+            return TraderModel(id: trader.id, name: trader.name, items: items)
+        }
+        traders = updatedTraders
     }
 }
 

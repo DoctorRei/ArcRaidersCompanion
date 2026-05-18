@@ -9,13 +9,17 @@ import Foundation
 import SwiftUI
 
 extension TradersView.ViewModel {
-    struct TraderModel: Identifiable {
+    struct TraderModel: Identifiable, Equatable {
         let id: String
         let name: String
-        let items: [TraderItemModel]
+        var items: [TraderItemModel]
+        
+        var stableId: String {
+            "\(id)-\(items.map { $0.isFavorite })"
+        }
     }
 
-    struct TraderItemModel: Identifiable {
+    struct TraderItemModel: Identifiable, Equatable {
         let id: String
         let icon: String
         let name: String
