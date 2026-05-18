@@ -10,7 +10,31 @@ import Kingfisher
 
 extension Views {
     struct EventCardView: View {
-        let event: Event
+        private enum Const {
+            static let imageFrame: CGFloat = 124
+            static let eventDateInfoSpacing: CGFloat = 6
+            static let mapInfoViewSpacing: CGFloat = 6
+            static let timeOfEventSpacing: CGFloat = 10
+            
+            enum Font {
+                static let nameMapFontSize: CGFloat = 18
+                static let nameEventFontSize: CGFloat = 16
+            }
+        }
+        
+        struct Model {
+            var isActive: Bool
+            var name: String
+            var map: String
+            var icon: String
+            
+            var formattedStartTime: String
+            var formattedEndTime: String
+            var formattedDateTime: String
+            var id: String
+        }
+        
+        let event: Model
         
         var body: some View {
             content()
@@ -23,13 +47,14 @@ private extension Views.EventCardView {
         Views.ContainerView {
             cardBody(event: event)
                 .overlay(alignment: .topTrailing) {
-                    Views.ActivityIndicator(isActive: event.isActive)
+                    Views.EventIsActiveIndicator(isActive: event.isActive)
                         .padding()
                 }
         }
+        .padding()
     }
     
-    func cardBody(event: Event) -> some View {
+    func cardBody(event: Model) -> some View {
         VStack {
             HStack {
                 loadedImageView(with: URL(string: event.icon))
@@ -46,25 +71,25 @@ private extension Views.EventCardView {
     
     func loadedImageView(with urlImage: URL?) -> some View {
         KFImageView(url: urlImage)
-            .frame(width: 120, height: 120, alignment: .center)
+            .frame(width: Const.imageFrame, height: Const.imageFrame, alignment: .center)
     }
     
     func eventDateInfo(startTimeText: String, endTimeText: String, dayText: String) -> some View {
-        VStack(alignment: .center, spacing: 6) {
+        VStack(alignment: .center, spacing: Const.eventDateInfoSpacing) {
             dateOfEventView(with: dayText)
             timeOfEventView(startDateText: startTimeText, endDateText: endTimeText)
         }
     }
     
     func mapInfoView(with mapName: String, and eventName: String) -> some View {
-        VStack(alignment: .center, spacing: 6) {
+        VStack(alignment: .center, spacing: Const.mapInfoViewSpacing) {
             nameMapView(with: mapName)
             nameEventView(with: eventName)
         }
     }
     
     func timeOfEventView(startDateText: String, endDateText: String) -> some View {
-        HStack(alignment: .center, spacing: 10) {
+        HStack(alignment: .center, spacing: Const.timeOfEventSpacing) {
             Text(startDateText)
             Text("-")
             Text(endDateText)
@@ -77,11 +102,11 @@ private extension Views.EventCardView {
     
     func nameMapView(with text: String) -> some View {
         Text(text)
-            .font(.system(size: 18))
+            .font(.system(size: Const.Font.nameMapFontSize))
     }
     
     func nameEventView(with text: String) -> some View {
         Text(text)
-            .font(.system(size: 16))
+            .font(.system(size: Const.Font.nameEventFontSize))
     }
 }

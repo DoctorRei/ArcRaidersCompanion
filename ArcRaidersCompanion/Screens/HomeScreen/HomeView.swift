@@ -10,14 +10,24 @@ import SwiftUI
 struct HomeView: View {
     @ObservedObject var viewModel: HomeView.ViewModel
     
+    init(viewModel: HomeView.ViewModel) {
+        self.viewModel = viewModel
+        getEvents()
+    }
+    
     var body: some View {
-        pickerView()
-            .padding(.horizontal)
         content()
-            .task {
-                await viewModel.getEvents()
-            }
             .toolbar(.hidden, for: .navigationBar)
+    }
+}
+
+private extension HomeView {
+    func content() -> some View {
+        VStack {
+            pickerView()
+                .padding(.horizontal)
+            cards()
+        }
     }
     
     func pickerView() -> some View {
@@ -30,7 +40,7 @@ struct HomeView: View {
     }
     
     @ViewBuilder
-    func content() -> some View {
+    func cards() -> some View {
         ScrollView {
             LazyVStack {
                 switch viewModel.selectedPickerTab {
@@ -48,6 +58,14 @@ struct HomeView: View {
                     }
                 }
             }
+        }
+    }
+}
+
+private extension HomeView {
+    func getEvents() {
+        Task {
+            await viewModel.getEvents()
         }
     }
 }

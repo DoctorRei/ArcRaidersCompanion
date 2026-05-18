@@ -2,19 +2,21 @@
 //  ActivityIndicator.swift
 //  ArcRaidersCompanion
 //
-//  Created by Akira Rei on 27.03.2026.
+//  Created by Akira Rei on 26.04.2026.
 //
 
 import SwiftUI
 
 extension Views {
     struct ActivityIndicator: View {
-        var isActive: Bool
+        private enum Const {
+            static let scaleEffect: CGFloat = 1.5
+        }
 
         var body: some View {
-            Circle()
-                .frame(width: 14, height: 14)
-                .foregroundStyle(isActive ? .yellow : .red)
+            ProgressView()
+                .progressViewStyle(CircularProgressViewStyle(tint: .gray))
+                .scaleEffect(Const.scaleEffect)
         }
     }
 }
