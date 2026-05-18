@@ -39,7 +39,11 @@ struct SelectedItemView: View {
                     title: viewModel.item?.name ?? Const.Strings.loading,
                     backAction: {
                         viewModel.navigateBack()
+                    },
+                    favoriteButton: .init(isFavorite: $viewModel.isFavorite, action: {
+                        viewModel.favoriteButtonPressed()
                     })
+                )
             )
         )
         if viewModel.isLoading || viewModel.item == nil {

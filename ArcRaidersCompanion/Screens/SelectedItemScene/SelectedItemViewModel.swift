@@ -24,6 +24,7 @@ extension SelectedItemView {
 
         @Published var item: SearchItemView.ViewModel.FoundedItem.Item?
         @Published var isLoading = false
+        @Published var isFavorite = false
 
         init(
             coordinator: SelectedItemNavigateProtocol? = nil,
@@ -35,7 +36,9 @@ extension SelectedItemView {
             switch navigateWith {
             case .itemData(let item):
                 self.item = item
+                print("navigate with itemData")
             case .id(let id):
+                print("navigate with id")
                 Task {
                     await loadItem(id: id)
                 }
@@ -86,6 +89,12 @@ extension SelectedItemView.ViewModel {
         await MainActor.run { isLoading = true }
         do {
             let networkItem = try await networkManager.fetchItem(id: id)
+            let favoriteItem = coreDataManager.fetchItem(for: networkItem.id)
+            print("Favorite item get -> \(favoriteItem?.id), networkItem -> \(networkItem.id)")
+            if let _ = favoriteItem?.id {
+                self.isFavorite = true
+            }
+            print("load item isFavorite \(isFavorite)")
             let convertedItem = SearchItemView.ViewModel.FoundedItem.Item(data: networkItem)
             await MainActor.run {
                 self.item = convertedItem
@@ -94,6 +103,20 @@ extension SelectedItemView.ViewModel {
         } catch {
             await MainActor.run { isLoading = false }
             print("Error loading item: \(error)")
+        }
+    }
+    
+    func favoriteButtonPressed() {
+        guard let item else { return }
+        print("Pressed favorite Button \(isFavorite)")
+        switch isFavorite {
+        case true:
+            coreDataManager.createItem(id: item.id, name: item.name, icon: item.icon)
+            print("Create item \(item)")
+            
+        case false:
+            coreDataManager.deleteItem(with: item.id)
+            print("Delete Item")
         }
     }
     
