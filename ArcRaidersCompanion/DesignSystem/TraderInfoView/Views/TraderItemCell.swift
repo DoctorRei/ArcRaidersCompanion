@@ -14,9 +14,26 @@ extension Views.TraderInfoView {
             static let valuePrefix: String = "Value: "
             static let pricePrefix: String = "Trader price: "
         }
+        
+        struct ItemCoreData {
+            var id: String
+            var name: String
+            var icon: String
+            var isSelected: Bool
+        }
 
         @State private var isFavoriteCell = false
         var itemModel: TradersView.ViewModel.TraderItemModel
+        var completion: (ItemCoreData) -> Void
+        
+        init(
+            itemModel: TradersView.ViewModel.TraderItemModel,
+            completion: @escaping (ItemCoreData) -> Void
+        ) {
+            self.itemModel = itemModel
+            self.isFavoriteCell = itemModel.isFavorite
+            self.completion = completion
+        }
 
         var body: some View {
             content()
@@ -28,15 +45,14 @@ extension Views.TraderInfoView {
             HStack(spacing: 12) {
                 itemIcon()
                     .frame(width: Const.iconFrame, height: Const.iconFrame)
-
                 VStack(alignment: .leading, spacing: 4) {
                     HStack {
                         Text(itemModel.name)
                             .font(.headline)
                             .foregroundColor(.primary)
                         Spacer()
-                        Views.StarButton(isSelected: $isFavoriteCell) {
-                            print("Star Selected")
+                        Views.StarButton(configuration: .cell, isSelected: $isFavoriteCell) {
+                            completion(.init(id: itemModel.id, name: itemModel.name, icon: itemModel.icon, isSelected: isFavoriteCell))
                         }
                     }
 

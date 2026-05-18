@@ -37,17 +37,25 @@ extension Views.CustomNavigationBar {
     
     // MARK: - Title Configuration
     struct TitleConfiguration {
+        struct Favorites {
+            let isFavorite: Binding<Bool>
+            let action: (() -> Void)
+        }
+        
         let title: String
         let backAction: (() -> Void)?
+        let favoriteButton: Favorites?
         var isLoading: Bool = false
 
         init(
             title: String,
             backAction: (() -> Void)? = nil,
+            favoriteButton: Favorites? = nil,
             isLoading: Bool = false
         ) {
             self.title = title
             self.backAction = backAction
+            self.favoriteButton = favoriteButton
             self.isLoading = isLoading
         }
     }

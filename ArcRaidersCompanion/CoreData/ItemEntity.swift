@@ -12,6 +12,8 @@ import CoreData
 public class Item: NSManagedObject {
     // Объявляем свойство, которое Core Data будет управлять
     @NSManaged public var id: String
+    @NSManaged public var name: String
+    @NSManaged public var icon: String
 }
 
 // Добавляем удобные методы для работы
@@ -22,11 +24,13 @@ extension Item {
     }
     
     // Удобный инициализатор
-    convenience init(context: NSManagedObjectContext, id: String) {
+    convenience init(context: NSManagedObjectContext, id: String, name: String, icon: String) {
         guard let entity = NSEntityDescription.entity(forEntityName: "Item", in: context) else {
             fatalError("Entity Item not found in model")
         }
         self.init(entity: entity, insertInto: context)
         self.id = id
+        self.name = name
+        self.icon = icon
     }
 }

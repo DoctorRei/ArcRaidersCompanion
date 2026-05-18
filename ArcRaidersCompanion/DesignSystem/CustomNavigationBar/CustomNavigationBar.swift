@@ -18,8 +18,26 @@ extension Views {
 
             static let chevronImage: String = "chevron.left"
         }
+        @Binding private var isFavorite: Bool
+
         let navigationBarStyle: NavigationBarStyle
-        var showBackButton: Bool = true
+        var showBackButton: Bool
+        
+        init(navigationBarStyle: NavigationBarStyle, showBackButton: Bool = true) {
+            self.navigationBarStyle = navigationBarStyle
+            self.showBackButton = showBackButton
+            
+            switch navigationBarStyle {
+            case .search:
+                self._isFavorite = .constant(false)
+            case .title(let titleConfiguration):
+                if let favoriteButton = titleConfiguration.favoriteButton {
+                    self._isFavorite = favoriteButton.isFavorite
+                } else {
+                    self._isFavorite = .constant(false)
+                }
+            }
+        }
         
         // MARK: - Body
         var body: some View {
@@ -69,6 +87,10 @@ extension Views {
                 if config.isLoading {
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                        .padding(.trailing)
+                }
+                if let favoriteButton = config.favoriteButton {
+                    Views.StarButton(configuration: .navBar, isSelected: $isFavorite, action: favoriteButton.action)
                         .padding(.trailing)
                 }
             }

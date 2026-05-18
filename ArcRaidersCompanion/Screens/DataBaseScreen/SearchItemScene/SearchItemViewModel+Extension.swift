@@ -30,7 +30,7 @@ extension SearchItemView.ViewModel {
             let ammoType: String?
             let locations: [Location]
             let guideLinks: [GuideLink]
-            let gameAssetId: Int
+            let gameAssetId: Int?
             
             init(data: NetworkManager.Model.DataModels.ItemsData.Item) {
                 self.id = data.id

@@ -9,13 +9,17 @@ import Foundation
 import SwiftUI
 
 extension TradersView.ViewModel {
-    struct TraderModel: Identifiable {
+    struct TraderModel: Identifiable, Equatable {
         let id: String
         let name: String
-        let items: [TraderItemModel]
+        var items: [TraderItemModel]
+        
+        var stableId: String {
+            "\(id)-\(items.map { $0.isFavorite })"
+        }
     }
 
-    struct TraderItemModel: Identifiable {
+    struct TraderItemModel: Identifiable, Equatable {
         let id: String
         let icon: String
         let name: String
@@ -24,6 +28,8 @@ extension TradersView.ViewModel {
         let itemType: String
         let description: String
         let traderPrice: Int
+
+        var isFavorite: Bool = false
     }
 
     enum Rarity: String, CaseIterable {
@@ -45,7 +51,7 @@ extension TradersView.ViewModel {
 
         var color: Color {
             switch self {
-            case .common: return .white
+            case .common: return .gray.opacity(0.4)
             case .uncommon: return .green.opacity(0.4)
             case .rare: return .blue.opacity(0.4)
             case .epic: return .purple.opacity(0.4)

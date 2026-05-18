@@ -35,13 +35,16 @@ struct TradersView: View {
         ScrollView {
             content()
         }
+        .onAppear() {
+            viewModel.updateFavoriteItems()
+        }
     }
 }
 
 private extension TradersView {
     func content() -> some View {
         LazyVStack {
-            ForEach(viewModel.traders) { trader in
+            ForEach(viewModel.traders, id: \.stableId) { trader in
                 traderCell(for: trader)
             }
         }
@@ -93,10 +96,19 @@ private extension TradersView {
     func traderItemsList(items: [ViewModel.TraderItemModel]) -> some View {
         LazyVStack(spacing: 2) {
             ForEach(items) { item in
-                Views.TraderInfoView.TraderItemCell(itemModel: item)
-                    .onTapGesture {
-                        viewModel.showItemDetails(id: item.id)
-                    }
+                Views.TraderInfoView.TraderItemCell(itemModel: item) { itemModel in
+                    viewModel.favoriteButtonPressed(
+                        for: .init(
+                            id: itemModel.id,
+                            name: itemModel.name,
+                            icon: itemModel.icon,
+                            isSelected: itemModel.isSelected
+                        )
+                    )
+                }
+                .onTapGesture {
+                    viewModel.showItemDetails(id: item.id)
+                }
             }
         }
         .padding(6)
