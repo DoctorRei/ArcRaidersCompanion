@@ -14,8 +14,9 @@ struct SearchItemView: View {
         static let animationDuration: CGFloat = 0.15
         static let chevronLeftFrame: CGFloat = 44
         static let chevronBackGroundFrame: CGFloat = 36
-
-        static let chevronImage: String = "chevron.left"
+        
+        static let errorMessage: String = "Sorry, but we not found your item"
+        static let greetingsMessage: String = "Use text field to find your item"
     }
     @ObservedObject var viewModel: ViewModel
     
@@ -62,32 +63,30 @@ extension SearchItemView {
         case (false, true):
             loader()
         case (true, false):
-            Text("Sorry, but we not found your item")
+            Text(Const.errorMessage)
         case (false, false):
-            listOfItems()
+            mainContent()
         case (true, true):
-            Text("Sorry, but we not found your item")
+            Text(Const.errorMessage)
         }
     }
     
-    func backButton() -> some View {
-        Button {
-            navigateBack()
-        } label: {
-            Image(systemName: Const.chevronImage)
-                .foregroundColor(.black)
-                .frame(width: Const.chevronLeftFrame, height: Const.chevronLeftFrame)
-                .background(
-                    Circle()
-                        .foregroundStyle(.white)
-                        .frame(width: Const.chevronBackGroundFrame, height: Const.chevronBackGroundFrame)
-                )
-                .contentShape(Rectangle())
+    @ViewBuilder
+    func mainContent() -> some View {
+        switch viewModel.foundedMiniItems.isEmpty {
+        case true:
+            greetingsView()
+        case false:
+            listOfItems()
         }
     }
     
     func loader() -> some View {
         Views.ActivityIndicator()
+    }
+    
+    func greetingsView() -> some View {
+        Text(Const.greetingsMessage)
     }
     
     func listOfItems() -> some View {

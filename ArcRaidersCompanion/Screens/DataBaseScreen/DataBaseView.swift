@@ -15,8 +15,6 @@ struct DataBaseView: View {
             switch item {
             case .arcs:
                 viewModel.showArcsScene()
-            case .quests:
-                print("1")
             case .items:
                 viewModel.showSearchItemScene()
             case .traders:

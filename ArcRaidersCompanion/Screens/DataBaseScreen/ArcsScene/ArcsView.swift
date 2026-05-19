@@ -96,7 +96,8 @@ extension ArcsView {
         Views.ArcInfoView.ArcPreviewCell(
             text: type.rawValue,
             frameWidth: Const.imageFrame,
-            frameHeight: Const.imageFrame
+            frameHeight: Const.imageFrame,
+            uiImage: type.image
         )
     }
 }

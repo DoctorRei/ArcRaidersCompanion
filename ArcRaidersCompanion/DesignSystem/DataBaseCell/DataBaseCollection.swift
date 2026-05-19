@@ -11,14 +11,12 @@ extension Views {
     struct DataBaseCollection: View {
         private enum Const {
             static let arcsTitle: String = "Arcs"
-            static let questsTitle: String = "Quests"
             static let itemsTitle: String = "Items"
             static let tradersTitle: String = "Traders"
         }
         
         enum ItemType: Hashable {
             case arcs
-            case quests
             case items
             case traders
             
@@ -26,8 +24,6 @@ extension Views {
                 switch self {
                 case .arcs:
                         .arcs
-                case .quests:
-                        .quests
                 case .items:
                         .items
                 case .traders:
@@ -39,8 +35,6 @@ extension Views {
                 switch self {
                 case .arcs:
                     Const.arcsTitle
-                case .quests:
-                    Const.questsTitle
                 case .items:
                     Const.itemsTitle
                 case .traders:
@@ -49,7 +43,7 @@ extension Views {
             }
         }
         
-        private let itemsTypes: [ItemType] = [.arcs, .items, .quests, .traders]
+        private let itemsTypes: [ItemType] = [.arcs, .items, .traders]
         let typeSelected: (ItemType) -> Void
         
         var body: some View {
