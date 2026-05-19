@@ -89,14 +89,17 @@ extension ArcsView {
                 image: model.image,
                 loot: model.loot
             )
-        )
+        ) { id in
+            viewModel.navigateToSelectedItemScene(with: id)
+        }
     }
     
     func arcPreviewCell(type: ViewModel.ArcModel.EnemyType) -> some View {
         Views.ArcInfoView.ArcPreviewCell(
             text: type.rawValue,
             frameWidth: Const.imageFrame,
-            frameHeight: Const.imageFrame
+            frameHeight: Const.imageFrame,
+            uiImage: type.image
         )
     }
 }

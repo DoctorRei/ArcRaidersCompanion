@@ -1,5 +1,5 @@
 //
-//  SearchBarView.swift
+//  SearchTextView.swift
 //  ArcRaidersCompanion
 //
 //  Created by Akira Rei on 11.04.2026.

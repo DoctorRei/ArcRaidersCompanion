@@ -9,10 +9,15 @@ import SwiftUI
 
 extension Views.ArcInfoView {
     struct ArcPreviewCell: View {
+        enum Const {
+            static let borderWidth: CGFloat = 3
+        }
+        
         var icon: String?
         var text: String
         var frameWidth: CGFloat
         var frameHeight: CGFloat
+        var uiImage: UIImage?
         
         var body: some View {
             content()
@@ -23,7 +28,7 @@ extension Views.ArcInfoView {
                 HStack {
                     image()
                         .frame(width: frameWidth, height: frameHeight)
-                        .padding(.horizontal)
+                        .padding()
                     Text(text)
                         .frame(maxWidth: .infinity)
                 }
@@ -34,9 +39,21 @@ extension Views.ArcInfoView {
         func image() -> some View {
             if let icon {
                 KFImageView(url: URL(string: icon))
+            } else if let uiImage {
+                imageWithBorder(image: uiImage)
             } else {
                 Image(systemName: icon ?? "heart.fill")
             }
+        }
+        
+        func imageWithBorder(image: UIImage) -> some View {
+            Image(uiImage: image)
+                .resizable()
+                .clipShape(.circle)
+                .overlay(
+                    Circle()
+                        .stroke(Color.white, lineWidth: Const.borderWidth)
+                )
         }
     }
 }

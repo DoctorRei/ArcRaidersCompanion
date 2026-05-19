@@ -10,6 +10,7 @@ import Combine
 
 protocol ArcsCoordinatorProtocol: AnyObject {
     func navigateBack()
+    func showItemDetails(id: String)
 }
 
 extension ArcsView {
@@ -65,5 +66,9 @@ extension ArcsView.ViewModel: ArcsView.ViewModelProtocol {
 extension ArcsView.ViewModel {
     func navigateBack() {
         coordinator?.navigateBack()
+    }
+    
+    func navigateToSelectedItemScene(with id: String) {
+        coordinator?.showItemDetails(id: id)
     }
 }
