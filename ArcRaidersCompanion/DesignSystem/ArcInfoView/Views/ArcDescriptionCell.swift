@@ -23,6 +23,7 @@ extension Views.ArcInfoView {
         
         @State private var isExpanded = false
         var arcModel: Models.ArcModel
+        var completion: (String) -> Void
         
         var body: some View {
             content()
@@ -65,6 +66,7 @@ extension Views.ArcInfoView {
                     Text(Const.lootString)
                     Views.ArcInfoView.ArcLootList(lootList: arcModel.loot) { item in
                         // TODO: - Navigation to another scene
+                        completion(item.id)
                     }
                 }
             }

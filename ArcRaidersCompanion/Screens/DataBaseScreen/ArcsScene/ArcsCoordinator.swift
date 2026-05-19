@@ -26,6 +26,12 @@ private extension ArcsCoordinator {
 }
 
 extension ArcsCoordinator: ArcsCoordinatorProtocol {
+    func showItemDetails(id: String) {
+        let coordinator = SelectedItemCoordinator(presenter: presenter, navigateWith: .id(id))
+        coordinator.start()
+        store(coordinator: coordinator)
+    }
+    
     func navigateBack() {
         presenter.popViewController(animated: true)
     }
