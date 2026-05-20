@@ -9,6 +9,7 @@ import Combine
 // TODO: - научиться ебашить отдельно модельки и отдельно вьюхи
 import DesignSystem
 import NetworkManager
+import CoreDataStore
 import Foundation
 
 protocol TradersCoordinatorProtocol: AnyObject {

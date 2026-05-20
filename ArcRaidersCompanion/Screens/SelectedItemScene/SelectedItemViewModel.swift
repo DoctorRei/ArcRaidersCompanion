@@ -9,6 +9,7 @@ import Combine
 // TODO: - Научить возвращать только модели, а не все сразу
 import DesignSystem
 import NetworkManager
+import CoreDataStore
 import Foundation
 
 protocol SelectedItemNavigateProtocol: AnyObject {

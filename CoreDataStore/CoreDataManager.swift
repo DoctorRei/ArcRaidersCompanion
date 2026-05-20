@@ -7,15 +7,15 @@
 
 import CoreData
 
-final class CoreDataManager {
+public class CoreDataManager {
     private let stack: CoreDataStack
     
-    init(stack: CoreDataStack = .shared) {
+    public init(stack: CoreDataStack = .shared) {
         self.stack = stack
     }
     
     // CREATE - создание нового Item
-    func createItem(id: String, name: String, icon: String) {
+    public func createItem(id: String, name: String, icon: String) {
         let item = Item(context: stack.viewContext, id: id, name: name, icon: icon)
         item.id = id
         item.name = name
@@ -23,7 +23,7 @@ final class CoreDataManager {
         stack.save()
     }
     
-    func deleteItem(with id: String) {
+    public func deleteItem(with id: String) {
         guard let item = fetchItem(for: id) else {
             print("Delete Item with id \(id) failed")
             return
@@ -32,7 +32,7 @@ final class CoreDataManager {
         deleteItem(item)
     }
     
-    func fetchItem(for id: String) -> Item? {
+    public func fetchItem(for id: String) -> Item? {
         let request = Item.fetchRequest()
         request.predicate = NSPredicate(format: "id == %@", id)
         request.fetchLimit = 1
@@ -46,7 +46,7 @@ final class CoreDataManager {
     }
     
     // READ - получение всех Item
-    func fetchAllItems() -> [Item] {
+    public func fetchAllItems() -> [Item] {
         let request = Item.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "id", ascending: true)
         request.sortDescriptors = [sortDescriptor]
@@ -60,7 +60,7 @@ final class CoreDataManager {
     }
     
     // UPDATE - обновление имени Item
-    func updateItem(_ item: Item, newId: String) {
+    public func updateItem(_ item: Item, newId: String) {
         item.id = newId
         stack.save()
     }

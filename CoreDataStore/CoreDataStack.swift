@@ -7,8 +7,8 @@
 
 import CoreData
 
-final class CoreDataStack {
-    static let shared = CoreDataStack()
+public class CoreDataStack {
+    public static let shared = CoreDataStack()
     
     let persistentContainer: NSPersistentContainer
     let viewContext: NSManagedObjectContext
