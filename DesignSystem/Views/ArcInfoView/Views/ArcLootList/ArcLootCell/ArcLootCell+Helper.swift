@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension Views.ArcInfoView.Models.ArcModel.ArcLoot.LootItem {
+extension Views.Models.ArcModels.Arc.ArcLoot.LootItem {
     var color: Color {
         switch rarity {
         case .common:

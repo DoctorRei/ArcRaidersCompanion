@@ -23,11 +23,11 @@ extension Views.TraderInfoView {
         }
 
         @State private var isFavoriteCell = false
-        var itemModel: TradersView.ViewModel.TraderItemModel
+        var itemModel: Models.TraderItemModel
         var completion: (ItemCoreData) -> Void
         
         init(
-            itemModel: TradersView.ViewModel.TraderItemModel,
+            itemModel: Models.TraderItemModel,
             completion: @escaping (ItemCoreData) -> Void
         ) {
             self.itemModel = itemModel

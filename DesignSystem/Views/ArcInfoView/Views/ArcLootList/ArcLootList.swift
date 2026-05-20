@@ -9,12 +9,14 @@ import SwiftUI
 
 extension Views.ArcInfoView {
     struct ArcLootList: View {
-        var lootList: [Models.ArcModel.ArcLoot]
-        var completion: (Models.ArcModel.ArcLoot.LootItem) -> Void
+        typealias ArcLoot = Views.Models.ArcModels.Arc.ArcLoot
+        
+        var lootList: [ArcLoot]
+        var completion: (ArcLoot.LootItem) -> Void
         
         init(
-            lootList: [Models.ArcModel.ArcLoot],
-            completion: @escaping (Models.ArcModel.ArcLoot.LootItem) -> Void
+            lootList: [ArcLoot],
+            completion: @escaping (ArcLoot.LootItem) -> Void
         ) {
             self.lootList = lootList.sorted { $0.item.rarity.priority > $1.item.rarity.priority }
             self.completion = completion

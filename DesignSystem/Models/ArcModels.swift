@@ -1,16 +1,18 @@
 //
-//  ArcInfoCell+Model.swift
-//  ArcRaidersCompanion
+//  Models.swift
+//  DesignSystem
 //
-//  Created by Akira Rei on 01.04.2026.
+//  Created by Akira Rei on 20.05.2026.
 //
 
-extension Views.ArcInfoView {
-    enum Models {}
+import Foundation
+
+extension Views.Models {
+    enum ArcModels {}
 }
 
-extension Views.ArcInfoView.Models {
-    struct ArcModel {
+extension Views.Models.ArcModels {
+    struct Arc {
         let id: String
         let name: String
         let description: String
@@ -20,7 +22,7 @@ extension Views.ArcInfoView.Models {
     }
 }
 
-extension Views.ArcInfoView.Models.ArcModel {
+extension Views.Models.ArcModels.Arc {
     struct ArcLoot {
         let id: String
         let item: LootItem
@@ -28,7 +30,7 @@ extension Views.ArcInfoView.Models.ArcModel {
     }
 }
 
-extension Views.ArcInfoView.Models.ArcModel.ArcLoot {
+extension Views.Models.ArcModels.Arc.ArcLoot {
     struct LootItem {
         let id: String
         let icon: String
@@ -38,7 +40,7 @@ extension Views.ArcInfoView.Models.ArcModel.ArcLoot {
     }
 }
 
-extension Views.ArcInfoView.Models.ArcModel.ArcLoot.LootItem {
+extension Views.Models.ArcModels.Arc.ArcLoot.LootItem {
     enum Rarity: String, CaseIterable {
         case common = "Common"
         case uncommon = "Uncommon"

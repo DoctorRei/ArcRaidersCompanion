@@ -118,8 +118,8 @@ extension Views {
             }
         }
 
-        let itemModel: SearchItemView.ViewModel.FoundedItem.Item
-        let selectedType: CellType
+        let itemModel: Models.FoundedItem.Item
+        let selectedType: Models.CellType
 
         var body: some View {
             content()
@@ -198,7 +198,7 @@ extension Views.DescriptionItemCell {
         }
     }
 
-    func statGroupView(group: StatGroup) -> some View {
+    func statGroupView(group: Models.StatGroup) -> some View {
         VStack(alignment: .leading, spacing: Const.Spacing.group) {
             statGroupHeader(group: group)
             statGroupContent(stats: group.stats)
@@ -206,7 +206,7 @@ extension Views.DescriptionItemCell {
         .baseCellStyle()
     }
 
-    func statGroupHeader(group: StatGroup) -> some View {
+    func statGroupHeader(group: Models.StatGroup) -> some View {
         HStack(spacing: Const.Spacing.icon) {
             Text(group.category.icon)
                 .font(Const.Fonts.icon)
@@ -261,7 +261,7 @@ extension Views.DescriptionItemCell {
         .padding(.vertical, Const.Spacing.cellVertical)
     }
 
-    func locationRow(location: SearchItemView.ViewModel.FoundedItem.Location) -> some View {
+    func locationRow(location: Models.FoundedItem.Location) -> some View {
         HStack {
             Image(systemName: Const.Images.map)
                 .foregroundColor(.blue)
@@ -306,7 +306,7 @@ extension Views.DescriptionItemCell {
         .padding(.vertical, Const.Spacing.cellVertical)
     }
 
-    func guideRow(guide: SearchItemView.ViewModel.FoundedItem.GuideLink) -> some View {
+    func guideRow(guide: Models.FoundedItem.GuideLink) -> some View {
         Link(destination: URL(string: guide.url) ?? URL(string: Const.URLs.fallbackURL)!) {
             HStack {
                 Image(systemName: Const.Images.link)
@@ -425,23 +425,23 @@ extension Views.DescriptionItemCell {
             .joined(separator: Const.Format.wordSeparator)
     }
     
-    var groupedStats: [StatGroup] {
+    var groupedStats: [Models.StatGroup] {
         let stats = statsFromReflection
-        var groups: [StatCategory: [(String, String)]] = [:]
+        var groups: [Models.StatCategory: [(String, String)]] = [:]
         
         for stat in stats {
             let category = categorizeStat(stat.title)
             groups[category, default: []].append((stat.title, stat.value))
         }
         
-        return StatCategory.allCases.compactMap { category in
+        return Models.StatCategory.allCases.compactMap { category in
             guard let stats = groups[category], !stats.isEmpty else { return nil }
-            return StatGroup(category: category, stats: stats)
+            return Models.StatGroup(category: category, stats: stats)
         }
         .filter { !$0.stats.isEmpty }
     }
     
-    private func categorizeStat(_ title: String) -> StatCategory {
+    private func categorizeStat(_ title: String) -> Models.StatCategory {
         let lowercased = title.lowercased()
 
         if Const.StatSearchKeywords.Combat.allCases.contains(where: { lowercased.contains($0.rawValue) }) {

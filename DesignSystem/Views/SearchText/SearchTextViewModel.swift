@@ -14,6 +14,6 @@ extension Views.SearchTextView {
         let name: String
         
         // TODO: - Сделать интернал модель
-        let mainModel: NetworkManager.Model.DataModels.ItemsData.Item
+//        let mainModel: NetworkManager.Model.DataModels.ItemsData.Item
     }
 }

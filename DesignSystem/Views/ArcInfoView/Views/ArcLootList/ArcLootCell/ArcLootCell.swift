@@ -9,7 +9,7 @@ import SwiftUI
 
 extension Views.ArcInfoView.ArcLootList {
     struct ArcLootCell: View {
-        typealias Item = Views.ArcInfoView.Models.ArcModel.ArcLoot.LootItem
+        typealias Item = Views.Models.ArcModels.Arc.ArcLoot.LootItem
         let lootModel: Item
         var completion: (Item) -> Void
 

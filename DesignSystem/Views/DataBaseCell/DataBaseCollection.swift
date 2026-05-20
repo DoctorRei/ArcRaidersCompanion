@@ -23,11 +23,11 @@ extension Views {
             var image: UIImage {
                 switch self {
                 case .arcs:
-                        .arcs
+                        .ArcTypes.arcs
                 case .items:
-                        .items
+                        .ArcTypes.items
                 case .traders:
-                        .traders
+                        .ArcTypes.traders
                 }
             }
             

@@ -7,11 +7,39 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		63897AFC2FBDB23300C6FBD8 /* DesignSystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63897AF42FBDB23300C6FBD8 /* DesignSystem.framework */; };
+		63897AFD2FBDB23300C6FBD8 /* DesignSystem.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 63897AF42FBDB23300C6FBD8 /* DesignSystem.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		63897B272FBDCD4000C6FBD8 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 63897B262FBDCD4000C6FBD8 /* Kingfisher */; };
 		63CE3A942F460085001FDB65 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 63CE3A932F460085001FDB65 /* Moya */; };
 		63CE3C9D2F6AED0F001FDB65 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 63CE3C9C2F6AED0F001FDB65 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		63897AFA2FBDB23300C6FBD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 63ECED3D2F45056A000318EE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 63897AF32FBDB23300C6FBD8;
+			remoteInfo = DesignSystem;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		63897B012FBDB23300C6FBD8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				63897AFD2FBDB23300C6FBD8 /* DesignSystem.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		63897AF42FBDB23300C6FBD8 /* DesignSystem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DesignSystem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63ECED452F45056A000318EE /* ArcRaidersCompanion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArcRaidersCompanion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -26,6 +54,11 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		63897AF52FBDB23300C6FBD8 /* DesignSystem */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
 		63ECED472F45056A000318EE /* ArcRaidersCompanion */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -37,10 +70,19 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		63897AF12FBDB23300C6FBD8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				63897B272FBDCD4000C6FBD8 /* Kingfisher in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		63ECED422F45056A000318EE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63897AFC2FBDB23300C6FBD8 /* DesignSystem.framework in Frameworks */,
 				63CE3C9D2F6AED0F001FDB65 /* Kingfisher in Frameworks */,
 				63CE3A942F460085001FDB65 /* Moya in Frameworks */,
 			);
@@ -49,10 +91,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		63897B252FBDCD4000C6FBD8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		63ECED3C2F45056A000318EE = {
 			isa = PBXGroup;
 			children = (
 				63ECED472F45056A000318EE /* ArcRaidersCompanion */,
+				63897AF52FBDB23300C6FBD8 /* DesignSystem */,
+				63897B252FBDCD4000C6FBD8 /* Frameworks */,
 				63ECED462F45056A000318EE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -61,13 +112,48 @@
 			isa = PBXGroup;
 			children = (
 				63ECED452F45056A000318EE /* ArcRaidersCompanion.app */,
+				63897AF42FBDB23300C6FBD8 /* DesignSystem.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		63897AEF2FBDB23300C6FBD8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		63897AF32FBDB23300C6FBD8 /* DesignSystem */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 63897AFE2FBDB23300C6FBD8 /* Build configuration list for PBXNativeTarget "DesignSystem" */;
+			buildPhases = (
+				63897AEF2FBDB23300C6FBD8 /* Headers */,
+				63897AF02FBDB23300C6FBD8 /* Sources */,
+				63897AF12FBDB23300C6FBD8 /* Frameworks */,
+				63897AF22FBDB23300C6FBD8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				63897AF52FBDB23300C6FBD8 /* DesignSystem */,
+			);
+			name = DesignSystem;
+			packageProductDependencies = (
+				63897B262FBDCD4000C6FBD8 /* Kingfisher */,
+			);
+			productName = DesignSystem;
+			productReference = 63897AF42FBDB23300C6FBD8 /* DesignSystem.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		63ECED442F45056A000318EE /* ArcRaidersCompanion */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 63ECED582F45056B000318EE /* Build configuration list for PBXNativeTarget "ArcRaidersCompanion" */;
@@ -75,10 +161,12 @@
 				63ECED412F45056A000318EE /* Sources */,
 				63ECED422F45056A000318EE /* Frameworks */,
 				63ECED432F45056A000318EE /* Resources */,
+				63897B012FBDB23300C6FBD8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				63897AFB2FBDB23300C6FBD8 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				63ECED472F45056A000318EE /* ArcRaidersCompanion */,
@@ -102,6 +190,9 @@
 				LastSwiftUpdateCheck = 2610;
 				LastUpgradeCheck = 2610;
 				TargetAttributes = {
+					63897AF32FBDB23300C6FBD8 = {
+						CreatedOnToolsVersion = 26.1;
+					};
 					63ECED442F45056A000318EE = {
 						CreatedOnToolsVersion = 26.1;
 					};
@@ -126,11 +217,19 @@
 			projectRoot = "";
 			targets = (
 				63ECED442F45056A000318EE /* ArcRaidersCompanion */,
+				63897AF32FBDB23300C6FBD8 /* DesignSystem */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		63897AF22FBDB23300C6FBD8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		63ECED432F45056A000318EE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -141,6 +240,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		63897AF02FBDB23300C6FBD8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		63ECED412F45056A000318EE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -150,7 +256,93 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		63897AFB2FBDB23300C6FBD8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 63897AF32FBDB23300C6FBD8 /* DesignSystem */;
+			targetProxy = 63897AFA2FBDB23300C6FBD8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		63897AFF2FBDB23300C6FBD8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z4JT48W22P;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = AkiraRei.DesignSystem;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		63897B002FBDB23300C6FBD8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z4JT48W22P;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = AkiraRei.DesignSystem;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		63ECED592F45056B000318EE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -349,6 +541,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		63897AFE2FBDB23300C6FBD8 /* Build configuration list for PBXNativeTarget "DesignSystem" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				63897AFF2FBDB23300C6FBD8 /* Debug */,
+				63897B002FBDB23300C6FBD8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		63ECED402F45056A000318EE /* Build configuration list for PBXProject "ArcRaidersCompanion" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -389,6 +590,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		63897B262FBDCD4000C6FBD8 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 63CE3C9B2F6AED0F001FDB65 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		63CE3A932F460085001FDB65 /* Moya */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 63CE3A922F460085001FDB65 /* XCRemoteSwiftPackageReference "Moya" */;

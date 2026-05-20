@@ -22,7 +22,7 @@ extension Views.ArcInfoView {
         }
         
         @State private var isExpanded = false
-        var arcModel: Models.ArcModel
+        var arcModel: Views.Models.ArcModels.Arc
         var completion: (String) -> Void
         
         var body: some View {
