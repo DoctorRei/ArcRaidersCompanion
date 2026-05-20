@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension Views {
-    struct SearchTextView: View {
+    public struct SearchTextView: View {
         @Binding private var searchText: String
         /// Пока не используется
         @Binding private var scrollOffset: CGFloat
@@ -16,7 +16,7 @@ extension Views {
         @State private var debounceTask: Task<Void, Never>?
         let onTextChange: (String) -> Void
         
-        init(searchText: Binding<String>,
+        public init(searchText: Binding<String>,
              scrollOffset: Binding<CGFloat>,
              isFocus: Binding<Bool>,
              onTextChange: @escaping (String) -> Void
@@ -27,7 +27,7 @@ extension Views {
             self.onTextChange = onTextChange
         }
         
-        var body: some View {
+        public var body: some View {
             content()
                 .fixedSize(horizontal: false, vertical: true)
                 .onChange(of: searchText) { newValue in

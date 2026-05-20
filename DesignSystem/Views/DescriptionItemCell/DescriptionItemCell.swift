@@ -7,7 +7,7 @@
 import SwiftUI
 
 extension Views {
-    struct DescriptionItemCell: View {
+    public struct DescriptionItemCell: View {
         private enum Const {
             enum Titles {
                 static let price: String = "Price"
@@ -120,8 +120,13 @@ extension Views {
 
         let itemModel: Models.FoundedItem.Item
         let selectedType: Models.CellType
+        
+        public init(itemModel: Models.FoundedItem.Item, selectedType: Models.CellType) {
+            self.itemModel = itemModel
+            self.selectedType = selectedType
+        }
 
-        var body: some View {
+        public var body: some View {
             content()
         }
     }

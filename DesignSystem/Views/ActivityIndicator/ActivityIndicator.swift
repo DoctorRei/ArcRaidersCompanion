@@ -7,13 +7,15 @@
 
 import SwiftUI
 
-extension Views {
+public extension Views {
     struct ActivityIndicator: View {
         private enum Const {
             static let scaleEffect: CGFloat = 1.5
         }
+        
+        public init() {}
 
-        var body: some View {
+        public var body: some View {
             ProgressView()
                 .progressViewStyle(CircularProgressViewStyle(tint: .gray))
                 .scaleEffect(Const.scaleEffect)

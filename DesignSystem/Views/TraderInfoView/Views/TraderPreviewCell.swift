@@ -8,13 +8,25 @@
 import SwiftUI
 
 extension Views.TraderInfoView {
-    struct TraderPreviewCell: View {
+    public struct TraderPreviewCell: View {
         var icon: String?
         var text: String
         var frameWidth: CGFloat
         var frameHeight: CGFloat
+        
+        public init(
+            icon: String? = nil,
+            text: String,
+            frameWidth: CGFloat,
+            frameHeight: CGFloat
+        ) {
+            self.icon = icon
+            self.text = text
+            self.frameWidth = frameWidth
+            self.frameHeight = frameHeight
+        }
 
-        var body: some View {
+        public var body: some View {
             content()
         }
 
@@ -33,7 +45,7 @@ extension Views.TraderInfoView {
         @ViewBuilder
         func image() -> some View {
             if let icon {
-                KFImageView(url: URL(string: icon))
+                Views.KFImageView(url: URL(string: icon))
             } else {
                 Image(systemName: icon ?? "person.fill")
             }

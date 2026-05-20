@@ -6,16 +6,16 @@
 //
 
 extension NetworkManager {
-    enum Model {}
+    public enum Model {}
 }
 
 extension NetworkManager.Model {
-    enum Response {}
-    enum DataModels {}
+    public enum Response {}
+    public enum DataModels {}
 }
 
 extension NetworkManager.Model.DataModels {
-    enum ArcsData {}
-    enum ItemsData {}
-    enum TradersData {}
+    public enum ArcsData {}
+    public enum ItemsData {}
+    public enum TradersData {}
 }

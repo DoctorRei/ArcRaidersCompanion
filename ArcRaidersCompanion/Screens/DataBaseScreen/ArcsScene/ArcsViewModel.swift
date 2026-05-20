@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import DesignSystem
 import Combine
 
 protocol ArcsCoordinatorProtocol: AnyObject {
@@ -20,7 +21,7 @@ extension ArcsView {
     
     final class ViewModel: ObservableObject {
         typealias ArcEnemy = NetworkManager.Model.DataModels.ArcsData.ARCEnemy
-        typealias ArcModel = Views.ArcInfoView.Models.ArcModel
+        typealias ArcModel = Views.Models.ArcModels.Arc
 
         weak var coordinator: ArcsCoordinatorProtocol?
         private var networkManager = NetworkManager.shared
@@ -48,7 +49,7 @@ extension ArcsView.ViewModel: ArcsView.ViewModelProtocol {
     
     func sortArcsByType(model: [ArcEnemy]) {
         model.forEach { arc in
-            let model = ArcModel(networkArcModel: arc)
+            let model = returnArcModel(model: arc)
             switch arc.type {
             case .ground:
                 groundArcs.append(model)
@@ -61,6 +62,29 @@ extension ArcsView.ViewModel: ArcsView.ViewModelProtocol {
             }
         }
     }
+    
+    private func returnArcModel(model: ArcEnemy) -> ArcModel {
+        return .init(
+            id: model.id,
+            name: model.name,
+            description: model.description,
+            icon: model.icon,
+            image: model.image,
+            loot: model.loot?.map { ArcModel.ArcLoot(id: $0.id, item: returnArcLootItem(for: $0.item), itemId: $0.itemId)} ?? []
+        )
+    }
+    
+    private func returnArcLootItem(for model: NetworkManager.Model.DataModels.ArcsData.LootItem) -> ArcModel.ArcLoot.LootItem {
+        .init(
+            id: model.id ,
+            icon: model.icon,
+            name: model.name,
+            rarity: .init(rawValue: model.rarity) ?? .common,
+            itemType: model.itemType
+        )
+    }
+    
+    
 }
 
 extension ArcsView.ViewModel {

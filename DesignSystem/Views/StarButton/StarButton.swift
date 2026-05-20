@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension Views {
-    struct StarButton: View {
+    public struct StarButton: View {
         private enum Const {
             static let starSizeS: CGFloat = 24
             static let backgroundCircleFrame: CGFloat = 36
@@ -18,8 +18,18 @@ extension Views {
         var configuration: Configuration
         @Binding var isSelected: Bool
         var action: () -> Void
+        
+        public init(
+            configuration: Configuration,
+            isSelected: Binding<Bool>,
+            action: @escaping () -> Void
+        ) {
+            self.configuration = configuration
+            self._isSelected = isSelected
+            self.action = action
+        }
 
-        var body: some View {
+        public var body: some View {
             content()
         }
     }
@@ -56,7 +66,7 @@ extension Views.StarButton {
 }
 
 extension Views.StarButton {
-    enum Configuration {
+    public enum Configuration {
         case cell
         case navBar
     }

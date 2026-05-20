@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension Views {
+public extension Views {
     struct DataBaseCollection: View {
         private enum Const {
             static let arcsTitle: String = "Arcs"
@@ -15,7 +15,7 @@ extension Views {
             static let tradersTitle: String = "Traders"
         }
         
-        enum ItemType: Hashable {
+        public enum ItemType: Hashable {
             case arcs
             case items
             case traders
@@ -44,9 +44,13 @@ extension Views {
         }
         
         private let itemsTypes: [ItemType] = [.arcs, .items, .traders]
-        let typeSelected: (ItemType) -> Void
+        public let typeSelected: (ItemType) -> Void
         
-        var body: some View {
+        public init(typeSelected: @escaping (ItemType) -> Void) {
+            self.typeSelected = typeSelected
+        }
+        
+        public var body: some View {
             content()
         }
         

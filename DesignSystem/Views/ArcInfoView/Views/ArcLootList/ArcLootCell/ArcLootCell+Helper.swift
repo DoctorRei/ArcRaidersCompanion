@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-extension Views.Models.ArcModels.Arc.ArcLoot.LootItem {
-    var color: Color {
+public extension Views.Models.ArcModels.Arc.ArcLoot.LootItem {
+    public var color: Color {
         switch rarity {
         case .common:
                 .gray.opacity(0.4)

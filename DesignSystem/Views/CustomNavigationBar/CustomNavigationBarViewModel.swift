@@ -7,20 +7,20 @@
 
 import SwiftUI
 
-extension Views.CustomNavigationBar {
-    enum NavigationBarStyle {
+public extension Views.CustomNavigationBar {
+    public enum NavigationBarStyle {
         case search(SearchConfiguration)
         case title(TitleConfiguration)
     }
     
-    struct SearchConfiguration {
+    public struct SearchConfiguration {
         let searchText: Binding<String>
         let scrollOffset: Binding<CGFloat>
         let isSearchFocused: Binding<Bool>
         let onTextChange: (String) -> Void
         let backAction: (() -> Void)?
         
-        init(
+        public init(
             searchText: Binding<String>,
             scrollOffset: Binding<CGFloat> = .constant(0),
             isSearchFocused: Binding<Bool>,
@@ -36,10 +36,15 @@ extension Views.CustomNavigationBar {
     }
     
     // MARK: - Title Configuration
-    struct TitleConfiguration {
-        struct Favorites {
+    public struct TitleConfiguration {
+        public struct Favorites {
             let isFavorite: Binding<Bool>
             let action: (() -> Void)
+            
+            public init(isFavorite: Binding<Bool>, action: @escaping () -> Void) {
+                self.isFavorite = isFavorite
+                self.action = action
+            }
         }
         
         let title: String
@@ -47,7 +52,7 @@ extension Views.CustomNavigationBar {
         let favoriteButton: Favorites?
         var isLoading: Bool = false
 
-        init(
+        public init(
             title: String,
             backAction: (() -> Void)? = nil,
             favoriteButton: Favorites? = nil,

@@ -7,18 +7,19 @@
 
 import SwiftUI
 
+// TODO: - Перенести в папку с моделями
 extension Views.TraderInfoView {
-    enum Models {}
+    public enum Models {}
 }
 
 extension Views.TraderInfoView.Models {
-    struct TraderModel {
+    public struct TraderModel {
         let id: String
         let name: String
     }
     
-    struct TraderItemModel: Identifiable, Equatable {
-        let id: String
+    public struct TraderItemModel: Identifiable, Equatable {
+        public let id: String
         let icon: String
         let name: String
         let value: Int
@@ -30,7 +31,7 @@ extension Views.TraderInfoView.Models {
         var isFavorite: Bool = false
     }
 
-    enum Rarity: String, CaseIterable {
+    public enum Rarity: String, CaseIterable {
         case common = "Common"
         case uncommon = "Uncommon"
         case rare = "Rare"

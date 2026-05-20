@@ -7,17 +7,17 @@
 
 import SwiftUI
 
-extension Views {
+public extension Views {
     struct ContainerView<Content: View>: View {
         private let content: Content
         private let color: Color
         
-        init(color: Color = .gray, @ViewBuilder content: () -> Content) {
+        public init(color: Color = .gray, @ViewBuilder content: () -> Content) {
             self.content = content()
             self.color = color
         }
         
-        var body: some View {
+        public var body: some View {
             content
                 .frame(maxWidth: .infinity)
                 .background(color.opacity(0.4))

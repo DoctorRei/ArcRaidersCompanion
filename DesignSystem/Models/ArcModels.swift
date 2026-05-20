@@ -8,40 +8,70 @@
 import Foundation
 
 extension Views.Models {
-    enum ArcModels {}
+    public enum ArcModels {}
 }
 
 extension Views.Models.ArcModels {
-    struct Arc {
-        let id: String
-        let name: String
-        let description: String
-        let icon: String
-        let image: String
-        let loot: [ArcLoot]
+    public struct Arc {
+        public let id: String
+        public let name: String
+        public let description: String
+        public let icon: String
+        public let image: String
+        public let loot: [ArcLoot]
+        
+        public init(
+            id: String,
+            name: String,
+            description: String,
+            icon: String,
+            image: String,
+            loot: [ArcLoot]
+        ) {
+            self.id = id
+            self.name = name
+            self.description = description
+            self.icon = icon
+            self.image = image
+            self.loot = loot
+        }
     }
 }
 
 extension Views.Models.ArcModels.Arc {
-    struct ArcLoot {
-        let id: String
-        let item: LootItem
-        let itemId: String
+    public struct ArcLoot: Identifiable {
+        public let id: String
+        public let item: LootItem
+        public let itemId: String
+        
+        public init(id: String, item: LootItem, itemId: String) {
+            self.id = id
+            self.item = item
+            self.itemId = itemId
+        }
     }
 }
 
 extension Views.Models.ArcModels.Arc.ArcLoot {
-    struct LootItem {
-        let id: String
-        let icon: String
-        let name: String
-        let rarity: Rarity
-        let itemType: String
+    public struct LootItem: Identifiable {
+        public let id: String
+        public let icon: String
+        public let name: String
+        public let rarity: Rarity
+        public let itemType: String
+        
+        public init(id: String, icon: String, name: String, rarity: Rarity, itemType: String) {
+            self.id = id
+            self.icon = icon
+            self.name = name
+            self.rarity = rarity
+            self.itemType = itemType
+        }
     }
 }
 
 extension Views.Models.ArcModels.Arc.ArcLoot.LootItem {
-    enum Rarity: String, CaseIterable {
+    public enum Rarity: String, CaseIterable {
         case common = "Common"
         case uncommon = "Uncommon"
         case rare = "Rare"

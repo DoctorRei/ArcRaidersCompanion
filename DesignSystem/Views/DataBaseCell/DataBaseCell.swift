@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension Views {
+public extension Views {
     struct DataBaseCell: View {
         private enum Const {
             static let navigationTitle: String = "Data Base"
@@ -18,12 +18,12 @@ extension Views {
         private let image: UIImage
         private let text: String
         
-        init(image: UIImage, text: String) {
+        public init(image: UIImage, text: String) {
             self.image = image
             self.text = text
         }
         
-        var body: some View {
+        public var body: some View {
             content()
                 .navigationTitle(Const.navigationTitle)
         }

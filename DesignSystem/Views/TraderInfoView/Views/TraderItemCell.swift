@@ -8,14 +8,14 @@
 import SwiftUI
 
 extension Views.TraderInfoView {
-    struct TraderItemCell: View {
+    public struct TraderItemCell: View {
         private enum Const {
             static let iconFrame: CGFloat = 56
             static let valuePrefix: String = "Value: "
             static let pricePrefix: String = "Trader price: "
         }
         
-        struct ItemCoreData {
+        public struct ItemCoreData {
             var id: String
             var name: String
             var icon: String
@@ -26,7 +26,7 @@ extension Views.TraderInfoView {
         var itemModel: Models.TraderItemModel
         var completion: (ItemCoreData) -> Void
         
-        init(
+        public init(
             itemModel: Models.TraderItemModel,
             completion: @escaping (ItemCoreData) -> Void
         ) {
@@ -35,7 +35,7 @@ extension Views.TraderInfoView {
             self.completion = completion
         }
 
-        var body: some View {
+        public var body: some View {
             content()
                 .background(itemModel.rarity.color)
                 .cornerRadius(8)
@@ -80,7 +80,7 @@ extension Views.TraderInfoView {
         @ViewBuilder
         func itemIcon() -> some View {
             if let url = URL(string: itemModel.icon) {
-                KFImageView(url: url)
+                Views.KFImageView(url: url)
             } else {
                 Image(systemName: "questionmark.circle")
                     .foregroundColor(.gray)

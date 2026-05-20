@@ -6,5 +6,5 @@
 //
 
 extension Views {
-    enum TraderInfoView {}
+    public enum TraderInfoView {}
 }

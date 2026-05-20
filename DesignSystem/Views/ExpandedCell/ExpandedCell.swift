@@ -8,8 +8,8 @@
 import SwiftUI
 
 extension Views {
-    struct ExpandedCell<Header: View, Content: View>: View {
-        enum Spacing {
+    public struct ExpandedCell<Header: View, Content: View>: View {
+        public enum Spacing {
             case none
             case small
             case medium
@@ -34,7 +34,7 @@ extension Views {
         let cellContent: Content
         let isExpanded: Binding<Bool>
         
-        init(isExpanded: Binding<Bool>,
+        public init(isExpanded: Binding<Bool>,
              spacing: Spacing,
              @ViewBuilder header: () -> Header,
              @ViewBuilder content: () -> Content) {
@@ -44,7 +44,7 @@ extension Views {
             self.spacing = spacing.padding
         }
         
-        var body: some View {
+        public var body: some View {
             content()
         }
         

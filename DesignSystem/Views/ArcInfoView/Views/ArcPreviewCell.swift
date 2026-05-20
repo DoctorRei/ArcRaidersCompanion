@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension Views.ArcInfoView {
+public extension Views.ArcInfoView {
     struct ArcPreviewCell: View {
         enum Const {
             static let borderWidth: CGFloat = 3
@@ -19,7 +19,21 @@ extension Views.ArcInfoView {
         var frameHeight: CGFloat
         var uiImage: UIImage?
         
-        var body: some View {
+        public init(
+            icon: String? = nil,
+            text: String,
+            frameWidth: CGFloat,
+            frameHeight: CGFloat,
+            uiImage: UIImage? = nil
+        ) {
+            self.icon = icon
+            self.text = text
+            self.frameWidth = frameWidth
+            self.frameHeight = frameHeight
+            self.uiImage = uiImage
+        }
+        
+        public var body: some View {
             content()
         }
         
@@ -38,7 +52,7 @@ extension Views.ArcInfoView {
         @ViewBuilder
         func image() -> some View {
             if let icon {
-                KFImageView(url: URL(string: icon))
+                Views.KFImageView(url: URL(string: icon))
             } else if let uiImage {
                 imageWithBorder(image: uiImage)
             } else {

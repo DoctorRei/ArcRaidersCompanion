@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension Views {
+public extension Views {
     struct CustomNavigationBar: View {
         private enum Const {
             static let textFieldPadding: CGFloat = 16
@@ -23,7 +23,7 @@ extension Views {
         let navigationBarStyle: NavigationBarStyle
         var showBackButton: Bool
         
-        init(navigationBarStyle: NavigationBarStyle, showBackButton: Bool = true) {
+        public init(navigationBarStyle: NavigationBarStyle, showBackButton: Bool = true) {
             self.navigationBarStyle = navigationBarStyle
             self.showBackButton = showBackButton
             
@@ -40,7 +40,7 @@ extension Views {
         }
         
         // MARK: - Body
-        var body: some View {
+        public var body: some View {
             content()
         }
         

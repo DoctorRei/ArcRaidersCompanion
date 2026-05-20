@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension Views.ArcInfoView {
+public extension Views.ArcInfoView {
     struct ArcDescriptionCell: View {
         private enum Const {
             static let arcFullInfoPadding: CGFloat = 26
@@ -25,7 +25,17 @@ extension Views.ArcInfoView {
         var arcModel: Views.Models.ArcModels.Arc
         var completion: (String) -> Void
         
-        var body: some View {
+        public init(
+            isExpanded: Bool = false,
+            arcModel: Views.Models.ArcModels.Arc,
+            completion: @escaping (String) -> Void
+        ) {
+            self.isExpanded = isExpanded
+            self.arcModel = arcModel
+            self.completion = completion
+        }
+        
+        public var body: some View {
             content()
         }
         
@@ -57,7 +67,7 @@ extension Views.ArcInfoView {
         func arcFullInfo() -> some View {
             Views.ContainerView {
                 VStack {
-                    KFImageView(url: URL(string: arcModel.image), cornerRadius: Const.imageViewCornerRadius)
+                    Views.KFImageView(url: URL(string: arcModel.image), cornerRadius: Const.imageViewCornerRadius)
                         .frame(height: Const.fullImageHeightFrame)
                         .frame(maxWidth: Const.fullImageWidthFrame)
                         .padding()

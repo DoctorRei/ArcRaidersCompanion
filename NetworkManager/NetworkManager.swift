@@ -15,7 +15,7 @@ enum NetworkError: Error {
     case moyaError(MoyaError)
 }
 
-final class NetworkManager {
+open class NetworkManager {
     typealias ItemsResponse = Model.Response.ItemsResponse
     typealias Item = Model.DataModels.ItemsData.Item
     

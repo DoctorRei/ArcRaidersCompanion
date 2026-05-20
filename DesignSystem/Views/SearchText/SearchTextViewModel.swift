@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension Views.SearchTextView {
-    struct ViewModel {
+    public struct ViewModel {
         let id: String
         let image: String
         let name: String

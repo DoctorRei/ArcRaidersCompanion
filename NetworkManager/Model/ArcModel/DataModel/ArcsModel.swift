@@ -8,8 +8,8 @@
 import Foundation
 
 extension NetworkManager.Model.DataModels.ArcsData {
-    struct ARCEnemy: Identifiable, Decodable {
-        let id: String
+    public struct ARCEnemy: Identifiable, Decodable {
+        public let id: String
         let name: String
         let description: String
         let icon: String
@@ -19,7 +19,7 @@ extension NetworkManager.Model.DataModels.ArcsData {
         let loot: [ArcLoot]?
     }
     
-    struct PaginationInfo: Decodable {
+    public struct PaginationInfo: Decodable {
         let page: Int
         let limit: Int
         let total: Int
@@ -28,14 +28,14 @@ extension NetworkManager.Model.DataModels.ArcsData {
         let hasPrevPage: Bool
     }
     
-    struct ArcLoot: Decodable {
+    public struct ArcLoot: Decodable {
         let id: String
         let item: LootItem
         let itemId: String
         let createdAt: String
     }
     
-    struct LootItem: Decodable {
+    public struct LootItem: Decodable {
         let id: String
         let icon: String
         let name: String

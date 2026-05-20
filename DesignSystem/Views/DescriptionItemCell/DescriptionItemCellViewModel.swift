@@ -8,11 +8,11 @@
 import Foundation
 
 extension Views.DescriptionItemCell {
-    enum Models {}
+    public enum Models {}
 }
 
 extension Views.DescriptionItemCell.Models {
-    enum StatCategory: String, CaseIterable {
+    public enum StatCategory: String, CaseIterable {
         case combat = "Combat"
         case mobility = "Mobility"
         case defense = "Defense"
@@ -32,23 +32,28 @@ extension Views.DescriptionItemCell.Models {
         }
     }
     
-    enum CellType {
+    public enum CellType {
         case baseInfo
         case fullInfo
         case locations
         case guides
     }
     
-    struct StatGroup: Identifiable {
-        let id = UUID()
+    public struct StatGroup: Identifiable {
+        public let id = UUID()
         let category: StatCategory
         let stats: [(title: String, value: String)]
+        
+        public init(category: StatCategory, stats: [(title: String, value: String)]) {
+            self.category = category
+            self.stats = stats
+        }
     }
 }
 
 extension Views.DescriptionItemCell.Models {
-    enum FoundedItem {
-        struct Item: Hashable {
+    public enum FoundedItem {
+        public struct Item: Hashable {
             let id: String
             let name: String
             let description: String
@@ -97,7 +102,7 @@ extension Views.DescriptionItemCell.Models {
 //            }
         }
         
-        struct Location: Hashable {
+        public struct Location: Hashable {
             let id: String
             let map: String
             
@@ -109,7 +114,7 @@ extension Views.DescriptionItemCell.Models {
         }
         
         // MARK: - StatBlock
-        struct StatBlock: Hashable {
+        public struct StatBlock: Hashable {
             let range: Double?
             let value: Int?
             let damage: Double?
@@ -230,7 +235,7 @@ extension Views.DescriptionItemCell.Models {
 //            }
         }
         
-        struct GuideLink: Hashable {
+        public struct GuideLink: Hashable {
             let url: String
             let label: String
             
@@ -241,7 +246,7 @@ extension Views.DescriptionItemCell.Models {
 //            }
         }
         
-        struct Pagination: Hashable {
+        public struct Pagination: Hashable {
             let page: Int
             let limit: Int
             let total: Int

@@ -9,7 +9,7 @@ import SwiftUI
 import Kingfisher
 
 extension Views {
-    struct EventCardView: View {
+    public struct EventCardView: View {
         private enum Const {
             static let imageFrame: CGFloat = 124
             static let eventDateInfoSpacing: CGFloat = 6
@@ -22,21 +22,45 @@ extension Views {
             }
         }
         
-        struct Model {
-            var isActive: Bool
-            var name: String
-            var map: String
-            var icon: String
+        public struct Model {
+            public var isActive: Bool
+            public var name: String
+            public var map: String
+            public var icon: String
+
+            public var formattedStartTime: String
+            public var formattedEndTime: String
+            public var formattedDateTime: String
+            public var id: String
             
-            var formattedStartTime: String
-            var formattedEndTime: String
-            var formattedDateTime: String
-            var id: String
+            public init(
+                isActive: Bool,
+                name: String,
+                map: String,
+                icon: String,
+                formattedStartTime: String,
+                formattedEndTime: String,
+                formattedDateTime: String,
+                id: String
+            ) {
+                self.isActive = isActive
+                self.name = name
+                self.map = map
+                self.icon = icon
+                self.formattedStartTime = formattedStartTime
+                self.formattedEndTime = formattedEndTime
+                self.formattedDateTime = formattedDateTime
+                self.id = id
+            }
         }
         
         let event: Model
         
-        var body: some View {
+        public init(event: Model) {
+            self.event = event
+        }
+        
+        public var body: some View {
             content()
         }
     }
@@ -70,7 +94,7 @@ private extension Views.EventCardView {
     }
     
     func loadedImageView(with urlImage: URL?) -> some View {
-        KFImageView(url: urlImage)
+        Views.KFImageView(url: urlImage)
             .frame(width: Const.imageFrame, height: Const.imageFrame, alignment: .center)
     }
     

@@ -8,14 +8,18 @@
 import SwiftUI
 
 extension Views {
-    struct EventIsActiveIndicator: View {
+    public struct EventIsActiveIndicator: View {
         private enum Const {
             static let frame: CGFloat = 14
         }
         
+        public init(isActive: Bool) {
+            self.isActive = isActive
+        }
+        
         var isActive: Bool
 
-        var body: some View {
+        public var body: some View {
             Circle()
                 .frame(width: Const.frame, height: Const.frame)
                 .foregroundStyle(isActive ? .yellow : .red)

@@ -8,53 +8,55 @@
 import SwiftUI
 import Kingfisher
 
-struct KFImageView: View {
-    private let url: URL?
-    private var placeholder: AnyView?
-    private var errorView: AnyView?
-    private var configuration: KingfisherOptionsInfo?
-    private var cornerRadius: CGFloat = 0
-    
-    init(url: URL?,
-         placeholder: AnyView? = nil,
-         errorView: AnyView? = nil,
-         configuration: KingfisherOptionsInfo? = nil,
-         cornerRadius: CGFloat = 0) {
-        self.url = url
-        self.placeholder = placeholder
-        self.errorView = errorView
-        self.configuration = configuration
-        self.cornerRadius = cornerRadius
-    }
-    
-    var body: some View {
-        Group {
-            if let url = url {
-                KFImage.url(url, cacheKey: nil)
-                    .setProcessor(DefaultImageProcessor.default)
-                    .loadDiskFileSynchronously(false)
-                    .cacheMemoryOnly(false)
-                    .fade(duration: 0.25)
-                    .forceTransition(true)
-                    .placeholder { _ in
-                        placeholder ?? AnyView(
-                            ProgressView()
-                                .progressViewStyle(CircularProgressViewStyle())
-                        )
-                    }
-                    .onFailure { error in
-                        print("Failed to load image: \(error.localizedDescription)")
-                    }
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-            } else {
-                placeholder ?? AnyView(
-                    Image(systemName: "photo")
+extension Views {
+    public struct KFImageView: View {
+        private let url: URL?
+        private var placeholder: AnyView?
+        private var errorView: AnyView?
+        private var configuration: KingfisherOptionsInfo?
+        private var cornerRadius: CGFloat = 0
+        
+        public init(url: URL?,
+             placeholder: AnyView? = nil,
+             errorView: AnyView? = nil,
+             configuration: KingfisherOptionsInfo? = nil,
+             cornerRadius: CGFloat = 0) {
+            self.url = url
+            self.placeholder = placeholder
+            self.errorView = errorView
+            self.configuration = configuration
+            self.cornerRadius = cornerRadius
+        }
+        
+        public var body: some View {
+            Group {
+                if let url = url {
+                    KFImage.url(url, cacheKey: nil)
+                        .setProcessor(DefaultImageProcessor.default)
+                        .loadDiskFileSynchronously(false)
+                        .cacheMemoryOnly(false)
+                        .fade(duration: 0.25)
+                        .forceTransition(true)
+                        .placeholder { _ in
+                            placeholder ?? AnyView(
+                                ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle())
+                            )
+                        }
+                        .onFailure { error in
+                            print("Failed to load image: \(error.localizedDescription)")
+                        }
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .foregroundColor(.gray)
-                )
+                        .aspectRatio(contentMode: .fill)
+                        .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+                } else {
+                    placeholder ?? AnyView(
+                        Image(systemName: "photo")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .foregroundColor(.gray)
+                    )
+                }
             }
         }
     }

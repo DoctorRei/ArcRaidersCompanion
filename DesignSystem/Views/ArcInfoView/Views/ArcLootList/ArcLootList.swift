@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-extension Views.ArcInfoView {
+public extension Views.ArcInfoView {
     struct ArcLootList: View {
-        typealias ArcLoot = Views.Models.ArcModels.Arc.ArcLoot
+        public typealias ArcLoot = Views.Models.ArcModels.Arc.ArcLoot
         
         var lootList: [ArcLoot]
         var completion: (ArcLoot.LootItem) -> Void
         
-        init(
+        public init(
             lootList: [ArcLoot],
             completion: @escaping (ArcLoot.LootItem) -> Void
         ) {
@@ -22,7 +22,7 @@ extension Views.ArcInfoView {
             self.completion = completion
         }
         
-        var body: some View {
+        public var body: some View {
             LazyVStack(spacing: 2) {
                 ForEach(lootList, id: \.id) { item in
                     ArcLootCell(lootModel: item.item) { selectedItem in

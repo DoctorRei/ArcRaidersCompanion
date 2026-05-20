@@ -10,5 +10,5 @@ import SwiftUI
 public enum Views {}
 
 extension Views {
-    enum Models {}
+    public enum Models {}
 }
