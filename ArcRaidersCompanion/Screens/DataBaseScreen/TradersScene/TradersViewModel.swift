@@ -6,6 +6,8 @@
 //
 
 import Combine
+// TODO: - научиться ебашить отдельно модельки и отдельно вьюхи
+import DesignSystem
 import Foundation
 
 protocol TradersCoordinatorProtocol: AnyObject {
@@ -100,11 +102,11 @@ extension TradersView.ViewModel {
 }
 
 extension TradersView.ViewModel {
-    struct ItemCoreData {
-        var id: String
-        var name: String
-        var icon: String
-        var isSelected: Bool
+    public struct ItemCoreData {
+        public var id: String
+        public var name: String
+        public var icon: String
+        public var isSelected: Bool
     }
     
     func favoriteButtonPressed(for item: ItemCoreData) {
@@ -114,5 +116,19 @@ extension TradersView.ViewModel {
         case false:
             coreDataManager.deleteItem(with: item.id)
         }
+    }
+    
+    func returnTraderModel(for item: TraderItemModel) -> Views.Models.TradersModels.TraderItemModel {
+        .init(
+            id: item.id,
+            icon: item.icon,
+            name: item.name,
+            value: item.value,
+            rarity: .init(rawValue: item.rarity.rawValue) ?? .common,
+            itemType: item.itemType,
+            description: item.description,
+            traderPrice: item.traderPrice,
+            isFavorite: item.isFavorite
+        )
     }
 }

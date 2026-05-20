@@ -6,6 +6,8 @@
 //
 
 import Combine
+// TODO: - Научить возвращать только модели, а не все сразу
+import DesignSystem
 import Foundation
 
 protocol SelectedItemNavigateProtocol: AnyObject {

@@ -76,6 +76,30 @@ extension Views.DescriptionItemCell.Models {
             let guideLinks: [GuideLink]
             let gameAssetId: Int?
             
+            public init(id: String, name: String, description: String, itemType: String, loadoutSlots: [String], icon: String, rarity: String, value: Int, workbench: String?, statBlock: StatBlock, flavorText: String?, subcategory: String?, createdAt: String, updatedAt: String, shieldType: String?, lootArea: String?, sources: String?, ammoType: String?, locations: [Location], guideLinks: [GuideLink], gameAssetId: Int?) {
+                self.id = id
+                self.name = name
+                self.description = description
+                self.itemType = itemType
+                self.loadoutSlots = loadoutSlots
+                self.icon = icon
+                self.rarity = rarity
+                self.value = value
+                self.workbench = workbench
+                self.statBlock = statBlock
+                self.flavorText = flavorText
+                self.subcategory = subcategory
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+                self.shieldType = shieldType
+                self.lootArea = lootArea
+                self.sources = sources
+                self.ammoType = ammoType
+                self.locations = locations
+                self.guideLinks = guideLinks
+                self.gameAssetId = gameAssetId
+            }
+            
         // TODO: - Сделать удобный инит для нетворка
 //            init(data: NetworkManager.Model.DataModels.ItemsData.Item) {
 //                self.id = data.id
@@ -105,6 +129,11 @@ extension Views.DescriptionItemCell.Models {
         public struct Location: Hashable {
             let id: String
             let map: String
+            
+            public init(id: String, map: String) {
+                self.id = id
+                self.map = map
+            }
             
             // TODO: - Сделать удобный инит для нетворка
 //            init(data: NetworkManager.Model.DataModels.ItemsData.Location) {
@@ -173,6 +202,122 @@ extension Views.DescriptionItemCell.Models {
             let projectilesPerShot: Int?
             let reducedProjectileDamage: Int?
             
+            public init(
+                range: Double?,
+                value: Int?,
+                damage: Double?,
+                health: Int?,
+                radius: Int?,
+                shield: Int?,
+                weight: Double?,
+                agility: Double?,
+                arcStun: Int?,
+                healing: Int?,
+                stamina: Int?,
+                stealth: Int?,
+                useTime: Double?,
+                duration: Int?,
+                fireRate: Double?,
+                stability: Double?,
+                stackSize: Int?,
+                damageMult: Int?,
+                raiderStun: Int?,
+                weightLimit: Int?,
+                augmentSlots: Int?,
+                healingSlots: Int?,
+                magazineSize: Int?,
+                reducedNoise: Int?,
+                shieldCharge: Int?,
+                backpackSlots: Int?,
+                quickUseSlots: Int?,
+                damagePerSecond: Int?,
+                movementPenalty: Int?,
+                safePocketSlots: Int?,
+                damageMitigation: Double?,
+                healingPerSecond: Double?,
+                reducedEquipTime: Int?,
+                staminaPerSecond: Double?,
+                increasedADSSpeed: Int?,
+                increasedFireRate: Int?,
+                reducedReloadTime: Int?,
+                illuminationRadius: Int?,
+                increasedEquipTime: Int?,
+                reducedUnequipTime: Int?,
+                shieldCompatibility: String?,
+                increasedUnequipTime: Int?,
+                reducedVerticalRecoil: Int?,
+                increasedBulletVelocity: Int?,
+                increasedVerticalRecoil: Int?,
+                reducedMaxShotDispersion: Int?,
+                reducedPerShotDispersion: Int?,
+                reducedDurabilityBurnRate: Int?,
+                reducedRecoilRecoveryTime: Int?,
+                increasedRecoilRecoveryTime: Int?,
+                reducedDispersionRecoveryTime: Double?,
+                ammo: String?,
+                firingMode: String?,
+                compatibleWeapons: String?,
+                projectilesPerShot: Int?,
+                reducedProjectileDamage: Int?
+            ) {
+                self.range = range
+                self.value = value
+                self.damage = damage
+                self.health = health
+                self.radius = radius
+                self.shield = shield
+                self.weight = weight
+                self.agility = agility
+                self.arcStun = arcStun
+                self.healing = healing
+                self.stamina = stamina
+                self.stealth = stealth
+                self.useTime = useTime
+                self.duration = duration
+                self.fireRate = fireRate
+                self.stability = stability
+                self.stackSize = stackSize
+                self.damageMult = damageMult
+                self.raiderStun = raiderStun
+                self.weightLimit = weightLimit
+                self.augmentSlots = augmentSlots
+                self.healingSlots = healingSlots
+                self.magazineSize = magazineSize
+                self.reducedNoise = reducedNoise
+                self.shieldCharge = shieldCharge
+                self.backpackSlots = backpackSlots
+                self.quickUseSlots = quickUseSlots
+                self.damagePerSecond = damagePerSecond
+                self.movementPenalty = movementPenalty
+                self.safePocketSlots = safePocketSlots
+                self.damageMitigation = damageMitigation
+                self.healingPerSecond = healingPerSecond
+                self.reducedEquipTime = reducedEquipTime
+                self.staminaPerSecond = staminaPerSecond
+                self.increasedADSSpeed = increasedADSSpeed
+                self.increasedFireRate = increasedFireRate
+                self.reducedReloadTime = reducedReloadTime
+                self.illuminationRadius = illuminationRadius
+                self.increasedEquipTime = increasedEquipTime
+                self.reducedUnequipTime = reducedUnequipTime
+                self.shieldCompatibility = shieldCompatibility
+                self.increasedUnequipTime = increasedUnequipTime
+                self.reducedVerticalRecoil = reducedVerticalRecoil
+                self.increasedBulletVelocity = increasedBulletVelocity
+                self.increasedVerticalRecoil = increasedVerticalRecoil
+                self.reducedMaxShotDispersion = reducedMaxShotDispersion
+                self.reducedPerShotDispersion = reducedPerShotDispersion
+                self.reducedDurabilityBurnRate = reducedDurabilityBurnRate
+                self.reducedRecoilRecoveryTime = reducedRecoilRecoveryTime
+                self.increasedRecoilRecoveryTime = increasedRecoilRecoveryTime
+                self.reducedDispersionRecoveryTime = reducedDispersionRecoveryTime
+                self.ammo = ammo
+                self.firingMode = firingMode
+                self.compatibleWeapons = compatibleWeapons
+                self.projectilesPerShot = projectilesPerShot
+                self.reducedProjectileDamage = reducedProjectileDamage
+            }
+            
             // TODO: - Сделать удобный инит для нетворка
 //            init(data: NetworkManager.Model.DataModels.ItemsData.StatBlock) {
 //                self.range = data.range
@@ -238,6 +383,11 @@ extension Views.DescriptionItemCell.Models {
         public struct GuideLink: Hashable {
             let url: String
             let label: String
+            
+            public init(url: String, label: String) {
+                self.url = url
+                self.label = label
+            }
             
             // TODO: - Сделать удобный инит для нетворка
 //            init(data: NetworkManager.Model.DataModels.ItemsData.GuideLink) {

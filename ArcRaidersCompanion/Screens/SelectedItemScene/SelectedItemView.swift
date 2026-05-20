@@ -67,22 +67,22 @@ extension SelectedItemView {
                 itemDescriptionView(item: item)
                 if viewModel.hasBasicInfo {
                     section(title: Const.Strings.basicInfo) {
-                        Views.DescriptionItemCell(itemModel: item, selectedType: .baseInfo)
+                        Views.DescriptionItemCell(itemModel: viewModel.returnItemModel(from: item), selectedType: .baseInfo)
                     }
                 }
                 if viewModel.hasStats {
                     section(title: Const.Strings.stats) {
-                        Views.DescriptionItemCell(itemModel: item, selectedType: .fullInfo)
+                        Views.DescriptionItemCell(itemModel: viewModel.returnItemModel(from: item), selectedType: .fullInfo)
                     }
                 }
                 if viewModel.hasLocations {
                     section(title: Const.Strings.location) {
-                        Views.DescriptionItemCell(itemModel: item, selectedType: .locations)
+                        Views.DescriptionItemCell(itemModel: viewModel.returnItemModel(from: item), selectedType: .locations)
                     }
                 }
                 if viewModel.hasGuides {
                     section(title: Const.Strings.guides) {
-                        Views.DescriptionItemCell(itemModel: item, selectedType: .guides)
+                        Views.DescriptionItemCell(itemModel: viewModel.returnItemModel(from: item), selectedType: .guides)
                     }
                 }
             }
@@ -100,7 +100,7 @@ extension SelectedItemView {
     }
 
     func itemImageView(item: SearchItemView.ViewModel.FoundedItem.Item) -> some View {
-        KFImageView(url: URL(string: item.icon))
+        Views.KFImageView(url: URL(string: item.icon))
             .padding()
     }
 

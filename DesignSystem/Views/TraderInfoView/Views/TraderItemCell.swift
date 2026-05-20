@@ -16,18 +16,18 @@ extension Views.TraderInfoView {
         }
         
         public struct ItemCoreData {
-            var id: String
-            var name: String
-            var icon: String
-            var isSelected: Bool
+            public var id: String
+            public var name: String
+            public var icon: String
+            public var isSelected: Bool
         }
 
         @State private var isFavoriteCell = false
-        var itemModel: Models.TraderItemModel
+        var itemModel: Views.Models.TradersModels.TraderItemModel
         var completion: (ItemCoreData) -> Void
         
         public init(
-            itemModel: Models.TraderItemModel,
+            itemModel: Views.Models.TradersModels.TraderItemModel,
             completion: @escaping (ItemCoreData) -> Void
         ) {
             self.itemModel = itemModel

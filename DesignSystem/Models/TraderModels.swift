@@ -1,18 +1,17 @@
 //
-//  TraderInfoView+Models.swift
-//  ArcRaidersCompanion
+//  TraderModels.swift
+//  DesignSystem
 //
-//  Created by Akira Rei on 02.05.2026.
+//  Created by Akira Rei on 20.05.2026.
 //
 
 import SwiftUI
 
-// TODO: - Перенести в папку с моделями
-extension Views.TraderInfoView {
-    public enum Models {}
+extension Views.Models {
+    public enum TradersModels {}
 }
 
-extension Views.TraderInfoView.Models {
+extension Views.Models.TradersModels {
     public struct TraderModel {
         let id: String
         let name: String
@@ -29,6 +28,28 @@ extension Views.TraderInfoView.Models {
         let traderPrice: Int
 
         var isFavorite: Bool = false
+        
+        public init(
+            id: String,
+            icon: String,
+            name: String,
+            value: Int,
+            rarity: Rarity,
+            itemType: String,
+            description: String,
+            traderPrice: Int,
+            isFavorite: Bool
+        ) {
+            self.id = id
+            self.icon = icon
+            self.name = name
+            self.value = value
+            self.rarity = rarity
+            self.itemType = itemType
+            self.description = description
+            self.traderPrice = traderPrice
+            self.isFavorite = isFavorite
+        }
     }
 
     public enum Rarity: String, CaseIterable {
@@ -59,11 +80,3 @@ extension Views.TraderInfoView.Models {
         }
     }
 }
-
-// TODO: - написать расширение для конвертации быстрой
-//extension Views.TraderInfoView.Models.TraderModel {
-//    init(networkTrader: NetworkManager.Model.DataModels.TradersData.Trader) {
-//        self.id = networkTrader.id
-//        self.name = networkTrader.name
-//    }
-//}
