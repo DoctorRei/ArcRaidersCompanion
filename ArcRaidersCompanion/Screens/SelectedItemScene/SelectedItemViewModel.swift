@@ -8,6 +8,7 @@
 import Combine
 // TODO: - Научить возвращать только модели, а не все сразу
 import DesignSystem
+import NetworkManager
 import Foundation
 
 protocol SelectedItemNavigateProtocol: AnyObject {
@@ -21,7 +22,7 @@ extension SelectedItemView {
 
     final class ViewModel: ObservableObject {
         weak var coordinator: SelectedItemNavigateProtocol?
-        private var networkManager = NetworkManager.shared
+        private var networkManager = NetworkLayer.shared
         private var coreDataManager = CoreDataManager()
 
         @Published var item: SearchItemView.ViewModel.FoundedItem.Item?
@@ -30,7 +31,7 @@ extension SelectedItemView {
 
         init(
             coordinator: SelectedItemNavigateProtocol? = nil,
-            networkManager: NetworkManager = NetworkManager.shared,
+            networkManager: NetworkLayer = NetworkLayer.shared,
             navigateWith: SelectedItemCoordinator.NavigateWith,
         ) {
             self.coordinator = coordinator

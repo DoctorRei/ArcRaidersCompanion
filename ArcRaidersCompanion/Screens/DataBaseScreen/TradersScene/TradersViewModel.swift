@@ -8,6 +8,7 @@
 import Combine
 // TODO: - научиться ебашить отдельно модельки и отдельно вьюхи
 import DesignSystem
+import NetworkManager
 import Foundation
 
 protocol TradersCoordinatorProtocol: AnyObject {
@@ -22,7 +23,7 @@ extension TradersView {
 
     final class ViewModel: ObservableObject {
         weak var coordinator: TradersCoordinatorProtocol?
-        private var networkManager = NetworkManager.shared
+        private var networkManager = NetworkLayer.shared
         private var coreDataManager = CoreDataManager()
         private var isErrorLoading = false
         private var favoritesFromCoreData: [String: String] = [:]
@@ -62,7 +63,7 @@ extension TradersView.ViewModel: TradersView.ViewModelProtocol {
         favoritesFromCoreData = newDict
     }
 
-    func sortTraders(_ model: [NetworkManager.Model.DataModels.TradersData.Trader]) {
+    func sortTraders(_ model: [NetworkLayer.Model.DataModels.TradersData.Trader]) {
         traders = model.map { trader in
             let items = trader.items
                 .map { networkItem -> TraderItemModel in

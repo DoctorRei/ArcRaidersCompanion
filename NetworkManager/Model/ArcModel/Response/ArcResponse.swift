@@ -7,9 +7,9 @@
 
 import Foundation
 
-extension NetworkManager.Model.Response {
+extension NetworkLayer.Model.Response {
     struct ArcsRespone: Decodable {
-        typealias ArcsData = NetworkManager.Model.DataModels.ArcsData
+        typealias ArcsData = NetworkLayer.Model.DataModels.ArcsData
 
         let data: [ArcsData.ARCEnemy]
         let pagination: ArcsData.PaginationInfo

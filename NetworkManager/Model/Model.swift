@@ -5,16 +5,16 @@
 //  Created by Akira Rei on 30.03.2026.
 //
 
-extension NetworkManager {
+extension NetworkLayer {
     public enum Model {}
 }
 
-extension NetworkManager.Model {
+extension NetworkLayer.Model {
     public enum Response {}
     public enum DataModels {}
 }
 
-extension NetworkManager.Model.DataModels {
+extension NetworkLayer.Model.DataModels {
     public enum ArcsData {}
     public enum ItemsData {}
     public enum TradersData {}

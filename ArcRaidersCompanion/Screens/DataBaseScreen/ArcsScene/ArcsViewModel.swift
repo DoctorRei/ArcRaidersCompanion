@@ -7,6 +7,7 @@
 
 import SwiftUI
 import DesignSystem
+import NetworkManager
 import Combine
 
 protocol ArcsCoordinatorProtocol: AnyObject {
@@ -20,11 +21,11 @@ extension ArcsView {
     }
     
     final class ViewModel: ObservableObject {
-        typealias ArcEnemy = NetworkManager.Model.DataModels.ArcsData.ARCEnemy
+        typealias ArcEnemy = NetworkLayer.Model.DataModels.ArcsData.ARCEnemy
         typealias ArcModel = Views.Models.ArcModels.Arc
 
         weak var coordinator: ArcsCoordinatorProtocol?
-        private var networkManager = NetworkManager.shared
+        private var networkManager = NetworkLayer.shared
         private var isErrorLoading = false
 
         var arcTypes: [ArcModel.EnemyType] = [.boss, .ground, .flying, .turret]
@@ -74,7 +75,7 @@ extension ArcsView.ViewModel: ArcsView.ViewModelProtocol {
         )
     }
     
-    private func returnArcLootItem(for model: NetworkManager.Model.DataModels.ArcsData.LootItem) -> ArcModel.ArcLoot.LootItem {
+    private func returnArcLootItem(for model: NetworkLayer.Model.DataModels.ArcsData.LootItem) -> ArcModel.ArcLoot.LootItem {
         .init(
             id: model.id ,
             icon: model.icon,

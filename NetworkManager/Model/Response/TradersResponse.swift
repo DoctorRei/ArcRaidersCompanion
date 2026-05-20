@@ -7,9 +7,9 @@
 
 import Foundation
 
-extension NetworkManager.Model.Response {
+extension NetworkLayer.Model.Response {
     struct TradersResponse: Decodable {
         let success: Bool
-        let data: [String: [NetworkManager.Model.DataModels.TradersData.TraderItem]]
+        let data: [String: [NetworkLayer.Model.DataModels.TradersData.TraderItem]]
     }
 }

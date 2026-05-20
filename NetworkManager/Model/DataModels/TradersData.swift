@@ -7,21 +7,21 @@
 
 import Foundation
 
-extension NetworkManager.Model.DataModels.TradersData {
-    struct TraderItem: Identifiable, Decodable {
-        let id: String
-        let icon: String
-        let name: String
-        let value: Int
-        let rarity: String
-        let itemType: String
-        let description: String
-        let traderPrice: Int
+extension NetworkLayer.Model.DataModels.TradersData {
+    public struct Trader: Identifiable, Decodable {
+        public let id: String
+        public let name: String
+        public let items: [TraderItem]
     }
-
-    struct Trader: Identifiable, Decodable {
-        let id: String
-        let name: String
-        let items: [TraderItem]
+    
+    public struct TraderItem: Identifiable, Decodable {
+        public let id: String
+        public let icon: String
+        public let name: String
+        public let value: Int
+        public let rarity: String
+        public let itemType: String
+        public let description: String
+        public let traderPrice: Int
     }
 }

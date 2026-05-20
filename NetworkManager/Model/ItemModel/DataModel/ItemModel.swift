@@ -8,39 +8,39 @@
 import Foundation
 
 // MARK: - Item
-extension NetworkManager.Model.DataModels.ItemsData {
-    struct Item: Decodable {
-        let id: String
-        let name: String
-        let description: String
-        let itemType: String
-        let loadoutSlots: [String]
-        let icon: String
-        let rarity: String
-        let value: Int
-        let workbench: String?
-        let statBlock: StatBlock
-        let flavorText: String?
-        let subcategory: String?
-        let createdAt: String
-        let updatedAt: String
-        let shieldType: String?
-        let lootArea: String?
-        let sources: String?
-        let ammoType: String?
-        let locations: [Location]
-        let guideLinks: [GuideLink]
-        let gameAssetId: Int?
+extension NetworkLayer.Model.DataModels.ItemsData {
+    public struct Item: Decodable {
+        public let id: String
+        public let name: String
+        public let description: String
+        public let itemType: String
+        public let loadoutSlots: [String]
+        public let icon: String
+        public let rarity: String
+        public let value: Int
+        public let workbench: String?
+        public let statBlock: StatBlock
+        public let flavorText: String?
+        public let subcategory: String?
+        public let createdAt: String
+        public let updatedAt: String
+        public let shieldType: String?
+        public let lootArea: String?
+        public let sources: String?
+        public let ammoType: String?
+        public let locations: [Location]
+        public let guideLinks: [GuideLink]
+        public let gameAssetId: Int?
     }
     
-    struct Location: Decodable {
-        let id: String
-        let map: String
+    public struct Location: Decodable {
+        public let id: String
+        public let map: String
     }
     
-    struct ShieldCompatibility: Decodable {
-        let value: Int?
-        init(from decoder: Decoder) throws {
+    public struct ShieldCompatibility: Decodable {
+        public let value: Int?
+        public init(from decoder: Decoder) throws {
             let container = try decoder.singleValueContainer()
             if let intValue = try? container.decode(Int.self) {
                 value = intValue
@@ -51,77 +51,77 @@ extension NetworkManager.Model.DataModels.ItemsData {
     }
 
     // MARK: - StatBlock
-    struct StatBlock: Decodable {
-        let range: Double?
-        let value: Int?
-        let damage: Double?
-        let health: Int?
-        let radius: Int?
-        let shield: Int?
-        let weight: Double?
-        let agility: Double?
-        let arcStun: Int?
-        let healing: Int?
-        let stamina: Int?
-        let stealth: Int?
-        let useTime: Double?
-        let duration: Int?
-        let fireRate: Double?
-        let stability: Double?
-        let stackSize: Int?
-        let damageMult: Int?
-        let raiderStun: Int?
-        let weightLimit: Int?
-        let augmentSlots: Int?
-        let healingSlots: Int?
-        let magazineSize: Int?
-        let reducedNoise: Int?
-        let shieldCharge: Int?
-        let backpackSlots: Int?
-        let quickUseSlots: Int?
-        let damagePerSecond: Int?
-        let movementPenalty: Int?
-        let safePocketSlots: Int?
-        let damageMitigation: Double?
-        let healingPerSecond: Double?
-        let reducedEquipTime: Int?
-        let staminaPerSecond: Double?
-        let increasedADSSpeed: Int?
-        let increasedFireRate: Int?
-        let reducedReloadTime: Int?
-        let illuminationRadius: Int?
-        let increasedEquipTime: Int?
-        let reducedUnequipTime: Int?
-        let shieldCompatibility: String?
-        let increasedUnequipTime: Int?
-        let reducedVerticalRecoil: Int?
-        let increasedBulletVelocity: Int?
-        let increasedVerticalRecoil: Int?
-        let reducedMaxShotDispersion: Int?
-        let reducedPerShotDispersion: Int?
-        let reducedDurabilityBurnRate: Int?
-        let reducedRecoilRecoveryTime: Int?
-        let increasedRecoilRecoveryTime: Int?
-        let reducedDispersionRecoveryTime: Double?
+    public struct StatBlock: Decodable {
+        public let range: Double?
+        public let value: Int?
+        public let damage: Double?
+        public let health: Int?
+        public let radius: Int?
+        public let shield: Int?
+        public let weight: Double?
+        public let agility: Double?
+        public let arcStun: Int?
+        public let healing: Int?
+        public let stamina: Int?
+        public let stealth: Int?
+        public let useTime: Double?
+        public let duration: Int?
+        public let fireRate: Double?
+        public let stability: Double?
+        public let stackSize: Int?
+        public let damageMult: Int?
+        public let raiderStun: Int?
+        public let weightLimit: Int?
+        public let augmentSlots: Int?
+        public let healingSlots: Int?
+        public let magazineSize: Int?
+        public let reducedNoise: Int?
+        public let shieldCharge: Int?
+        public let backpackSlots: Int?
+        public let quickUseSlots: Int?
+        public let damagePerSecond: Int?
+        public let movementPenalty: Int?
+        public let safePocketSlots: Int?
+        public let damageMitigation: Double?
+        public let healingPerSecond: Double?
+        public let reducedEquipTime: Int?
+        public let staminaPerSecond: Double?
+        public let increasedADSSpeed: Int?
+        public let increasedFireRate: Int?
+        public let reducedReloadTime: Int?
+        public let illuminationRadius: Int?
+        public let increasedEquipTime: Int?
+        public let reducedUnequipTime: Int?
+        public let shieldCompatibility: String?
+        public let increasedUnequipTime: Int?
+        public let reducedVerticalRecoil: Int?
+        public let increasedBulletVelocity: Int?
+        public let increasedVerticalRecoil: Int?
+        public let reducedMaxShotDispersion: Int?
+        public let reducedPerShotDispersion: Int?
+        public let reducedDurabilityBurnRate: Int?
+        public let reducedRecoilRecoveryTime: Int?
+        public let increasedRecoilRecoveryTime: Int?
+        public let reducedDispersionRecoveryTime: Double?
 
-        let ammo: String?
-        let firingMode: String?
-        let compatibleWeapons: String?
-        let projectilesPerShot: Int?
-        let reducedProjectileDamage: Int?
+        public let ammo: String?
+        public let firingMode: String?
+        public let compatibleWeapons: String?
+        public let projectilesPerShot: Int?
+        public let reducedProjectileDamage: Int?
     }
 
-    struct GuideLink: Decodable {
-        let url: String
-        let label: String
+    public struct GuideLink: Decodable {
+        public let url: String
+        public let label: String
     }
 
-    struct Pagination: Decodable {
-        let page: Int
-        let limit: Int
-        let total: Int
-        let totalPages: Int
-        let hasNextPage: Bool
-        let hasPrevPage: Bool
+    public struct Pagination: Decodable {
+        public let page: Int
+        public let limit: Int
+        public let total: Int
+        public let totalPages: Int
+        public let hasNextPage: Bool
+        public let hasPrevPage: Bool
     }
 }

@@ -8,6 +8,7 @@
 import Combine
 import Foundation
 import DesignSystem
+import NetworkManager
 
 protocol SearchItemNavigateProtocol: AnyObject {
     func navigateBack()
@@ -21,7 +22,7 @@ extension SearchItemView {
     
     final class ViewModel: ObservableObject {
         weak var coordinator: SearchItemNavigateProtocol?
-        private var networkManager = NetworkManager.shared
+        private var networkManager = NetworkLayer.shared
 
         @Published var foundedMiniItems: [Views.Models.ArcModels.Arc.ArcLoot] = []
         @Published var scrollOffset: CGFloat = 0

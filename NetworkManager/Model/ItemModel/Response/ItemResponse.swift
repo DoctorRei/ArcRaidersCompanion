@@ -7,10 +7,10 @@
 
 import Foundation
 
-extension NetworkManager.Model.Response {
-    struct ItemsResponse: Decodable {
-        let data: [NetworkManager.Model.DataModels.ItemsData.Item]
-        let maxValue: Int?
-        let pagination: NetworkManager.Model.DataModels.ItemsData.Pagination?
+extension NetworkLayer.Model.Response {
+    public struct ItemsResponse: Decodable {
+        public let data: [NetworkLayer.Model.DataModels.ItemsData.Item]
+        public let maxValue: Int?
+        public let pagination: NetworkLayer.Model.DataModels.ItemsData.Pagination?
     }
 }

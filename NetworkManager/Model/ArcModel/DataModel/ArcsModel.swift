@@ -7,39 +7,39 @@
 
 import Foundation
 
-extension NetworkManager.Model.DataModels.ArcsData {
+extension NetworkLayer.Model.DataModels.ArcsData {
     public struct ARCEnemy: Identifiable, Decodable {
         public let id: String
-        let name: String
-        let description: String
-        let icon: String
-        let image: String
-        let createdAt: String
-        let updatedAt: String
-        let loot: [ArcLoot]?
+        public let name: String
+        public let description: String
+        public let icon: String
+        public let image: String
+        public let createdAt: String
+        public let updatedAt: String
+        public let loot: [ArcLoot]?
     }
     
     public struct PaginationInfo: Decodable {
-        let page: Int
-        let limit: Int
-        let total: Int
-        let totalPages: Int
-        let hasNextPage: Bool
-        let hasPrevPage: Bool
+        public let page: Int
+        public let limit: Int
+        public let total: Int
+        public let totalPages: Int
+        public let hasNextPage: Bool
+        public let hasPrevPage: Bool
     }
     
     public struct ArcLoot: Decodable {
-        let id: String
-        let item: LootItem
-        let itemId: String
-        let createdAt: String
+        public let id: String
+        public let item: LootItem
+        public let itemId: String
+        public let createdAt: String
     }
     
     public struct LootItem: Decodable {
-        let id: String
-        let icon: String
-        let name: String
-        let rarity: String
-        let itemType: String
+        public let id: String
+        public let icon: String
+        public let name: String
+        public let rarity: String
+        public let itemType: String
     }
 }

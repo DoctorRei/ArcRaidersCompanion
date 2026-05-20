@@ -9,42 +9,8 @@ import Moya
 import Alamofire
 import Foundation
 
-enum ItemType: String, CaseIterable {
-    case weapon = "Weapon"
-    case armor = "Armor"
-    case quickUse = "Quick Use"
-    case consumable = "Consumable"
-    case modification = "Modification"
-    case blueprint = "Blueprint"
-    case material = "Material"
-    case topsideMaterial = "Topside Material"
-    case refinedMaterial = "Refined Material"
-    case recyclable = "Recyclable"
-    case nature = "Nature"
-    case trinket = "Trinket"
-    case key = "Key"
-    case misc = "Misc"
-}
-
-// MARK: - Rarity Types
-enum Rarity: String, CaseIterable {
-    case common = "Common"
-    case uncommon = "Uncommon"
-    case rare = "Rare"
-    case epic = "Epic"
-    case legendary = "Legendary"
-}
-
-// MARK: - Loadout Slots
-enum LoadoutSlot: String, CaseIterable {
-    case weapon = "weapon"
-    case backpack = "backpack"
-    case quickUse = "quickUse"
-    case safePocket = "safePocket"
-}
-
 // MARK: - Sort Fields
-enum SortField: String {
+public enum SortField: String {
     case name
     case value
     case rarity
@@ -62,9 +28,43 @@ enum SortField: String {
     }
 }
 
-enum SortOrder: String {
+public enum SortOrder: String {
     case asc
     case desc
+}
+
+public enum ItemType: String, CaseIterable {
+    case weapon = "Weapon"
+    case armor = "Armor"
+    case quickUse = "Quick Use"
+    case consumable = "Consumable"
+    case modification = "Modification"
+    case blueprint = "Blueprint"
+    case material = "Material"
+    case topsideMaterial = "Topside Material"
+    case refinedMaterial = "Refined Material"
+    case recyclable = "Recyclable"
+    case nature = "Nature"
+    case trinket = "Trinket"
+    case key = "Key"
+    case misc = "Misc"
+}
+
+// MARK: - Rarity Types
+public enum Rarity: String, CaseIterable {
+    case common = "Common"
+    case uncommon = "Uncommon"
+    case rare = "Rare"
+    case epic = "Epic"
+    case legendary = "Legendary"
+}
+
+// MARK: - Loadout Slots
+public enum LoadoutSlot: String, CaseIterable {
+    case weapon = "weapon"
+    case backpack = "backpack"
+    case quickUse = "quickUse"
+    case safePocket = "safePocket"
 }
 
 enum MetaForgeService {

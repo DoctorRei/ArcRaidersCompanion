@@ -15,11 +15,11 @@ enum NetworkError: Error {
     case moyaError(MoyaError)
 }
 
-open class NetworkManager {
-    typealias ItemsResponse = Model.Response.ItemsResponse
-    typealias Item = Model.DataModels.ItemsData.Item
+open class NetworkLayer {
+    public typealias ItemsResponse = Model.Response.ItemsResponse
+    public typealias Item = Model.DataModels.ItemsData.Item
     
-    static let shared = NetworkManager()
+    public static let shared = NetworkLayer()
     
     private init() {}
     
@@ -30,7 +30,7 @@ open class NetworkManager {
         return decoder
     }()
     
-    func fetchEvents() async throws -> [Model.Event] {
+    public func fetchEvents() async throws -> [Model.Event] {
         return try await withCheckedThrowingContinuation { continuation in
             provider.request(.events) { result in
                 switch result {
@@ -48,7 +48,7 @@ open class NetworkManager {
         }
     }
     
-    func fetchArcs() async throws -> [Model.DataModels.ArcsData.ARCEnemy] {
+    public func fetchArcs() async throws -> [Model.DataModels.ArcsData.ARCEnemy] {
         return try await withCheckedThrowingContinuation { continuation in
             provider.request(.arcs) { result in
                 switch result {
@@ -66,7 +66,7 @@ open class NetworkManager {
         }
     }
     
-    func fetchItems() async throws -> [Item] {
+    public func fetchItems() async throws -> [Item] {
         return try await withCheckedThrowingContinuation { continuation in
             provider.request(.arcs) { result in
                 switch result {
@@ -84,7 +84,7 @@ open class NetworkManager {
         }
     }
     
-    func fetchItems(
+    public func fetchItems(
         page: Int = 1,
         limit: Int = 200,
         search: String? = nil,
@@ -132,7 +132,7 @@ open class NetworkManager {
     }
     
     /// Получение конкретного предмета по ID
-    func fetchItem(
+    public func fetchItem(
         id: String,
         includeComponents: Bool = false
     ) async throws -> Item {
@@ -175,7 +175,7 @@ open class NetworkManager {
         return item
     }
     
-    func fetchTraders() async throws -> [Model.DataModels.TradersData.Trader] {
+    public func fetchTraders() async throws -> [Model.DataModels.TradersData.Trader] {
         return try await withCheckedThrowingContinuation { continuation in
             provider.request(.traders) { result in
                 switch result {
@@ -200,7 +200,7 @@ open class NetworkManager {
         }
     }
 
-    func fetchAllItems(
+    public func fetchAllItems(
         search: String? = nil,
         itemType: ItemType? = nil,
         rarity: Rarity? = nil,

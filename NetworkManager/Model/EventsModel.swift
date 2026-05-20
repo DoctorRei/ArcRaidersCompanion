@@ -7,21 +7,21 @@
 
 import Foundation
 
-extension NetworkManager.Model.Event {
-    enum EventStatus {
+extension NetworkLayer.Model.Event {
+    public enum EventStatus {
         case active
         case upcoming
         case finished
     }
     
-    var status: EventStatus {
+    public var status: EventStatus {
         if isActive { return .active }
         if isUpcoming { return .upcoming }
         return .finished
     }
 }
 
-extension NetworkManager.Model {
+extension NetworkLayer.Model {
     struct EventScheduleResponse: Decodable {
         let data: [Event]
         let cachedAt: Int64
@@ -33,15 +33,15 @@ extension NetworkManager.Model {
     }
     
     // MARK: - Модель события
-    struct Event: Decodable, Identifiable {
-        let name: String
-        let map: String
-        let icon: String
-        let startTime: Int64
-        let endTime: Int64
+    public struct Event: Decodable, Identifiable {
+        public let name: String
+        public let map: String
+        public let icon: String
+        public let startTime: Int64
+        public let endTime: Int64
         
         // Используем комбинацию name, map и startTime как уникальный идентификатор
-        var id: String {
+        public var id: String {
             return "\(name)-\(map)-\(startTime)"
         }
         
@@ -60,7 +60,7 @@ extension NetworkManager.Model {
         }
         
         // Форматированное время начала
-        var formattedStartTime: String {
+        public var formattedStartTime: String {
             let formatter = DateFormatter()
             formatter.dateFormat = "HH:mm"
             formatter.timeZone = TimeZone.current
@@ -68,7 +68,7 @@ extension NetworkManager.Model {
         }
         
         // Форматированное время окончания
-        var formattedEndTime: String {
+        public var formattedEndTime: String {
             let formatter = DateFormatter()
             formatter.dateFormat = "HH:mm"
             formatter.timeZone = TimeZone.current
@@ -76,7 +76,7 @@ extension NetworkManager.Model {
         }
         
         // Форматированная дата и время
-        var formattedDateTime: String {
+        public var formattedDateTime: String {
             let formatter = DateFormatter()
             formatter.dateFormat = "dd.MM.yyyy"
             formatter.timeZone = TimeZone.current
@@ -84,7 +84,7 @@ extension NetworkManager.Model {
         }
         
         // Проверка, активно ли событие сейчас
-        var isActive: Bool {
+        public var isActive: Bool {
             let now = Date()
             return now >= startDate && now <= endDate
         }
@@ -119,8 +119,8 @@ extension NetworkManager.Model {
 }
 
 // MARK: - Расширение для фильтрации и сортировки
-extension Array where Element == NetworkManager.Model.Event {
-    typealias Event = NetworkManager.Model.Event
+extension Array where Element == NetworkLayer.Model.Event {
+    typealias Event = NetworkLayer.Model.Event
 
     var active: [Event] {
         return filter { $0.isActive }.sorted { $0.startDate < $1.startDate }

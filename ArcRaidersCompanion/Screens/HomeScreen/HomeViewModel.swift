@@ -7,6 +7,7 @@
 
 import SwiftUI
 import DesignSystem
+import NetworkManager
 import Combine
 
 enum PickerStyles: String, CaseIterable, Identifiable {
@@ -29,10 +30,10 @@ extension HomeView {
     }
     
     final class ViewModel: ObservableObject {
-        typealias Event = NetworkManager.Model.Event
-        typealias CardModel = Views.EventCardView.Model
+        public typealias Event = NetworkLayer.Model.Event
+        public typealias CardModel = Views.EventCardView.Model
         weak var coordinator: HomeCoordinatorProtocol?
-        private var networkManager = NetworkManager.shared
+        private var networkManager = NetworkLayer.shared
         
         var events: [Event] = []
         

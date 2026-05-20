@@ -62,34 +62,14 @@
 		63897B402FBDCEE900C6FBD8 /* Exceptions for "NetworkManager" folder in "ArcRaidersCompanion" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				MetaForgeService.swift,
-				Model/ArcModel/DataModel/ArcsModel.swift,
 				"Model/ArcModel/DataModel/Helpers/ArcModel+Helpers.swift",
-				Model/ArcModel/Response/ArcResponse.swift,
-				Model/DataModels/TradersData.swift,
-				Model/EventsModel.swift,
-				Model/ItemModel/DataModel/ItemModel.swift,
-				Model/ItemModel/Response/ItemResponse.swift,
-				Model/Model.swift,
-				Model/Response/TradersResponse.swift,
-				NetworkManager.swift,
 			);
 			target = 63ECED442F45056A000318EE /* ArcRaidersCompanion */;
 		};
 		63897B412FBDCEE900C6FBD8 /* Exceptions for "NetworkManager" folder in "NetworkManager" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				MetaForgeService.swift,
-				Model/ArcModel/DataModel/ArcsModel.swift,
 				"Model/ArcModel/DataModel/Helpers/ArcModel+Helpers.swift",
-				Model/ArcModel/Response/ArcResponse.swift,
-				Model/DataModels/TradersData.swift,
-				Model/EventsModel.swift,
-				Model/ItemModel/DataModel/ItemModel.swift,
-				Model/ItemModel/Response/ItemResponse.swift,
-				Model/Model.swift,
-				Model/Response/TradersResponse.swift,
-				NetworkManager.swift,
 			);
 			target = 63897B2C2FBDCEAC00C6FBD8 /* NetworkManager */;
 		};

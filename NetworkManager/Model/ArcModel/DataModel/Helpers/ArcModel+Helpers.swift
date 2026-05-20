@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import NetworkManager
 
-extension NetworkManager.Model.DataModels.ArcsData.ARCEnemy {
+extension NetworkLayer.Model.DataModels.ArcsData.ARCEnemy {
     enum EnemyType: String, CaseIterable {
         case ground = "Ground"
         case flying = "Flying"
