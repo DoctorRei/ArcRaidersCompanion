@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import DesignSystem
 
 struct SearchItemView: View {
     private enum Const {
@@ -105,5 +106,14 @@ extension SearchItemView {
     
     func navigateToSelectedItem(with id: String) {
         viewModel.navigateToSelectedItem(with: id)
+    }
+    
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(
+            #selector(UIResponder.resignFirstResponder),
+            to: nil,
+            from: nil,
+            for: nil
+        )
     }
 }

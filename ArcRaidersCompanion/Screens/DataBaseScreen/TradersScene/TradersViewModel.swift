@@ -6,6 +6,10 @@
 //
 
 import Combine
+// TODO: - научиться ебашить отдельно модельки и отдельно вьюхи
+import DesignSystem
+import NetworkManager
+import CoreDataStore
 import Foundation
 
 protocol TradersCoordinatorProtocol: AnyObject {
@@ -20,7 +24,7 @@ extension TradersView {
 
     final class ViewModel: ObservableObject {
         weak var coordinator: TradersCoordinatorProtocol?
-        private var networkManager = NetworkManager.shared
+        private var networkManager = NetworkLayer.shared
         private var coreDataManager = CoreDataManager()
         private var isErrorLoading = false
         private var favoritesFromCoreData: [String: String] = [:]
@@ -60,7 +64,7 @@ extension TradersView.ViewModel: TradersView.ViewModelProtocol {
         favoritesFromCoreData = newDict
     }
 
-    func sortTraders(_ model: [NetworkManager.Model.DataModels.TradersData.Trader]) {
+    func sortTraders(_ model: [NetworkLayer.Model.DataModels.TradersData.Trader]) {
         traders = model.map { trader in
             let items = trader.items
                 .map { networkItem -> TraderItemModel in
@@ -100,11 +104,11 @@ extension TradersView.ViewModel {
 }
 
 extension TradersView.ViewModel {
-    struct ItemCoreData {
-        var id: String
-        var name: String
-        var icon: String
-        var isSelected: Bool
+    public struct ItemCoreData {
+        public var id: String
+        public var name: String
+        public var icon: String
+        public var isSelected: Bool
     }
     
     func favoriteButtonPressed(for item: ItemCoreData) {
@@ -114,5 +118,19 @@ extension TradersView.ViewModel {
         case false:
             coreDataManager.deleteItem(with: item.id)
         }
+    }
+    
+    func returnTraderModel(for item: TraderItemModel) -> Views.Models.TradersModels.TraderItemModel {
+        .init(
+            id: item.id,
+            icon: item.icon,
+            name: item.name,
+            value: item.value,
+            rarity: .init(rawValue: item.rarity.rawValue) ?? .common,
+            itemType: item.itemType,
+            description: item.description,
+            traderPrice: item.traderPrice,
+            isFavorite: item.isFavorite
+        )
     }
 }

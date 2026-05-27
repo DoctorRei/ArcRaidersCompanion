@@ -6,6 +6,9 @@
 //
 
 import Foundation
+import NetworkManager
+
+// TODO: - Проверить где юзается и почему не ругалось раньше
 
 extension SearchItemView.ViewModel {
     enum FoundedItem {
@@ -32,7 +35,7 @@ extension SearchItemView.ViewModel {
             let guideLinks: [GuideLink]
             let gameAssetId: Int?
             
-            init(data: NetworkManager.Model.DataModels.ItemsData.Item) {
+            init(data: NetworkLayer.Model.DataModels.ItemsData.Item) {
                 self.id = data.id
                 self.name = data.name
                 self.description = data.description
@@ -61,7 +64,7 @@ extension SearchItemView.ViewModel {
             let id: String
             let map: String
             
-            init(data: NetworkManager.Model.DataModels.ItemsData.Location) {
+            init(data: NetworkLayer.Model.DataModels.ItemsData.Location) {
                 self.id = data.id
                 self.map = data.map
             }
@@ -127,7 +130,7 @@ extension SearchItemView.ViewModel {
             let projectilesPerShot: Int?
             let reducedProjectileDamage: Int?
             
-            init(data: NetworkManager.Model.DataModels.ItemsData.StatBlock) {
+            init(data: NetworkLayer.Model.DataModels.ItemsData.StatBlock) {
                 self.range = data.range
                 self.value = data.value
                 self.damage = data.damage
@@ -192,7 +195,7 @@ extension SearchItemView.ViewModel {
             let url: String
             let label: String
             
-            init(data: NetworkManager.Model.DataModels.ItemsData.GuideLink) {
+            init(data: NetworkLayer.Model.DataModels.ItemsData.GuideLink) {
                 self.url = data.url
                 self.label = data.label
             }
@@ -206,7 +209,7 @@ extension SearchItemView.ViewModel {
             let hasNextPage: Bool
             let hasPrevPage: Bool
             
-            init(data: NetworkManager.Model.DataModels.ItemsData.Pagination) {
+            init(data: NetworkLayer.Model.DataModels.ItemsData.Pagination) {
                 self.page = data.page
                 self.limit = data.limit
                 self.total = data.total

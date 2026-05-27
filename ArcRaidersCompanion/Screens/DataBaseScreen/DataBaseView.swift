@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import DesignSystem
 
 struct DataBaseView: View {
     @ObservedObject var viewModel: ViewModel

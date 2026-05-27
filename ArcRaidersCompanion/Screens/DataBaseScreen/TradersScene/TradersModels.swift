@@ -5,8 +5,8 @@
 //  Created by Akira Rei on 02.05.2026.
 //
 
-import Foundation
 import SwiftUI
+import NetworkManager
 
 extension TradersView.ViewModel {
     struct TraderModel: Identifiable, Equatable {
@@ -62,7 +62,7 @@ extension TradersView.ViewModel {
 }
 
 extension TradersView.ViewModel.TraderModel {
-    init(networkTrader: NetworkManager.Model.DataModels.TradersData.Trader) {
+    init(networkTrader: NetworkLayer.Model.DataModels.TradersData.Trader) {
         self.id = networkTrader.id
         self.name = networkTrader.name
         self.items = networkTrader.items.map { TradersView.ViewModel.TraderItemModel(networkItem: $0) }
@@ -70,7 +70,7 @@ extension TradersView.ViewModel.TraderModel {
 }
 
 extension TradersView.ViewModel.TraderItemModel {
-    init(networkItem: NetworkManager.Model.DataModels.TradersData.TraderItem) {
+    init(networkItem: NetworkLayer.Model.DataModels.TradersData.TraderItem) {
         self.id = networkItem.id
         self.icon = networkItem.icon
         self.name = networkItem.name

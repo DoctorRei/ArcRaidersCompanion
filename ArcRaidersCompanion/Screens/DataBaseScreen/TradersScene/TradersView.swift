@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import DesignSystem
 
 struct TradersView: View {
     private enum Const {
@@ -96,7 +97,7 @@ private extension TradersView {
     func traderItemsList(items: [ViewModel.TraderItemModel]) -> some View {
         LazyVStack(spacing: 2) {
             ForEach(items) { item in
-                Views.TraderInfoView.TraderItemCell(itemModel: item) { itemModel in
+                Views.TraderInfoView.TraderItemCell(itemModel: viewModel.returnTraderModel(for: item)) { itemModel in
                     viewModel.favoriteButtonPressed(
                         for: .init(
                             id: itemModel.id,

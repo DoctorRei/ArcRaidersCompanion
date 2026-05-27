@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import DesignSystem
 
 struct HomeView: View {
     @ObservedObject var viewModel: HomeView.ViewModel
